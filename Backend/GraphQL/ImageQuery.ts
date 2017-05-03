@@ -16,39 +16,6 @@ export const ImageType = new GraphQLObjectType({
         user_id: {type: GraphQLString}
     })
 });
-// TODO: RIPULIRE CONSOLE LOG A FINE TEST
-/*const findImages2 = (offset) => {
-    return redisClient.getAsync(offset)
-        .then( async (RedisEncodedResult) => {
-            console.log(RedisEncodedResult, 'risultati');
-            if (RedisEncodedResult) {
-                console.log('********** SENT BY REDIS **********');
-                return await ImagesArrayProtoBuffer({argument: RedisEncodedResult, decode: true});
-
-            } else {
-                console.log('DENTRO DUEEEEEEEEEEEEEEEEEEEEEEEEEEE');
-                return  await ImagesSequelize.findAll({
-                    offset: offset,
-                    limit: 24,
-                    order: [['created_at', 'DESC']]
-                }).then(async (result) => {
-                    return result;
-                    // caching the results on redis
-                 //   console.log(console.log({images: result[0]}))
-                    console.log('DENTROOOOOOOOOOOOOOOOOOOOOOOOOOO');
-
-                   // const encodedResult = await ImagesArrayProtoBuffer({argument: payload, encode: true});
-                  //  console.log(encodedResult, 'TREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE')
-                  //  console.log(encodedResult, 'encoded results')
-                    return await redisClient.setexAsync(offset, 3600, 'ZZ')
-                        .then(OK => result);
-                    }
-                );
-
-            }
-        })
-        .catch(e => e);
-};*/
 
 const findImages = async (offset) => {
      const cache = await redisClient.getAsync(offset);
@@ -74,17 +41,7 @@ const findImages = async (offset) => {
     }
 };
 
-/*
- const findImages = async (offset) => {
- return await ImagesSequelize.findAll({
- offset: offset,
- limit: 24,
- order: [['created_at', 'DESC']]
- }).then(result => {
- return result;
- }).catch(e => e);
- };
- */
+
 export const imagesListGraphQL = {
     type: new GraphQLList(ImageType),
     args: {indexOffset: {type: GraphQLInt}},
