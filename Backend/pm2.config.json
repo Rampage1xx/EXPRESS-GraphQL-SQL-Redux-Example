@@ -1,0 +1,13 @@
+{
+  "apps": [
+    {
+      "name": "pinIT",
+      "script": "./server.js",
+      "watch": true,
+      "watch_options": {
+        "usePolling": true,
+        "interval": 5000
+      }
+    }
+  ]
+}
