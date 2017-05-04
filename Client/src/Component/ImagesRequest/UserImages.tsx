@@ -1,17 +1,17 @@
 import * as React from 'react';
 import Masonry from 'react-masonry-component';
-import { addLikeStatusToArray, findUserImagesQueryHandler } from '../../Utils/GraphQL/Queries';
-import { GenerateMasonry } from './GenerateMasonry';
+import {addLikeStatusToArray, findUserImagesQueryHandler} from '../../Utils/GraphQL/Queries';
+import {GenerateMasonry} from './GenerateMasonry';
 
 export class UserImages extends React.Component<any, any> {
-    private userID : { id };
+    private userID : string;
     private likes: any[];
     constructor(props) {
         super(props);
         this.likes = [];
         const {id, likes} =  props.history.location.state
         this.userID = id;
-        this.likes = likes
+        this.likes = likes;
         this.state = {
             processedImages : []
         };
@@ -20,22 +20,33 @@ export class UserImages extends React.Component<any, any> {
 
     private componentDidMount() {
         findUserImagesQueryHandler(this.userID)
-            .then((response) => this.generateMasonryCards(response.data))
+            .then((response) => {
+            console.log('risposta', response)
+            this.generateMasonryCards(response.data)})
             .catch(e => e);
     }
     private generateMasonryCards(data : any) {
         // we generate the user masonry
         let result = [];
         const { findUserImagesGraphQL } = data;
+        console.log('generate')
         if ( findUserImagesGraphQL ) {
+
             const { images } = findUserImagesGraphQL;
+            console.log(images, 'images')
             result = addLikeStatusToArray(images, this.likes);
-            result = GenerateMasonry({images: result, deletePin: false});
+            console.log(result, 'risultati')
+            result = GenerateMasonry({
+                images: result,
+                deletePin: false,
+                deleteCardFunction: false,
+                id: this.userID
+            });
 
         } else {
             result.push(<div key = { 1234 }> Error while fetching data...</div>);
         }
-
+        console.log(result)
         this.setState({
             processedImages : result
         });

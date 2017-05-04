@@ -1,12 +1,16 @@
 import * as React from 'react';
-import { store } from '../../store/Store';
-import { actionCloseModal } from '../../Actions/ActionCreators';
+import {store} from '../../store/Store';
+import {actionCloseModal} from '../../Actions/ActionCreators';
 
-export class SocialComponent extends React.Component<any, any> {
+interface IProps {
+    socialsArray: string[]
+}
+
+export class SocialComponent extends React.Component<IProps, any> {
     private socials: any;
     private group: string[];
 
-    constructor(props) {
+    constructor(props: IProps) {
         super(props);
         this.socials = {};
         this.group = this.props.socialsArray;
@@ -15,8 +19,7 @@ export class SocialComponent extends React.Component<any, any> {
         });
     }
 
-    private startAuthentication(social) {
-     //   this.props.authentication(social);
+    private startAuthentication(social: string) {
         window.open(`http://localhost:3000/${social}/login`, `login`, 'height=200,width=200');
         store.dispatch(actionCloseModal(true))
     }
@@ -24,10 +27,10 @@ export class SocialComponent extends React.Component<any, any> {
     public render() {
         return (
             <div>
-                <div className='fa fa-twitter-square fa-3x' aria-hidden='true'
-                     onClick={this.socials.twitter}/>
-                <div className='fa fa-google-plus-square fa-3x' aria-hidden='true'
-                     onClick={this.socials.google}/>
+                <div role='button' className='fa fa-twitter-square fa-3x' aria-hidden='true'
+                     onClick={ this.socials.twitter }/>
+                <div role='button' className='fa fa-google-plus-square fa-3x' aria-hidden='true'
+                     onClick={ this.socials.google }/>
             </div>
         );
     }

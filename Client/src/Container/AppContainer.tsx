@@ -7,7 +7,6 @@ import {actionActivateModal, actionLoginStateChange} from '../Actions/ActionCrea
 import {MainPage} from '../Component/MainPage/MainPage';
 import {NavbarStrap} from '../Component/navbar/Navbar';
 import {MyImages} from '../Component/ImagesRequest/MyImages';
-//import { MyImagesAsync } from './test'
 import {History, store} from '../store/Store';
 import {createUserMutationOptions} from '../Utils/GraphQL/Mutations';
 import {currentUserQueryOptions, fetchPinsQueryOptions2} from '../Utils/GraphQL/Queries';
@@ -15,43 +14,51 @@ import {createUser, fetchPins, loggedInUserQuery} from '../Utils/GraphQL/QueryAn
 import {closeModalSelector, indexOffsetSelector, loginStateChangeSelector} from './AppSelector';
 import {LoginCallback} from '../LoginCallback';
 import {UserImages} from '../Component/ImagesRequest/UserImages';
+import {get} from 'lodash';
+interface IProps extends IPins {
+    currentUser: TCurrentUser,
+    loginStateChange: boolean
+}
 
-export class AppContainer extends React.PureComponent<any, any> {
+export class AppContainer extends React.PureComponent<IProps, any> {
 
-    constructor(props) {
+    constructor(props: IProps) {
         super(props);
- this.findUserHandler = this.findUserHandler.bind(this)
+        this.findUserHandler = this.findUserHandler.bind(this);
     }
 
-    private componentWillReceiveProps(nextProps) {
-        if ( nextProps.loginStateChange ) {
+    private componentWillReceiveProps(nextProps: IProps) {
+        if (nextProps.loginStateChange) {
             this.props.currentUser.refetch();
             store.dispatch(actionActivateModal(0));
             store.dispatch(actionLoginStateChange(false));
         }
     }
-    private findUserHandler ( user_id ) {
-       const likes = this.props.currentUser.loggedUserImagesGraphQL.likes;
-        History.push('/userImages', {id: user_id, likes})
+
+    private findUserHandler(user_id: string) {
+        const likes = this.props.currentUser.loggedUserImagesGraphQL.likes;
+        History.push('/userImages', {id: user_id, likes});
 
     }
 
     public render() {
-        const { pins2, currentUser } = this.props;
-        const { loggedUserImagesGraphQL } = currentUser;
+
+        const {pins, currentUser} = this.props;
+        const {loggedUserImagesGraphQL} = currentUser;
 
         // this is a safety check against against a late response from the server
-        const id = loggedUserImagesGraphQL ? loggedUserImagesGraphQL.id : 'Guest';
+       // const id = loggedUserImagesGraphQL ? loggedUserImagesGraphQL.id : 'Guest';
+        const id = get(loggedUserImagesGraphQL, 'id', 'Guest')
         //react router docs states that component needs to be bound inside render if we need to pass props to it
-        const Main = () => <MainPage pins = { pins2 } start = { 0 } end = { 6 } id = { id } findUser= { this.findUserHandler } />;
-        const MyImagePage = () => <MyImages userImages = { currentUser } />;
+        const Main = () => <MainPage pins={ pins } id={ id } findUser={ this.findUserHandler }/>;
+        const MyImagePage = () => <MyImages userImages={ currentUser }/>;
 
         return (
             <div>
-                <NavbarStrap id = { id } />
-                <Route exact path = '/' render = { Main } />
-                <Route path = '/myImages' render = { MyImagePage } />
-                <Route path = '/userImages' component={ UserImages } />
+                <NavbarStrap id={ id }/>
+                <Route exact path='/' render={ Main }/>
+                <Route path='/myImages' render={ MyImagePage }/>
+                <Route path='/userImages' component={ UserImages }/>
                 <Route exact path='/loginDone' component={ LoginCallback }/>
             </div>
         );
@@ -59,9 +66,9 @@ export class AppContainer extends React.PureComponent<any, any> {
 }
 
 const mapStateToProps = createStructuredSelector({
-    closeModal : closeModalSelector,
-    indexOffset : indexOffsetSelector,
-    loginStateChange : loginStateChangeSelector
+    closeModal: closeModalSelector,
+    indexOffset: indexOffsetSelector,
+    loginStateChange: loginStateChangeSelector
 
 });
 
@@ -73,8 +80,8 @@ export const AppContainerConnected: any = compose(
     graphql(fetchPins, fetchPinsQueryOptions2)
 )(AppContainer);
 
-    const Prova = (props) => {
-        return (
-            <div> ciao </div>
-        );
-    };
+const Prova = (props) => {
+    return (
+        <div> ciao </div>
+    );
+};

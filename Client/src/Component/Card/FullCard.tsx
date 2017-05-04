@@ -22,9 +22,9 @@ import {CardBottom} from './CardBottom';
 interface IProps {
     singleImage: TSingleImage,
     LoggedInUserID: string,
-    findUser?(user_id: string): null,
+    findUser?(user_id: string): void,
     deletePin?: boolean,
-    deleteCard?(index: number): null,
+    deleteCard?(index: number): void,
     cell?: any
 }
 interface IState {
@@ -103,7 +103,7 @@ export class FullCard extends React.Component<IProps, IState> {
 
     private findUserHandler() {
         const {singleImage, findUser} = this.props;
-
+        console.log(singleImage, findUser, 'si cerca')
         this.findUser ? findUser(singleImage.user_id)
             :
             History.push('/myImages');

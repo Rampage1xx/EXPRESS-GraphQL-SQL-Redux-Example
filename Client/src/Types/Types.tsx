@@ -1,22 +1,6 @@
-declare type TProps =  {
-    ownProps: {
-        currentUser: {
-            loggedUserImagesGraphQL: any[]
-        }
-    },
-    pins2: {
-        imagesListGraphQL: any[],
-        fetchMore: any,
-        feed: any
-    }
-}
-
-declare type TLoggedInUser =  { id : string, images : any[], likes : any[] }
-
-declare type TPins = [TSingleImage]
-
+// a single image object structure
 declare type TSingleImage = {
-avatar: string,
+    avatar: string,
     description: string,
     id: string,
     like_id: number,
@@ -26,11 +10,59 @@ avatar: string,
     url: string,
     userName: string,
     user_id: string,
-    
 };
 
-declare type TDeleteCard =  (index) => null;
-
-interface MethodsDelete {
-    deleteCard(index):  null
+// the likes array
+declare type TLikes = {
+    id: string,
+    image_id: string,
+    user_id: string
 }
+
+// the logged in user data, it has two arrays: one being the IPins array and the other being TLikes
+// they get filtered to form the personal user array
+declare type TLoggedInUser = {
+    likes: TLikes[],
+    id: string,
+    images: TSingleImage[],
+    __typename: string
+}
+// images here is the result of the filtering of the two precedents arrays
+declare type TCurrentUser = {
+    loggedUserImagesGraphQL: TLoggedInUser,
+    refetch(): void,
+    images: TSingleImage[],
+    fetchMore(): void,
+    subscribeToMore(): void,
+    startPolling(): void,
+    stopPolling(): void,
+
+}
+
+// this is used by apollo internally during the GraphQL fetch to the server.
+interface IOwnProps {
+    ownProps: {
+        currentUser: TCurrentUser
+    }
+}
+
+// used to fetch images for the guests users,
+// later on if the guests log in matches the
+// personal Likes array to obtain the customized
+// user images
+interface IPins {
+    pins: {
+        imagesListGraphQL: TSingleImage[],
+        fetchMore: any,
+        feed: any
+        loadMoreEntries?(): void
+    },
+}
+interface IFindUser {
+    id: string,
+    findUser(id: string): void
+}
+
+interface IFetchPinsProps extends IOwnProps, IPins {
+}
+

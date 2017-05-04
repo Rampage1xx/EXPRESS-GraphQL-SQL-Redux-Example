@@ -1,54 +1,52 @@
 import * as React from 'react';
 import Masonry from 'react-masonry-component';
 import {GenerateMasonry} from './GenerateMasonry';
+interface IProps {
+    userImages: TCurrentUser
+}
 
-export class MyImages extends React.PureComponent<any, any> {
-    private myItems : any [] = [];
+export class MyImages extends React.PureComponent<IProps, any> {
+    private myItems: any [] = [];
 
-    constructor(props) {
+    constructor(props: IProps) {
         super(props);
         this.deleteCard = this.deleteCard.bind(this);
-        this.state = {
-            deletedItems : 0
-        };
+        this.state = {deletedItems: 0};
         this.generateMasonryCards(this.props);
     }
 
-    private deleteCard(index) {
+    private deleteCard(index: number) {
         delete this.myItems[index];
-        this.setState({
-            deletedItems : this.state.deletedItems + 1
-        });
+        this.setState({deletedItems: this.state.deletedItems + 1});
     }
 
-    private generateMasonryCards(propsLocation) {
+    private generateMasonryCards(propsLocation: IProps) {
         // we generate the user masonry
-        const { userImages } = propsLocation;
+        const {userImages} = propsLocation;
         this.myItems = [];
-        if ( userImages ) {
-            const { images } = userImages;
-
+        if (userImages) {
+            const {images, loggedUserImagesGraphQL} = userImages;
+            const { id } = loggedUserImagesGraphQL;
             this.myItems = GenerateMasonry({
                 images,
-                deletePin : true,
-                deleteCardFunction : this.deleteCard
+                deletePin: true,
+                deleteCardFunction: this.deleteCard,
+                id
             });
 
         }
     }
 
-    private componentWillReceiveProps(nextProps) {
-        // console.log('props del my images', nextProps)
+    private componentWillReceiveProps(nextProps: IProps) {
         this.generateMasonryCards(nextProps);
 
     }
-
     public  render() {
         return (
             <Masonry
-                elementType = { 'div' }
-                disableImagesLoaded = { false }
-                updateOnEachImageLoad = { false }
+                elementType={ 'div' }
+                disableImagesLoaded={ false }
+                updateOnEachImageLoad={ false }
             >
                 { this.myItems }
             </Masonry>
@@ -57,15 +55,3 @@ export class MyImages extends React.PureComponent<any, any> {
     }
 }
 
-/*            /*let loop = 0;
- if ( images && images.length >= 1 ) {
- while ( loop < images.length ) {
- this.myItems.push(
- <FullCard key = { images[loop].id } user_id = { images[loop].user_id}
- deletePin = {true} deleteCard = { this.deleteCard } cell = {loop}
- singleImage = {images[loop]}
- />
- );
-
- loop = loop + 1;
- }*/

@@ -1,28 +1,33 @@
 import * as React from 'react';
-import { Row } from '../Row/Row';
+import {Row} from '../Row/Row';
 
-export class MainPage extends React.Component<any, any> {
+interface IProps extends IPins, IFindUser {
 
-    constructor (props) {
+}
+
+export class MainPage extends React.Component<IProps, any> {
+
+    constructor(props: IProps) {
         super(props);
         this.fetchMore = this.fetchMore.bind(this);
 
     };
 
-    private fetchMore () {
+    private fetchMore() {
         this.props.pins.loadMoreEntries();
     }
 
-    public render () {
-        const {id, start, end, pins, findUser} = this.props;
+    public render() {
+        const {id, pins, findUser} = this.props;
         const {imagesListGraphQL} = pins;
+
         return (
             <div>
-                    <Row id = { id } end = { end }
-                         start = { start }
-                         pins = { imagesListGraphQL }  findUser= { findUser }/>
+                <Row id={ id } pins={ imagesListGraphQL } findUser={ findUser }/>
 
-                <div className = 'LoadMore' onMouseEnter = { this.fetchMore }><h2> Hover me to load more!</h2></div>
+                <div className='LoadMore' onMouseEnter={ this.fetchMore }>
+                    <h2> Hover me to load more!</h2>
+                </div>
 
             </div>
         );

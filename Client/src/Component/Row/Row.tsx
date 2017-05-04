@@ -2,40 +2,27 @@ import * as React from 'react';
 import Masonry from 'react-masonry-component';
 import {FullCard} from '../Card/FullCard';
 
-interface IProps {
-    pins: TPins,
-    id,
-    end,
-    start,
-    findUser,
-    
+interface IProps extends  IFindUser {
+    pins: TSingleImage[]
 }
 
 export class Row extends React.PureComponent<IProps, any> {
     private items : any [] = [];
-    constructor(props) {
+    constructor(props: IProps) {
         super(props);
         this.generateCards(this.props);
-/*
-        this.findUserHandler = this.findUserHandler.bind(this)
-*/
+
     }
 
-    private  componentWillReceiveProps(nextProps) {
+    private  componentWillReceiveProps(nextProps: IProps) {
         this.generateCards(nextProps);
 
     }
 
-/*    private findUserHandler ( user_id ) {
-        const { likes } = this.props;
-       History.push('/userImages', {id: user_id, likes})
-
-    }*/
-
-    private generateCards(props) {
+    private generateCards(props: IProps) {
         // generating the cards from the props(array) received
-        const { pins, start, id, findUser } = props;
-        let loop = start;
+        const { pins,  id, findUser } = props;
+        let loop = 0;
         this.items = [];
         if ( pins ) {
             while ( loop < pins.length ) {

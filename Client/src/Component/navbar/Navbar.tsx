@@ -1,22 +1,25 @@
 import * as React from 'react';
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { ConnectedNavContainer } from '../../Container/NavbarContainer/ConnectedNavContainer';
-import { NavBrand } from './brand/NavBrand';
+import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from 'reactstrap';
+import {ConnectedNavContainer} from '../../Container/NavbarContainer/ConnectedNavContainer';
+import {NavBrand} from './brand/NavBrand';
 
-export class NavbarStrap extends React.Component<any, any> {
-    constructor(props) {
+interface IProps {
+    id: string
+}
+interface IState {
+    isOpen: boolean
+}
+
+export class NavbarStrap extends React.Component<IProps, IState> {
+    constructor(props: IProps) {
         super(props);
 
         this.toggle = this.toggle.bind(this);
-        this.state = {
-            isOpen: false
-        };
+        this.state = {isOpen: false};
     }
 
     private  toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
+        this.setState({isOpen: !this.state.isOpen});
     }
 
     public  render() {
