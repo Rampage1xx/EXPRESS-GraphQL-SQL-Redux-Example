@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-export const CardBottom = (props) => {
+declare type TProps = {
+    avatar: string, userName: string, findUserHandler(): void,
+    like: boolean, likeHandler(): void, totalLikes: number
+}
+export const CardBottom = (props: TProps) => {
     const {avatar, userName, findUserHandler, like, likeHandler, totalLikes} = props;
 
     // assigning css depending if a like is present or not
@@ -13,7 +17,7 @@ export const CardBottom = (props) => {
                 <div> { userName } </div>
             </div>
             <div className='bottomCard__center'>
-                <div className={ `${likeCSS}` } onClick={ likeHandler }/>
+                <div role='button' className={ `${likeCSS}` } onClick={ likeHandler }/>
                 <p className='totalLikes__card__p'> { totalLikes }</p>
             </div>
         </div>

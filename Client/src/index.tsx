@@ -16,7 +16,7 @@ import routes from './routes';
 ReactDOM.render(
     <ApolloProvider store={ store } client={ client }>
         <Router history={ History }>
-            {routes}
+            { routes }
         </Router>
     </ApolloProvider>,
     document.getElementById('app')

@@ -2,35 +2,37 @@ import * as React from 'react';
 import Masonry from 'react-masonry-component';
 import {addLikeStatusToArray, findUserImagesQueryHandler} from '../../Utils/GraphQL/Queries';
 import {GenerateMasonry} from './GenerateMasonry';
+import {RouteComponentProps} from 'react-router';
 
-export class UserImages extends React.Component<any, any> {
-    private userID : string;
+export class UserImages extends React.Component<RouteComponentProps<{id: string, likes: any[]}>, any> {
+    private userID: string;
     private likes: any[];
-    constructor(props) {
+
+    constructor(props: RouteComponentProps<{id: string, likes: any[]}>) {
         super(props);
         this.likes = [];
-        const {id, likes} =  props.history.location.state
+        const {id, likes} = props.history.location.state;
         this.userID = id;
         this.likes = likes;
-        this.state = {
-            processedImages : []
-        };
+        this.state = {processedImages: []};
 
     }
 
     private componentDidMount() {
         findUserImagesQueryHandler(this.userID)
             .then((response) => {
-            this.generateMasonryCards(response.data)})
+                this.generateMasonryCards(response.data);
+            })
             .catch(e => e);
     }
-    private generateMasonryCards(data : any) {
+
+    private generateMasonryCards(data: any) {
         // we generate the user masonry
         let result = [];
-        const { findUserImagesGraphQL } = data;
-        if ( findUserImagesGraphQL ) {
+        const {findUserImagesGraphQL} = data;
+        if (findUserImagesGraphQL) {
 
-            const { images } = findUserImagesGraphQL;
+            const {images} = findUserImagesGraphQL;
             result = addLikeStatusToArray(images, this.likes);
             result = GenerateMasonry({
                 images: result,
@@ -40,19 +42,19 @@ export class UserImages extends React.Component<any, any> {
             });
 
         } else {
-            result.push(<div key = { 1234 }> Error while fetching data...</div>);
+            result.push(<div key={ 1234 }> Error while fetching data...</div>);
         }
         this.setState({
-            processedImages : result
+            processedImages: result
         });
     }
 
     public render() {
         return (
             <Masonry
-                elementType = { 'div' }
-                disableImagesLoaded = { false }
-                updateOnEachImageLoad = { false }
+                elementType={ 'div' }
+                disableImagesLoaded={ false }
+                updateOnEachImageLoad={ false }
             >
                 { this.state.processedImages }
             </Masonry>

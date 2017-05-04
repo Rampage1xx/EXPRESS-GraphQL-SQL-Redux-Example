@@ -1,5 +1,7 @@
 import * as React from 'react';
-export const RenderField = ({ input, label, type, meta: { asyncValidating, touched, error } }) => (
+
+
+export const RenderField = ({input, label, type, meta: {asyncValidating, touched, error}}) => (
     <div className='form-group'>
         <label>{ label }</label>
         <div className={ asyncValidating ? 'async-validating' : '' }>

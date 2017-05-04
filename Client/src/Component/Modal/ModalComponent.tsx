@@ -5,9 +5,22 @@ import {store} from '../../store/Store';
 import {OpenModalButton} from './AddOns/OpenModalButton';
 import {ModalClosingTag} from './AddOns/ModalClosingTag';
 
-export class ModalComponent extends React.Component<any, any> {
+interface IProps {
+    name: string,
+    activeModal: number,
+    invisible?: boolean,
+    closingTag?: string,
+    closeModal?: boolean,
+    modalNumber?: number;
+}
 
-    constructor(props) {
+interface IState {
+    modal: boolean
+}
+
+export class ModalComponent extends React.Component<IProps, IState> {
+
+    constructor(props: IProps) {
         super(props);
         this.state = {
             modal: false
@@ -16,7 +29,7 @@ export class ModalComponent extends React.Component<any, any> {
 
     }
 
-    private componentWillReceiveProps(nextProps) {
+    private componentWillReceiveProps(nextProps: IProps) {
         // when form contained in the modal get submitted it dispatches an action to
         // informs the modal to close itself.
         // This if statement executes the order  and after that reverts the store closeModal state

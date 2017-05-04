@@ -1,17 +1,24 @@
 import {List, Map} from 'immutable';
 import {ACTIVATE_MODAL, CLOSE_MODAL, INDEX_OFFSET, LOGIN_STATE_CHANGE} from '../Actions/ActionCreators';
 
-const defaultState : Map<string, boolean | number | List<any>> = Map({
-    indexOffset : 0,
-    closeModal : false,
-    userID : 0,
-    loginStateChange : false,
-    activeModal : 0
+declare type TDefaultState = Map<string, boolean | number | List<any>>
+
+const defaultState: TDefaultState = Map({
+    indexOffset: 0,
+    closeModal: false,
+    userID: 0,
+    loginStateChange: false,
+    activeModal: 0
 
 });
 
-export const userReducer = (state = defaultState, action? : { modal : boolean, offset : number, type : string, login : boolean, modalNumber: number }) => {
-    switch ( action.type ) {
+declare type TUserReducer<T> =  (state: T, action: {
+    modal: boolean, offset: number,
+    type: string, login: boolean, modalNumber: number
+}) => any
+
+export const userReducer: TUserReducer<TDefaultState> = (state = defaultState, action?) => {
+    switch (action.type) {
         case CLOSE_MODAL:
             return state.set('closeModal', action.modal);
         case INDEX_OFFSET:
@@ -19,7 +26,7 @@ export const userReducer = (state = defaultState, action? : { modal : boolean, o
         case LOGIN_STATE_CHANGE:
             return state.set('loginStateChange', action.login);
         case ACTIVATE_MODAL:
-            return state.set('activeModal', action.modalNumber)
+            return state.set('activeModal', action.modalNumber);
         default:
             return state;
     }

@@ -1,12 +1,12 @@
-import { actionActivateModal, actionCloseModal } from '../../Actions/ActionCreators';
-import { client, store } from '../../store/Store';
-import { addImageMutation, addLikeMutation, createUser, removeImageMutation, removeLikeMutation } from './QueryAndMutationsStrings';
-
-//TODO: INSERIRE ERROR HANDLING SE L'AZIONE NON VA A BUON FINE
-//TODO: a)postare immagini da non loggato non produce alcun effetto ora, invece di un errore
-
-//TODO: va spostata in axios
-
+import {actionActivateModal, actionCloseModal} from '../../Actions/ActionCreators';
+import {client, store} from '../../store/Store';
+import {
+    addImageMutation,
+    addLikeMutation,
+    createUser,
+    removeImageMutation,
+    removeLikeMutation
+} from './QueryAndMutationsStrings';
 
 // OPTIONS //
 export const createUserMutationOptions = {
@@ -63,6 +63,6 @@ export const formAddImageHandler = (formProps) : void => {
     client.mutate({
             mutation : addImageMutation, variables : { url : values[0], title : values[1], description : values[2] }
         })
-        .then((res) => 'Image successfully added!')
-        .catch((res) => 'Wops error! Try again later!');
+        .then((res) => window.location.reload(true))
+        .catch((res) => store.dispatch(actionActivateModal(2)));
 };

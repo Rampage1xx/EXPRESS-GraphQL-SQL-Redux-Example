@@ -265,14 +265,6 @@
       "check-operator",
       "check-separator",
       "check-type"
-    ],
-    "no-useless-files": true,
-    "jsx-alignment": true,
-    "jsx-boolean-value": false,
-    "jsx-no-lambda": true,
-    "jsx-no-multiline-js": true,
-    "jsx-no-string-ref": true,
-    "jsx-self-close": true,
-    "jsx-wrap-multiline": true
+    ]
   }
 }

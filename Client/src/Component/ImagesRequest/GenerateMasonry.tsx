@@ -1,7 +1,12 @@
 import * as React from 'react';
 import {FullCard} from '../Card/FullCard';
 
-export const GenerateMasonry = (parameters: { images: any[], deletePin: boolean, deleteCardFunction?: any, id?: string }) => {
+declare type TGenerateMasonry = (parameters: {
+    images: any[], deletePin: boolean,
+    deleteCardFunction?: any, id?: string
+}) => any[]
+
+export const GenerateMasonry: TGenerateMasonry = (parameters) => {
     const {images, deletePin, deleteCardFunction, id} = parameters;
     const myItems = [];
     let loop = 0;

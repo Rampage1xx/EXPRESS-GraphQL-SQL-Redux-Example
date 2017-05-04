@@ -55,7 +55,8 @@ interface IPins {
         imagesListGraphQL: TSingleImage[],
         fetchMore: any,
         feed: any
-        loadMoreEntries?(): void
+        loadMoreEntries?(): void,
+        refetch?(): void,
     },
 }
 interface IFindUser {

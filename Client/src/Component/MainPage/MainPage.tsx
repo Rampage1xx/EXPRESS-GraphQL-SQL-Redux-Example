@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {Row} from '../Row/Row';
 
-interface IProps extends IPins, IFindUser {
-
-}
+interface IProps extends IPins, IFindUser {}
 
 export class MainPage extends React.Component<IProps, any> {
 

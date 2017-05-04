@@ -1,7 +1,9 @@
 import * as React from 'react';
 import {CardSubtitle, CardText, CardTitle} from 'reactstrap';
 
-export const CardBodyText = (props) => {
+declare type TProps = {title: string, description: string}
+
+export const CardBodyText = (props: TProps) => {
     const {title, description} = props;
     return (
         <div>

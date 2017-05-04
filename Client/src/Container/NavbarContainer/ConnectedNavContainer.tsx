@@ -8,7 +8,13 @@ import {NotLoggedInComponents} from '../../Component/navbar/NotLoggedInComponent
 
 import {activeModalStateChangeSelector, closeModalSelector, idPropsSelector} from '../AppSelector';
 
-class NavContainer extends React.Component<any, any> {
+interface IProps {
+    id: string,
+    closeModal: boolean,
+    activeModal: number,
+}
+
+class NavContainer extends React.Component<IProps, any> {
     constructor(props : any) {
         super(props);
     }

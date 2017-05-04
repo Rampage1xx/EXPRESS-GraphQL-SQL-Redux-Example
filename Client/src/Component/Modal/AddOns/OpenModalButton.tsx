@@ -2,8 +2,10 @@ import * as React from 'react';
 
 export const OpenModalButton = (props) => {
     const {invisible, toggle, name} = props;
-    return invisible ? null : <div className='btn__Navbar' color='danger' onClick={ toggle }>{ name }</div>
+    if (invisible) {
+        return null;
+    }
+
+    return <div role='button' className='btn__Navbar' color='danger' onClick={ toggle }>{ name }</div>;
 
 };
-
-
