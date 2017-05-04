@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  redis:
+    image: redis
+    networks:
+     - nodeapp-network
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: MyNewPass
+     # POSTGRES_DB: pinit
+      POSTGRES_DB: test
+    networks:
+     - nodeapp-network
+
+  node:
+    build:
+      context: .
+      dockerfile: node.dockerfile
+    command: ["npm", "run-script","mocha"]
+    environment:
+      NODE_ENV: test
+    volumes:
+      - ./Backend/Compiled/:/var/www/
+      - /var/www/node_modules
+      #- /var/www/config/
+    ports:
+     - "3000:3000"
+    networks:
+     - nodeapp-network
+
+
+
+networks:
+    nodeapp-network:
+      driver: bridge

@@ -1,11 +1,6 @@
 .idea/
 Backend/Compiled/
 /node_modules/
-Backend/GraphQL/
-Backend/Routes/
-Backend/Strings.ts
-Backend/database/
-Backend/middleware/
 Backend/node_modules/.bin/
 Backend/node_modules/.yarn-integrity
 Backend/node_modules/@protobufjs/
@@ -411,16 +406,8 @@ Backend/node_modules/xtend/
 Backend/node_modules/xtraverse/
 Backend/node_modules/yallist/
 Backend/node_modules/yeast/
-Backend/package.json
-Backend/pm2.config.json
-Backend/server.ts
-Backend/tests/
-Backend/tsconfig.json
-Backend/tslint.json
-Backend/types/
-Backend/yarn.lock
 BackendSRC/
-Would skip repository Client/
-docker-compose.yml
 node.dockerfile
 node_modules/
+/Backend/middleware/passport/facebook.ts
+/Backend/tests/mocks.ts
