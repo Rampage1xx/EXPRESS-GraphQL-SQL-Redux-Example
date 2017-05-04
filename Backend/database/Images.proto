@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package ImageDefinition;
+
+
+message SingleImage {
+    string id = 1;
+    string title = 2;
+    string url = 3;
+    string description = 4;
+    int32 totalLikes = 5;
+    string userName = 6;
+    string avatar = 7;
+    google.protobuf.Timestamp  created_at = 8;
+    google.protobuf.Timestamp  updated_at = 9;
+    string user_id = 10;
+}
+message ArrayImage {
+    SingleImage dataValues = 12;
+}
+
+message ImageList {
+    repeated ArrayImage images = 21;
+}
+

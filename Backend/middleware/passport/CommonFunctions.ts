@@ -1,7 +1,7 @@
-import { UsersSequelize } from '../../database/Tables';
+import { UsersSequelize } from '../../database/SequelizeTables';
 
 export const findUserPassport = ({ email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow }) : Promise<any> => {
-    const findUserError = 'loggedUserImagesGraphQL not found, MIO';
+    const findUserError = 'error while finding user';
     return UsersSequelize.findOne({
             where : {
                 email
@@ -22,13 +22,13 @@ export const findUserPassport = ({ email, SocialDatabaseIDRow, SocialID, socialD
 
         })
         .catch((e) => {
-            throw e;
+            throw findUserError;
         });
 };
 // SHOULD THE USER CHOOSE A GLOBAL USERNAME?
 export const createUser = (profile : profileParameters) : Promise<string> => {
     const { email, SocialDatabaseUsernameRow, SocialDatabaseIDRow, socialDisplayName, SocialID } = profile;
-    const createUserError = 'loggedUserImagesGraphQL already exists, MIO';
+    const createUserError = 'loggedUserImagesGraphQL already exists';
     return UsersSequelize.create({
         email : email,
         [SocialDatabaseIDRow] : SocialID,
@@ -38,10 +38,8 @@ export const createUser = (profile : profileParameters) : Promise<string> => {
     });
 };
 
-
-
 export const oAuthLoginFunction = async (profile : profileParameters, cb) => {
-    const { email, socialDisplayName, SocialID, SocialDatabaseIDRow, avatar, SocialDatabaseUsernameRow } = profile;
+    const { avatar, SocialDatabaseUsernameRow } = profile;
     try {
         // a) find the user
         // b) if false(not present) create account

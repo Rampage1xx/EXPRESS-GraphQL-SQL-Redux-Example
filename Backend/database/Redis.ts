@@ -13,13 +13,15 @@ export const redisClient: any = redis.createClient({
     return_buffers: true
 });
 
+// SERIALIZING REDIS DATA //
 export const ImagesArrayProtoBuffer: TProtoBuffer =  ({argument, encode, decode}) => {
 
-    return  root.load('./GraphQL/Images.proto', {keepCase: true})
+    return  root.load('./database/Images.proto', {keepCase: true})
         .then(ProtoFile => {
 
-             return encode ? encodeProtoBuf(ProtoFile, argument) : decode
-                 ? decodeProtoBuf(ProtoFile, argument) : new Error('Missing instruction');
+             return encode ? encodeProtoBuf(ProtoFile, argument) :
+                 decode ? decodeProtoBuf(ProtoFile, argument) :
+                     new Error('Missing instruction');
 
         });
 
@@ -34,7 +36,7 @@ const decodeProtoBuf = (ProtoFile, encodedBuffer) => {
 const encodeProtoBuf = (ProtoFile, payload) => {
     const ImageArray = ProtoFile.lookupType('ImageDefinition.ImageList');
     const errMsg = ImageArray.verify(payload);
-    if (errMsg) { throw errMsg; }
+    if (errMsg) {throw errMsg; }
     const message = ImageArray.create(payload);
     return ImageArray.encode(message).finish();
 };

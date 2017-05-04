@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import * as Sequelize from 'sequelize';
 import {Instance} from 'sequelize';
 import {twitterID, twitterUsername} from '../Strings';
-const NODE_TEST = (process.env.NODE_ENV === 'test')
+const NODE_TEST = (process.env.NODE_ENV === 'test');
 const database: string = NODE_TEST ? 'test' : 'pinit';
 
 export const connection = new Sequelize(`${database}`, 'root', 'MyNewPass', {
@@ -11,7 +11,7 @@ export const connection = new Sequelize(`${database}`, 'root', 'MyNewPass', {
     // port: 3306,
     port: 5432,
     logging: false,
-    dialect: 'postgres',
+    dialect: 'postgres'
 
 });
 
@@ -63,7 +63,7 @@ export const UsersSequelize = connection.define('users', {
     {
         underscored: true,
         hooks: {
-            beforeUpdate: (user: Instance<object> | any, options): Promise<Instance<object>> => {
+            beforeUpdate: (user: Instance<object> | any, options?: {}): Promise<Instance<object>> => {
                 if (user.changed('password')) {
                     return bcrypt.genSalt(10)
                         .then((salt) => bcrypt.hash(user.password, salt))
@@ -75,7 +75,7 @@ export const UsersSequelize = connection.define('users', {
                 }
             },
 
-            beforeCreate: function(user: Instance<any> | any, options: {}) {
+            beforeCreate: function (user: Instance<any> | any, options?: {}) {
                 // Because we allow users to login without having a local Username/Password
                 // we need to check if a password is present before proceeding to hashing
                 return !user.password ? user : bcrypt.genSalt(10)
@@ -84,13 +84,10 @@ export const UsersSequelize = connection.define('users', {
                         user.password = result;
                         return user;
                     });
-            },
-            afterValidate: function(user, option) {
-                console.log('after validate');
             }
         },
         instanceMethods: {
-            verifyPassword: function(password): Promise<boolean> {
+            verifyPassword: function (password: string): Promise<boolean> {
                 const user = this;
                 return bcrypt.compare(password, user.password)
                     .then(result => result);
@@ -129,9 +126,7 @@ export const ImagesSequelize = connection.define('images', {
         }
     },
     {
-        underscored: true,
-
-
+        underscored: true
     });
 
 export const LikesSequelize = connection.define('likes', {
@@ -157,4 +152,3 @@ UsersSequelize.hasMany(LikesSequelize);
 if (!NODE_TEST) {
     connection.sync().catch(e => e);
 }
-

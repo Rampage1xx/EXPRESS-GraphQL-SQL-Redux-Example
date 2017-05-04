@@ -4,7 +4,7 @@ import {GraphQLString} from 'graphql';
 import {agent} from 'supertest';
 import {app, server} from '../server';
 import * as assert from 'assert';
-import {ImagesSequelize, LikesSequelize, UsersSequelize} from '../database/Tables';
+import {ImagesSequelize, LikesSequelize, UsersSequelize} from '../database/SequelizeTables';
 const agent1 = agent(app);
 const createUserMutation = `
   mutation createUser($email:String!, $userName: String!, $password:String!) {
@@ -157,7 +157,7 @@ describe(' testing GraphQL queries', () => {
             query: fetchPins,
             variables: {indexOffset: 0}
         })
-        .then(res => res.body.data.imagesListGraphQL)
+        .then(res => res.body.data.imagesListGraphQL);
 
     before('creating a batch of images to operate with', async () => {
         const user: any = await userFind('hello');
@@ -165,8 +165,8 @@ describe(' testing GraphQL queries', () => {
 
     });
 
-   it('should retrieve the images list', async () => {
-        const imagesArray =  await fetchImages();
+    it('should retrieve the images list', async () => {
+        const imagesArray = await fetchImages();
         assert.deepEqual(imagesArray.length, 24);
     });
 
@@ -178,6 +178,3 @@ describe(' testing GraphQL queries', () => {
 });
 
 server.close();
-
-
-// sdadasa
