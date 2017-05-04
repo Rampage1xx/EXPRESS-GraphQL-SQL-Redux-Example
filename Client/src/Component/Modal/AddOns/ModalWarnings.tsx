@@ -1,9 +1,9 @@
-import * as React from 'react'
-import { ModalComponent } from '../ModalComponent';
+import * as React from 'react';
+import {ModalComponent} from '../ModalComponent';
 
 export const ModalWarnings = (props) => {
   const {activeModal} = props
-    return (
+  return (
 <div>
     <ModalComponent name = { 'Account Created!' } modalNumber = { 1 } closingTag = { 'Yeeee!!' }
                     activeModal = { activeModal } invisible = { true }>

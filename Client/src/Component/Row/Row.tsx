@@ -1,14 +1,24 @@
 import * as React from 'react';
 import Masonry from 'react-masonry-component';
-import { FullCard } from './FullCard';
-import { History } from '../../store/Store'
+import {FullCard} from '../Card/FullCard';
 
-export class Row extends React.PureComponent<any, any> {
+interface IProps {
+    pins: TPins,
+    id,
+    end,
+    start,
+    findUser,
+    
+}
+
+export class Row extends React.PureComponent<IProps, any> {
     private items : any [] = [];
     constructor(props) {
         super(props);
         this.generateCards(this.props);
+/*
         this.findUserHandler = this.findUserHandler.bind(this)
+*/
     }
 
     private  componentWillReceiveProps(nextProps) {
@@ -16,11 +26,11 @@ export class Row extends React.PureComponent<any, any> {
 
     }
 
-    private findUserHandler ( user_id ) {
+/*    private findUserHandler ( user_id ) {
         const { likes } = this.props;
        History.push('/userImages', {id: user_id, likes})
 
-    }
+    }*/
 
     private generateCards(props) {
         // generating the cards from the props(array) received
@@ -29,8 +39,8 @@ export class Row extends React.PureComponent<any, any> {
         this.items = [];
         if ( pins ) {
             while ( loop < pins.length ) {
-                this.items.push(<FullCard key = { pins[loop].id } user_id = { id } singleImage = { pins[loop] }
-                                          imageUserID= { pins[loop].user_id } findUser= { findUser }   />);
+                this.items.push(<FullCard key = { pins[loop].id } LoggedInUserID = { id } singleImage = { pins[loop] }
+                                           findUser= { findUser }   />);
                 loop = loop + 1;
             }
         }

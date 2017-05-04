@@ -1,9 +1,5 @@
-import { List, Map } from 'immutable';
-import { ACTIVATE_MODAL, CLOSE_MODAL, INDEX_OFFSET, LOGIN_STATE_CHANGE } from '../Actions/ActionCreators';
-
-declare type provaType = {
-    source : string, imageHeight : number, imageWidth : number, caption : string, list : List<any>
-}
+import {List, Map} from 'immutable';
+import {ACTIVATE_MODAL, CLOSE_MODAL, INDEX_OFFSET, LOGIN_STATE_CHANGE} from '../Actions/ActionCreators';
 
 const defaultState : Map<string, boolean | number | List<any>> = Map({
     indexOffset : 0,

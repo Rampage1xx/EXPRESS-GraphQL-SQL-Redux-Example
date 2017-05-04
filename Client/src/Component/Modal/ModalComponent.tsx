@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { Route } from 'react-router';
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader, NavLink } from 'reactstrap';
-import {  actionCloseModal } from '../../Actions/ActionCreators';
-import { store } from '../../store/Store';
-import { Link } from 'react-router-dom'
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader, NavLink} from 'reactstrap';
+import {actionCloseModal} from '../../Actions/ActionCreators';
+import {store} from '../../store/Store';
 
 export class ModalComponent extends React.Component<any, any> {
 

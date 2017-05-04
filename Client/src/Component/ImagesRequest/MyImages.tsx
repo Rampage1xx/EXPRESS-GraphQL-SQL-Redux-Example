@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Masonry from 'react-masonry-component';
-import { GenerateMasonry } from './GenerateMasonry';
+import {GenerateMasonry} from './GenerateMasonry';
+
 export class MyImages extends React.PureComponent<any, any> {
     private myItems : any [] = [];
 

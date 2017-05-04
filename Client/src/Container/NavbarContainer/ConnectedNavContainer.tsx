@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Button, Nav, NavItem, NavLink } from 'reactstrap';
-import { createStructuredSelector } from 'reselect';
-import { ModalWarnings } from '../../Component/Modal/AddOns/ModalWarnings';
-import { LoggedInComponents } from '../../Component/navbar/LoggedInComponents';
-import { NotLoggedInComponents } from '../../Component/navbar/NotLoggedInComponents';
+import {connect} from 'react-redux';
+import {Button, Nav, NavItem, NavLink} from 'reactstrap';
+import {createStructuredSelector} from 'reselect';
+import {ModalWarnings} from '../../Component/Modal/AddOns/ModalWarnings';
+import {LoggedInComponents} from '../../Component/navbar/LoggedInComponents';
+import {NotLoggedInComponents} from '../../Component/navbar/NotLoggedInComponents';
 
-import { activeModalStateChangeSelector, closeModalSelector, idPropsSelector } from '../AppSelector';
+import {activeModalStateChangeSelector, closeModalSelector, idPropsSelector} from '../AppSelector';
 
 class NavContainer extends React.Component<any, any> {
     constructor(props : any) {

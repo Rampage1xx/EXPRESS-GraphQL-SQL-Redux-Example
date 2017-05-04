@@ -4,6 +4,6 @@ export const Circle = (props) => {
 
     return (
 
-        <div className='Circle__navbar'><p className='circle_p_Text'>{props.text}</p></div>
+        <div className='Circle__navbar'><p className='circle_p_Text'>{ props.text }</p></div>
     );
 };

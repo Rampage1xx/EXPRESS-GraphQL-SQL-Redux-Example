@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FullCard } from '../Row/FullCard';
+import {FullCard} from '../Card/FullCard';
 
 export const GenerateMasonry = (parameters: {images, deletePin, deleteCardFunction?, id?}) => {
     const {images, deletePin, deleteCardFunction, id} = parameters;
@@ -8,9 +8,9 @@ export const GenerateMasonry = (parameters: {images, deletePin, deleteCardFuncti
         if ( images && images.length >= 1 ) {
             while ( loop < images.length ) {
                 myItems.push(
-                    <FullCard key = { images[loop].id } user_id = { images[loop].user_id}
-                              deletePin = {deletePin} deleteCard = { deleteCardFunction } cell = {loop}
-                              singleImage = {images[loop]}
+                    <FullCard key = { images[loop].id } LoggedInUserID = { images[loop].user_id }
+                              deletePin = { deletePin } deleteCard = { deleteCardFunction }
+                              cell = { loop } singleImage = { images[loop] }
                     />
                 );
 

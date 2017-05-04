@@ -3,8 +3,6 @@ import  * as  React from 'react'
 
 declare const System: any;
 
-
-
 function asyncComponent(getComponent) {
     return class AsyncComponent extends React.Component<any, any> {
        public static Component = null;
@@ -28,11 +26,9 @@ function asyncComponent(getComponent) {
     }
 }
 
-
 export  const MyImagesAsync = asyncComponent(() =>
 System.import('../Component/UserImages/MyImages').then(module => module.default))
 */
-
 
 /*
 const App = () =>

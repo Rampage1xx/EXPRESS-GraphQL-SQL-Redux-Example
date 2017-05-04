@@ -1,21 +1,20 @@
 import * as React from 'react';
-import { compose, graphql } from 'react-apollo';
-import { connect } from 'react-redux';
-import {  Route } from 'react-router';
-import { createStructuredSelector } from 'reselect';
-import { actionActivateModal, actionLoginStateChange } from '../Actions/ActionCreators';
-import { MainPage } from '../Component/MainPage/MainPage';
-import { NavbarStrap } from '../Component/navbar/Navbar';
-import { MyImages } from '../Component/ImagesRequest/MyImages';
- //import { MyImagesAsync } from './test'
-import { store } from '../store/Store';
-import { createUserMutationOptions } from '../Utils/GraphQL/Mutations';
-import { currentUserQueryOptions, fetchPinsQueryOptions2 } from '../Utils/GraphQL/Queries';
-import { createUser, fetchPins, loggedInUserQuery } from '../Utils/GraphQL/QueryAndMutationsStrings';
-import { closeModalSelector, indexOffsetSelector, loginStateChangeSelector } from './AppSelector';
-import { LoginCallback } from '../LoginCallback';
-import { UserImages } from '../Component/ImagesRequest/UserImages';
-import { History } from '../store/Store'
+import {compose, graphql} from 'react-apollo';
+import {connect} from 'react-redux';
+import {Route} from 'react-router';
+import {createStructuredSelector} from 'reselect';
+import {actionActivateModal, actionLoginStateChange} from '../Actions/ActionCreators';
+import {MainPage} from '../Component/MainPage/MainPage';
+import {NavbarStrap} from '../Component/navbar/Navbar';
+import {MyImages} from '../Component/ImagesRequest/MyImages';
+//import { MyImagesAsync } from './test'
+import {History, store} from '../store/Store';
+import {createUserMutationOptions} from '../Utils/GraphQL/Mutations';
+import {currentUserQueryOptions, fetchPinsQueryOptions2} from '../Utils/GraphQL/Queries';
+import {createUser, fetchPins, loggedInUserQuery} from '../Utils/GraphQL/QueryAndMutationsStrings';
+import {closeModalSelector, indexOffsetSelector, loginStateChangeSelector} from './AppSelector';
+import {LoginCallback} from '../LoginCallback';
+import {UserImages} from '../Component/ImagesRequest/UserImages';
 
 export class AppContainer extends React.PureComponent<any, any> {
 
@@ -36,7 +35,6 @@ export class AppContainer extends React.PureComponent<any, any> {
         History.push('/userImages', {id: user_id, likes})
 
     }
-
 
     public render() {
         const { pins2, currentUser } = this.props;

@@ -1,4 +1,4 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
 // var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {

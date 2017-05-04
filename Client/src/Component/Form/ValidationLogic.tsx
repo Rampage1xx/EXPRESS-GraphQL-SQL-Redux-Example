@@ -1,5 +1,5 @@
-import { gql } from 'react-apollo/lib';
-import { client } from '../../store/Store';
+import {gql} from 'react-apollo/lib';
+import {client} from '../../store/Store';
 
 export const createAccountValidation = (values) => {
     const getValues = (prop: string) => values.get(prop);

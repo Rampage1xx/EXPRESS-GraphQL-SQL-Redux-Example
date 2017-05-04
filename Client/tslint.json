@@ -19,24 +19,14 @@
     "prefer-method-signature": true,
     "strict-type-predicates": false,
     "adjacent-overload-signatures": false,
-    "align": [
-      false
-    ],
-    "array-type": [
-      false
-    ],
     "arrow-parens": false,
     "ban": false,
     "callable-types": true,
     "chai-prefer-contains-to-index-of": true,
     "chai-vague-errors": true,
     "class-name": true,
-    "comment-format": [
-      false
-    ],
-    "completed-docs": [
-      false
-    ],
+    "comment-format": false,
+    "completed-docs": false,
     "curly": true,
     "cyclomatic-complexity": [
       false
@@ -140,9 +130,7 @@
       "http://www.examples.com/?.*"
     ],
     "no-increment-decrement": true,
-    "no-inferrable-types": [
-      false
-    ],
+    "no-inferrable-types": false,
     "no-inferred-empty-object-type": false,
     "no-inner-html": true,
     "no-internal-module": false,
@@ -192,10 +180,7 @@
     "no-void-expression": false,
     "no-with-statement": true,
     "non-literal-require": true,
-    "object-literal-key-quotes": [
-      false,
-      "as-needed"
-    ],
+    "object-literal-key-quotes": false,
     "object-literal-shorthand": false,
     "object-literal-sort-keys": false,
     "one-line": [
@@ -208,12 +193,8 @@
     "one-variable-per-declaration": [
       true
     ],
-    "only-arrow-functions": [
-      false
-    ],
-    "ordered-imports": [
-      false
-    ],
+    "only-arrow-functions": false,
+    "ordered-imports": false,
     "possible-timing-attack": true,
     "prefer-array-literal": true,
     "prefer-const": true,
@@ -246,10 +227,7 @@
     "react-this-binding-issue": false,
     "react-unused-props-and-state": true,
     "restrict-plus-operands": false,
-    "semicolon": [
-      true,
-      "ignore-bound-class-methods"
-    ],
+    "semicolon": false,
     "space-before-function-paren": false,
     "strict-boolean-expressions": false,
     "switch-default": false,

@@ -18,13 +18,6 @@ export const actionCloseModal = (modal: boolean) => {
     };
 };
 
-export const actionIndexOffset = (offset) => {
-    return {
-        type: INDEX_OFFSET,
-        offset
-    }
-};
-
 export const actionActivateModal = (modalNumber) => {
     return {
         type: ACTIVATE_MODAL,
