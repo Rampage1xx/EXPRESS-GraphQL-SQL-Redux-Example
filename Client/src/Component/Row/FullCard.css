@@ -1,0 +1,38 @@
+.faRed {
+  color:red;
+}
+.faLightGreen {
+  color:lightgreen;
+}
+.bottomCard__Container{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+}
+.totalLikes__card__p {
+  margin-top: 0;
+  margin-right: 0.3rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+.bottomCard__rightSide{
+
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* align-content: center; */
+
+  align-items: center;
+  justify-content: space-between;
+  align-self: flex-end;
+  width: calc(99%*1/2);
+}
+
+/*.img_card_size {
+  width:256px;
+  height:180px ;
+}*/
+
+.avatarSize {
+  width: 4.8rem;
+  height: 4.8rem;
+}

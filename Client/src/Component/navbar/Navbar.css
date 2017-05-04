@@ -1,0 +1,70 @@
+/* NAVBAR */
+
+.Navbar {
+  /*@apply --flexRow;*/
+  @mixin flexDirectionWrap false, row;
+  width: 100%;
+  height: 3rem;
+  background-color: lightseagreen;
+}
+
+.Menu__navbar {
+  margin-left: auto;
+}
+
+/*circle inside navbar*/
+.circle_p_Text {
+  margin: 0;
+  align-self: center;
+}
+
+.Circle__navbar {
+  background-color: #FF8B00;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 0px 0.2em black;
+
+}
+
+/* REACTSTRAP CSS*/
+.navbar-brand {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.navbar-toggleable .navbar-collapse {
+  width: auto;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.bg-faded {
+  background-color: #81D4FA;
+  box-shadow: 0rem 0rem 5rem black;
+
+}
+
+.btn__Navbar {
+  box-shadow: 0px 0px 0.3rem black;
+}
+.LoggedInComponents_Navbar{
+  display:flex;
+}
+.modal__Navbar{
+  cursor:pointer;
+  color:#0275d8;
+}
+.brand__Navbar {
+  display:flex;
+  color: #000;
+}
+.brand__Navbar:hover {
+  color: royalblue;
+}
+/*@mixin parentName_ChildNumber_Color Circle__navbar, 1, green;*/
+@mixin parentName_ChildNumber_Color Circle__navbar, 2, yellow;
+@mixin parentName_ChildNumber_Color Circle__navbar, 4, yellow;
+

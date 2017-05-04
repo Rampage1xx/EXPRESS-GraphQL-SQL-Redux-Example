@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "target": "es2017",
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+  //  "allowSyntheticDefaultExports": true,
+    "types": [],
+    "lib": [
+      "es2017",
+      "dom"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "**/test/*.ts",
+    "*.d.ts"
+  ],
+  "include": [
+    "src/**/*"
+  ]
+}

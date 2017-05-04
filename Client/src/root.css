@@ -1,0 +1,43 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+}
+
+:root {
+  --flexRow: {
+    display: flex;
+    flex-direction: row;
+  };
+  --flexWrap: {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@define-mixin icon $name {
+  padding-left: 16px;
+  padding-right: $ name;
+
+  &::after {
+    content: "";
+    background-url: url(/icons/$(name) . png);
+    background-color: $(name)
+  }
+}
+
+@define-mixin flexDirectionWrap $direction $wrap {
+  display: flex;
+  flex-direction: $(direction);
+  flex-wrap: $(wrap);
+}
+
+@define-mixin parentName_ChildNumber_Color $parent $child $color {
+  .$
+
+(parent):nth-child($(child)) {
+  background-color: $(color);
+}
+}

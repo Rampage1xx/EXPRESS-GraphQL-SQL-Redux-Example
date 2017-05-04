@@ -1,0 +1,40 @@
+/* MIDDLE ROW */
+
+.MiddleRow {
+  @mixin flexDirectionWrap column, wrap;
+  width: calc(99.9% * 2 / 10 - (1rem - 1rem * 1 / 3));
+  /* height: calc(99.9% * 1/1 - (1rem - 1rem * 1/3));*/
+  margin: 0px;
+}
+
+.MiddleColumns {
+  @mixin flexDirectionWrap column, wrap;
+  background-color: lightcoral;
+  justify-content: space-between;
+  margin: 0.2rem;
+  width: calc(99.9% * 1 / 1 - (3rem - 1rem * 1 / 1));
+  flex-grow: 1;
+}
+
+.MiddleColumns__Image {
+  background-image: url(https://unsplash.it/800/600?image=59);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  filter: contrast(70%);
+  overflow: hidden;
+  position: relative;
+  transition: -webkit-filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+  transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+}
+
+/*img {
+  width: 100%;
+  height: auto;
+}*/
+.grid-item { width: 20%; }
+
+@mixin parentName_ChildNumber_Color MiddleColumns, 2, lightgreen;
+@mixin parentName_ChildNumber_Color MiddleColumns, 3, lightsteelblue;
