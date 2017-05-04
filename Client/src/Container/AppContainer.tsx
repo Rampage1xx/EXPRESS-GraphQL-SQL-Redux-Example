@@ -19,7 +19,7 @@ interface IProps extends IPins {
     currentUser: TCurrentUser,
     loginStateChange: boolean
 }
-// prova
+
 export class AppContainer extends React.PureComponent<IProps, any> {
 
     constructor(props: IProps) {
