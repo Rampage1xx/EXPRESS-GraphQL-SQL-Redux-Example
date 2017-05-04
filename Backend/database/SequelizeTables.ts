@@ -152,3 +152,4 @@ if (!NODE_TEST) {
         .then(connection => console.log('******CONNECTED TO POSTGRES******'))
         .catch(e => e);
 }
+

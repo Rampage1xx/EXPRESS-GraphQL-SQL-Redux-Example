@@ -17,7 +17,7 @@ export const findImagesSequelize = async (offset) => {
             });
             const payload: any = {images: findImages};
             const encodedResults = await ImagesArrayProtoBuffer({argument: payload, encode: true});
-            const cacheImages = await redisClient.setexAsync(offset, 2, encodedResults);
+            const cacheImages = await redisClient.setexAsync(offset, 1, encodedResults);
             return findImages;
         }
     } catch (err) {
