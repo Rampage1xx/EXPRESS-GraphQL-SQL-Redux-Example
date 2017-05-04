@@ -2,6 +2,7 @@ import * as bcrypt from 'bcrypt';
 import * as Sequelize from 'sequelize';
 import {Instance} from 'sequelize';
 import {twitterID, twitterUsername} from '../Strings';
+
 const NODE_TEST = (process.env.NODE_ENV === 'test');
 const database: string = NODE_TEST ? 'test' : 'pinit';
 
@@ -140,15 +141,14 @@ export const LikesSequelize = connection.define('likes', {
         underscored: true
     });
 LikesSequelize.belongsTo(ImagesSequelize);
-LikesSequelize.belongsTo(UsersSequelize, {
-    // foreignKey: 'email',
-    // targetKey: 'email'
-});
+LikesSequelize.belongsTo(UsersSequelize);
 ImagesSequelize.belongsTo(UsersSequelize);
 ImagesSequelize.hasMany(LikesSequelize);
 UsersSequelize.hasMany(ImagesSequelize);
 UsersSequelize.hasMany(LikesSequelize);
 
 if (!NODE_TEST) {
-    connection.sync().catch(e => e);
+    connection.sync()
+        .then(connection => console.log('******CONNECTED TO POSTGRES******'))
+        .catch(e => e);
 }

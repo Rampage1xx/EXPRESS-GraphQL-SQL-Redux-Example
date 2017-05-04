@@ -12,8 +12,8 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: MyNewPass
-     # POSTGRES_DB: pinit
-      POSTGRES_DB: test
+      POSTGRES_DB: pinit
+     # POSTGRES_DB: test
     networks:
      - nodeapp-network
 
@@ -21,9 +21,9 @@ services:
     build:
       context: .
       dockerfile: node.dockerfile
-    command: ["npm", "run-script","mocha"]
+    #command: ["npm", "run-script","mocha"]
     environment:
-      NODE_ENV: test
+      NODE_ENV: development
     volumes:
       - ./Backend/Compiled/:/var/www/
       - /var/www/node_modules

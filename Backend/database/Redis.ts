@@ -13,6 +13,8 @@ export const redisClient: any = redis.createClient({
     return_buffers: true
 });
 
+redisClient.flushdbAsync().then(done => console.log('**** REDIS FLUSHED ****'));
+
 // SERIALIZING REDIS DATA //
 export const ImagesArrayProtoBuffer: TProtoBuffer = ({argument, encode, decode}) => {
 
