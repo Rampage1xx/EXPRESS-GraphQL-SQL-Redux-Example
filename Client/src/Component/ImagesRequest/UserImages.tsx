@@ -21,7 +21,6 @@ export class UserImages extends React.Component<any, any> {
     private componentDidMount() {
         findUserImagesQueryHandler(this.userID)
             .then((response) => {
-            console.log('risposta', response)
             this.generateMasonryCards(response.data)})
             .catch(e => e);
     }
@@ -29,13 +28,10 @@ export class UserImages extends React.Component<any, any> {
         // we generate the user masonry
         let result = [];
         const { findUserImagesGraphQL } = data;
-        console.log('generate')
         if ( findUserImagesGraphQL ) {
 
             const { images } = findUserImagesGraphQL;
-            console.log(images, 'images')
             result = addLikeStatusToArray(images, this.likes);
-            console.log(result, 'risultati')
             result = GenerateMasonry({
                 images: result,
                 deletePin: false,
@@ -46,7 +42,6 @@ export class UserImages extends React.Component<any, any> {
         } else {
             result.push(<div key = { 1234 }> Error while fetching data...</div>);
         }
-        console.log(result)
         this.setState({
             processedImages : result
         });

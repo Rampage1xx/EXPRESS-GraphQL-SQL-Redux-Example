@@ -103,7 +103,6 @@ export class FullCard extends React.Component<IProps, IState> {
 
     private findUserHandler() {
         const {singleImage, findUser} = this.props;
-        console.log(singleImage, findUser, 'si cerca')
         this.findUser ? findUser(singleImage.user_id)
             :
             History.push('/myImages');

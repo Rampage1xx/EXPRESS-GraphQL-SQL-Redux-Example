@@ -3,7 +3,6 @@ import {FullCard} from '../Card/FullCard';
 
 export const GenerateMasonry = (parameters: { images: any[], deletePin: boolean, deleteCardFunction?: any, id?: string }) => {
     const {images, deletePin, deleteCardFunction, id} = parameters;
-    console.log(parameters, 'parametri')
     const myItems = [];
     let loop = 0;
     if (images && images.length >= 1) {
