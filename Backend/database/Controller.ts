@@ -25,18 +25,18 @@ export const findImagesSequelize = async (offset) => {
     }
 };
 
-export const removeLikeSequelize =    (args) =>
+export const removeLikeSequelize = (args) =>
     LikesSequelize.findOne({
-    where: {
-        identifier: args.identifier
-    },
-    include: [ImagesSequelize]
-})
-    .then((like: any) => like.image.decrement('totalLikes')
-        .then((image: any) => like.destroy())
-        .then((likeDestroyed) => like)
-    )
-    .catch(e => e);
+        where: {
+            identifier: args.identifier
+        },
+        include: [ImagesSequelize]
+    })
+        .then((like: any) => like.image.decrement('totalLikes')
+            .then((image: any) => like.destroy())
+            .then((likeDestroyed) => like)
+        )
+        .catch(e => e);
 
 export const addLikeSequelize = (args, req) =>
     ImagesSequelize.findOne({
@@ -56,7 +56,6 @@ export const addLikeSequelize = (args, req) =>
             })
         );
 
-
 export const postImageSequelize = (args, req) =>
     UsersSequelize.findById(req.user.id)
         .then((user) =>
@@ -75,14 +74,13 @@ export const postImageSequelize = (args, req) =>
 
 export const createUserSequelize = (args, avatar) =>
     UsersSequelize.create({
-        email : args.email,
-        userName : args.userName,
-        password : args.password,
-        localAccount : true,
+        email: args.email,
+        userName: args.userName,
+        password: args.password,
+        localAccount: true,
         avatar
     }).then((result) => result)
         .catch(e => e);
-
 
 export const removeImageSequelize = (args, req) =>
     ImagesSequelize.findOne({
@@ -98,17 +96,16 @@ export const removeImageSequelize = (args, req) =>
 export const findUserSequelize = (args, id) => {
     return UsersSequelize.findById(
         id,
-        { include : [ImagesSequelize, LikesSequelize] }
+        {include: [ImagesSequelize, LikesSequelize]}
     )
-        .then((result : { dataValues : { images? : any[] } }) => {
+        .then((result: { dataValues: { images?: any[] } }) => {
             return result;
         }).catch(e => e);
 };
 
-
 export const findUsernameSequelize = (args) =>
- UsersSequelize.findOne({ where : { userName : args.userName } })
-    .then((result) => {
-        // the data we should send back in this case is only the username without any additional details.
-        return {userName: get(result, result.userName, 'available' )};
-    });
+    UsersSequelize.findOne({where: {userName: args.userName}})
+        .then((result) => {
+            // the data we should send back in this case is only the username without any additional details.
+            return {userName: get(result, result.userName, 'available')};
+        });

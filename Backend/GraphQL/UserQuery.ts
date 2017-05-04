@@ -1,36 +1,36 @@
-import { GraphQLBoolean, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
-import { googleID, twitterID } from '../Strings';
-import { ImageType } from './ImageQuery';
-import { LikesType } from './LikeQuery';
+import {GraphQLBoolean, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import {googleID, twitterID} from '../Strings';
+import {ImageType} from './ImageQuery';
+import {LikesType} from './LikeQuery';
 import {createUserSequelize, findUsernameSequelize, findUserSequelize} from '../database/Controller';
 
 export const UserType = new GraphQLObjectType({
-    name : 'UserQL',
-    fields : () => ({
-        id : { type : GraphQLString },
-        userName : { type : GraphQLString },
-        email : { type : GraphQLString },
-        [twitterID] : { type : GraphQLString },
-        images : { type : new GraphQLList(ImageType) },
-        likes : { type : new GraphQLList(LikesType) },
-        [googleID] : {type : GraphQLString}
+    name: 'UserQL',
+    fields: () => ({
+        id: {type: GraphQLString},
+        userName: {type: GraphQLString},
+        email: {type: GraphQLString},
+        [twitterID]: {type: GraphQLString},
+        images: {type: new GraphQLList(ImageType)},
+        likes: {type: new GraphQLList(LikesType)},
+        [googleID]: {type: GraphQLString}
     })
 
 });
 
 const guestUserGraphQL = () => {
     return {
-        id : 'Guest',
-        userName : 'Guest',
-        email : 'Guest',
-        images : null
+        id: 'Guest',
+        userName: 'Guest',
+        email: 'Guest',
+        images: null
     };
 };
 
 export const loggedUserImagesGraphQL = {
-    type : UserType,
-    args : { image : { type : GraphQLBoolean } },
-    resolve : (parentValue, args, req) => {
+    type: UserType,
+    args: {image: {type: GraphQLBoolean}},
+    resolve: (parentValue, args, req) => {
 
         return req.isAuthenticated() ? findUserSequelize(args, req.user.id) : guestUserGraphQL();
     }
@@ -38,17 +38,17 @@ export const loggedUserImagesGraphQL = {
 };
 
 export const findUserImagesGraphQL = {
-    type : UserType,
-    args : { id : { type : GraphQLString } },
-    resolve : (parentValue, args, req) => {
+    type: UserType,
+    args: {id: {type: GraphQLString}},
+    resolve: (parentValue, args, req) => {
         return findUserSequelize(args, args.id);
     }
 };
 
 export const userNameFieldFormValidation = {
-    type : UserType,
-    args : { userName : { type : GraphQLString } },
-    resolve : (parentValue, args : { userName : string }, req) => {
+    type: UserType,
+    args: {userName: {type: GraphQLString}},
+    resolve: (parentValue, args: { userName: string }, req) => {
         // checks if there is an existing user with the same user name
         return findUsernameSequelize(args);
     }
@@ -57,24 +57,24 @@ export const userNameFieldFormValidation = {
 
 // MUTATIONS //
 export const addUserMutation = {
-    type : UserType,
-    args : {
-        email : {
-            type : new GraphQLNonNull(GraphQLString)
+    type: UserType,
+    args: {
+        email: {
+            type: new GraphQLNonNull(GraphQLString)
         },
-        userName : {
-            type : new GraphQLNonNull(GraphQLString)
+        userName: {
+            type: new GraphQLNonNull(GraphQLString)
         },
-        password : {
-            type : new GraphQLNonNull(GraphQLString)
+        password: {
+            type: new GraphQLNonNull(GraphQLString)
         },
-        avatar : {
-            type : GraphQLString
+        avatar: {
+            type: GraphQLString
         }
     },
-    resolve :  (parentValue, args) => {
+    resolve: (parentValue, args) => {
         const avatar = args.avatar ? args.avatar : undefined;
-        return   createUserSequelize(args, avatar);
+        return createUserSequelize(args, avatar);
 
     }
 

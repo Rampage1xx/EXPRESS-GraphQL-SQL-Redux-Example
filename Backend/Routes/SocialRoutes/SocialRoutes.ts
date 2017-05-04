@@ -2,10 +2,10 @@ import * as express from 'express';
 import * as passport from 'passport';
 
 export class SocialRoutes {
-   public socials: string[];
-   public route: string;
+    public socials: string[];
+    public route: string;
 
-    constructor(public socialNames: string[], public routeName: string ) {
+    constructor(public socialNames: string[], public routeName: string) {
         this.socials = socialNames;
         this.route = routeName;
 
@@ -20,9 +20,9 @@ export class SocialRoutes {
                     scope: ['https://www.googleapis.com/auth/plus.login',
                         'https://www.googleapis.com/auth/plus.profile.emails.read']
                 }));
-            }else {
+            } else {
                 router.get(`/${social}/${this.route}`, passport.authenticate(social));
-               /// requestType(GET,POST,PUT,DELETE)
+                /// requestType(GET,POST,PUT,DELETE)
                 // example result router.get('/twitter/login', passport.authenticate(twitter)
             }
         });

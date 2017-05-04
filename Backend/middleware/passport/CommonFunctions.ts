@@ -1,12 +1,12 @@
-import { UsersSequelize } from '../../database/SequelizeTables';
+import {UsersSequelize} from '../../database/SequelizeTables';
 
-export const findUserPassport = ({ email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow }) : Promise<any> => {
+export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow}): Promise<any> => {
     const findUserError = 'error while finding user';
     return UsersSequelize.findOne({
-            where : {
-                email
-            }
-        })
+        where: {
+            email
+        }
+    })
         .then((user) => {
             // we check:
             // a)  if there is a result,
@@ -16,8 +16,8 @@ export const findUserPassport = ({ email, SocialDatabaseIDRow, SocialID, socialD
             return !user ? user :
                 user[SocialDatabaseIDRow] ? user :
                     user.update({
-                        [SocialDatabaseIDRow] : SocialID,
-                        [SocialDatabaseUsernameRow] : socialDisplayName
+                        [SocialDatabaseIDRow]: SocialID,
+                        [SocialDatabaseUsernameRow]: socialDisplayName
                     });
 
         })
@@ -26,20 +26,20 @@ export const findUserPassport = ({ email, SocialDatabaseIDRow, SocialID, socialD
         });
 };
 // SHOULD THE USER CHOOSE A GLOBAL USERNAME?
-export const createUser = (profile : profileParameters) : Promise<string> => {
-    const { email, SocialDatabaseUsernameRow, SocialDatabaseIDRow, socialDisplayName, SocialID } = profile;
+export const createUser = (profile: profileParameters): Promise<string> => {
+    const {email, SocialDatabaseUsernameRow, SocialDatabaseIDRow, socialDisplayName, SocialID} = profile;
     const createUserError = 'loggedUserImagesGraphQL already exists';
     return UsersSequelize.create({
-        email : email,
-        [SocialDatabaseIDRow] : SocialID,
-        [SocialDatabaseUsernameRow] : socialDisplayName
+        email: email,
+        [SocialDatabaseIDRow]: SocialID,
+        [SocialDatabaseUsernameRow]: socialDisplayName
     }).catch(e => {
         throw createUserError;
     });
 };
 
-export const oAuthLoginFunction = async (profile : profileParameters, cb) => {
-    const { avatar, SocialDatabaseUsernameRow } = profile;
+export const oAuthLoginFunction = async (profile: profileParameters, cb) => {
+    const {avatar, SocialDatabaseUsernameRow} = profile;
     try {
         // a) find the user
         // b) if false(not present) create account
@@ -52,12 +52,12 @@ export const oAuthLoginFunction = async (profile : profileParameters, cb) => {
             await createUser(profile);
         // data that leaves the server
         const data = {
-            userName : result.dataValues[SocialDatabaseUsernameRow],
-            id : result.dataValues.id,
-            avatar : avatar
+            userName: result.dataValues[SocialDatabaseUsernameRow],
+            id: result.dataValues.id,
+            avatar: avatar
         };
         return cb(null, data);
-    } catch ( err ) {
+    } catch (err) {
         return cb(err);
     }
 };

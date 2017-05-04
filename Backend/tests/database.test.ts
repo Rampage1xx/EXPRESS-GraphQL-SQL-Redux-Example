@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 import * as protobuf from 'protobufjs';
-import {UsersSequelize, ImagesSequelize, connection, LikesSequelize} from '../database/SequelizeTables';
+import {connection, ImagesSequelize, LikesSequelize, UsersSequelize} from '../database/SequelizeTables';
 import {ImagesArrayProtoBuffer, redisClient} from '../database/Redis';
 
 const root = new protobuf.Root();

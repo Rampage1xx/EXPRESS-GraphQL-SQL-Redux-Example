@@ -1,7 +1,12 @@
 import {GraphQLObjectType, GraphQLSchema} from 'graphql';
 import {imagesListGraphQL, postImageMutation, removeImageMutation} from './ImageQuery';
 import {addLikeMutation, removeLikeMutation} from './LikeQuery';
-import {addUserMutation, userNameFieldFormValidation, loggedUserImagesGraphQL, findUserImagesGraphQL} from './UserQuery';
+import {
+    addUserMutation,
+    findUserImagesGraphQL,
+    loggedUserImagesGraphQL,
+    userNameFieldFormValidation
+} from './UserQuery';
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQuery',
