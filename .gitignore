@@ -411,3 +411,9 @@ node.dockerfile
 node_modules/
 /Backend/middleware/passport/facebook.ts
 /Backend/tests/mocks.ts
+/.gitignore
+!/node.dockerfile
+/Client/src/Container/test.tsx
+/Client/src/Utils/GraphQL/mocks.tsx
+/Client/src/Component/Card/mock.tsx
+Client/Client.rar
