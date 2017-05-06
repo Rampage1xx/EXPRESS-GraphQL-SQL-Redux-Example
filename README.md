@@ -1,6 +1,4 @@
 # PinIT
-PinIT
-
 <br/>Pininterest clone made with GraphQL! 
 <br/>npm run setup 
 <br/>npm start 
