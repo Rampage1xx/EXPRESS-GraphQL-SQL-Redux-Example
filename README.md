@@ -1,9 +1,9 @@
 # PinIT
 PinIT
 
-Pininterest clone made with GraphQL! 
-npm run setup 
-npm start 
-Requires docker. 
-🐳 Work In Progress 🐳
+<br/>Pininterest clone made with GraphQL! 
+<br/>npm run setup 
+<br/>npm start 
+<br/>Requires docker. 
+<br/>🐳 Work In Progress 🐳
 
