@@ -116,31 +116,32 @@ describe('CRUD', () => {
 
 describe(' protocol buffer tests', () => {
 
-    xit('should convert an array to protobuff and get it back', () => {
+    it('should convert an array to protobuff and get it back', () => {
 
-            return root.load('./GraphQL/Images.proto', {keepCase: true})
+            return root.load('./database/Images.proto', {keepCase: true})
                 .then(r => {
+                    const argument = {images: payload};
                     const ImageArray = r.lookupType('ImageDefinition.ImageList');
 
-                    const errMsg = ImageArray.verify(payload);
+                    const errMsg = ImageArray.verify(argument);
                     if (errMsg) {
                         throw errMsg;
                     }
-                    const message = ImageArray.create(payload);
+                    const message = ImageArray.create(argument);
                     const buffer = ImageArray.encode(message).finish();
                     const decrypt = ImageArray.decode(buffer);
                     const transformBackToArray = decrypt.toObject({arrays: true});
-                    return assert.deepEqual(payload, transformBackToArray);
+                    return assert.deepEqual(payload, transformBackToArray.images);
                 });
         }
     );
 
-    xit('should save a buffer into redis and get it back', async () => {
+    it('should save a buffer into redis and get it back', async () => {
         const argument = {images: payload};
         const encoded = await ImagesArrayProtoBuffer({argument, encode: true});
         await redisClient.setexAsync('B', 60, encoded);
         const data = await redisClient.getAsync('B');
         const decoded = await ImagesArrayProtoBuffer({argument: data, decode: true});
-        assert.deepEqual(decoded, payload);
+        assert.deepEqual(decoded.images, payload);
     });
 });

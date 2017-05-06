@@ -12,4 +12,4 @@ export const ImageModalAddOn = (props) => {
         </AddImageForm>
 </div>
     )
-}
+};

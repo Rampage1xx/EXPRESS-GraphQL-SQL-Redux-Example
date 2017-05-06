@@ -8,12 +8,18 @@ services:
      - nodeapp-network
 
   postgres:
-    image: postgres
+    build:
+      context: .
+      dockerfile: postgres.dockerfile
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: MyNewPass
-      POSTGRES_DB: pinit
-     # POSTGRES_DB: test
+      POSTGRES_DB: root
+      DB_USER: meeseeks
+      DB_PASS: MEESEEKS
+      DB_NAME: pinit
+      DB_NAME2: test
+
     networks:
      - nodeapp-network
 
@@ -22,12 +28,19 @@ services:
       context: .
       dockerfile: node.dockerfile
     #command: ["npm", "run-script","mocha"]
+    command: ["pm2-dev","start","pm2.config.json"]
     environment:
+     # NODE_ENV: test
       NODE_ENV: development
+    depends_on:
+     - postgres
+     - redis
     volumes:
       - ./Backend/Compiled/:/var/www/
       - /var/www/node_modules
-      #- /var/www/config/
+      - ./Backend/package.json:/var/www/package.json
+      - ./Backend/pm2.config.json:/var/www/pm2.config.json
+      - ./Backend/database/Images.proto:/var/www/database/Images.proto
     ports:
      - "3000:3000"
     networks:

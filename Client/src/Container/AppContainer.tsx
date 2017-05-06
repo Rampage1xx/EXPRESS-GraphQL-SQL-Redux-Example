@@ -21,7 +21,6 @@ interface IProps extends IPins {
 }
 
 export class AppContainer extends React.PureComponent<IProps, any> {
-    private delay: any = ms => new Promise(resolve => setTimeout(resolve, ms));
 
     constructor(props: IProps) {
         super(props);
@@ -34,7 +33,7 @@ export class AppContainer extends React.PureComponent<IProps, any> {
             this.props.currentUser.refetch();
             store.dispatch(actionActivateModal(0));
             store.dispatch(actionLoginStateChange(false));
-          //  this.delay(1500).then((r) => this.props.pins.loadMoreEntries());
+            //  this.delay(1500).then((r) => this.props.pins.loadMoreEntries());
         }
     }
 
@@ -45,12 +44,9 @@ export class AppContainer extends React.PureComponent<IProps, any> {
     }
 
     public render() {
-
         const {pins, currentUser} = this.props;
         const {loggedUserImagesGraphQL} = currentUser;
-
-        // this is a safety check against against a late response from the server
-        // const id = loggedUserImagesGraphQL ? loggedUserImagesGraphQL.id : 'Guest';
+        // get the logged in userID otherwise assign a guest value
         const id = get(loggedUserImagesGraphQL, 'id', 'Guest');
         //react router docs states that component needs to be bound inside render if we need to pass props to it
         const Main = () => <MainPage pins={ pins } id={ id } findUser={ this.findUserHandler }/>;
@@ -82,9 +78,3 @@ export const AppContainerConnected: any = compose(
     graphql(createUser, createUserMutationOptions),
     graphql(fetchPins, fetchPinsQueryOptions2)
 )(AppContainer);
-
-const Prova = (props) => {
-    return (
-        <div> ciao </div>
-    );
-};

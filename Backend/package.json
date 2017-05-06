@@ -1,11 +1,10 @@
 {
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "mocha": "mocha ./tests --watch",
+    "build": "tsc",
+    "build-watch": "tsc -w"
   },
-  "//": [
-    "this package gets copied over the docker container to install npm",
-    "the second package that is mounted on the volume is only to issue commands to the container"
-  ],
   "dependencies": {
     "bcrypt": "^1.0.2",
     "bluebird": "^3.5.0",
@@ -30,7 +29,8 @@
     "protobufjs": "^6.7.3",
     "redis": "^2.7.1",
     "sequelize": "^3.30.4",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
+    "validator": "^7.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^1.0.0",
@@ -53,6 +53,8 @@
     "mocha": "^3.3.0",
     "nodemon": "^1.11.0",
     "sinon": "^2.2.0",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "tslint": "^5.2.0",
+    "typescript": "^2.3.2"
   }
 }

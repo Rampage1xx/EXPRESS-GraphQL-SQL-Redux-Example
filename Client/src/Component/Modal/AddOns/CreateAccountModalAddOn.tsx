@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { NavItem, NavLink } from 'reactstrap';
-import { Field } from 'redux-form/immutable';
-import { formCreateAccountHandler } from '../../../Utils/GraphQL/Mutations';
-import { CreateAccountForm } from '../../Form/FormContainer';
-import { RenderField } from '../../Form/RenderField';
-import { UsernamePasswordFields } from '../../Form/UsernamePasswordFields';
+import {NavItem, NavLink} from 'reactstrap';
+import {Field} from 'redux-form/immutable';
+import {formCreateAccountHandler} from '../../../Utils/GraphQL/Mutations';
+import {CreateAccountForm} from '../../Form/FormContainer';
+import {RenderField} from '../../Form/RenderField';
+import {UsernamePasswordFields} from '../../Form/UsernamePasswordFields';
 
 export const CreateAccountModalAddOn = (props) => {
 
@@ -22,4 +22,3 @@ export const CreateAccountModalAddOn = (props) => {
         </div>
     );
 };
-

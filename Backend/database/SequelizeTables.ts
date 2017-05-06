@@ -2,13 +2,14 @@ import * as bcrypt from 'bcrypt';
 import * as Sequelize from 'sequelize';
 import {Instance} from 'sequelize';
 import {twitterID, twitterUsername} from '../Strings';
+import {createDummyImages} from './mocks';
 
 const NODE_TEST = (process.env.NODE_ENV === 'test');
 const database: string = NODE_TEST ? 'test' : 'pinit';
-
-export const connection = new Sequelize(`${database}`, 'root', 'MyNewPass', {
+const host: string = NODE_TEST ? 'postgres' : 'postgres';
+export const connection = new Sequelize(`${database}`, 'meeseeks', 'MEESEEKS', {
     //host: 'localhost',
-    host: 'postgres',
+    host: `${host}`,
     // port: 3306,
     port: 5432,
     logging: false,
@@ -151,5 +152,5 @@ if (!NODE_TEST) {
     connection.sync()
         .then(connection => console.log('******CONNECTED TO POSTGRES******'))
         .catch(e => e);
+    createDummyImages();
 }
-

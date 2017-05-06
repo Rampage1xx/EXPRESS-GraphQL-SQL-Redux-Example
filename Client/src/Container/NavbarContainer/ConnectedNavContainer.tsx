@@ -41,4 +41,3 @@ const mapStateToProps = createStructuredSelector({
     activeModal : activeModalStateChangeSelector
 });
 export const ConnectedNavContainer : any = connect(mapStateToProps, undefined)(NavContainer);
-

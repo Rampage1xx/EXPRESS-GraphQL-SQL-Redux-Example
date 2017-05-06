@@ -1,5 +1,4 @@
 import {ImageType} from '../GraphQL/ImageQuery';
-import {expect} from 'chai';
 import {GraphQLString} from 'graphql';
 import {agent} from 'supertest';
 import {app, server} from '../server';
@@ -85,34 +84,38 @@ const GraphQLQuery = () => agent1.post('/graphql');
 
 describe('testing graphql fields', () => {
     it('should get a field and test its type', () => {
-        expect(ImageType.getFields()).to.have.property('id');
-        expect(ImageType.getFields().id.type).to.deep.equals(GraphQLString);
+        assert.deepEqual(ImageType.getFields().id.type, GraphQLString);
+        assert.ok(ImageType.getFields().id);
     });
 });
 
 describe('testing graphql resolve functions', () => {
 
-    it('should resolve create user', () => {
-        return GraphQLQuery().send({
+    it('should resolve create user', async () => {
+        const query = await GraphQLQuery().send({
             query: createUserMutation,
             variables: {email: 'hello@hello.com', userName: 'hello', password: 'ciao'}
-        }).then((res) => assert.deepEqual(res.body.data.addUserMutation.userName, 'hello'));
+        }).then((res) => res.body.data.addUserMutation.userName);
+
+        assert.deepEqual(query, 'hello');
     });
 
-    it('should log in', () => {
-        return agent1.post('/login')
+    it('should log in', async () => {
+        const status = await agent1.post('/login')
             .send({username: 'hello', password: 'ciao'})
-            .then((res) => assert.deepEqual(res.body.login, true, 'there should be a boolean true indicating successful login'));
+            .then((res) => res.body.login);
+
+        assert.deepEqual(status, true, 'there should be a boolean true indicating successful login');
     });
 
-    it('should create an image', () => {
-        return GraphQLQuery()
+    it('should create an image', async () => {
+        const query = await GraphQLQuery()
             .send({
                 query: createImageMutation,
                 variables: {url: 'http://heythere', title: 'test1', description: 'a good test'}
             })
-            .then(res =>
-                assert.deepEqual(res.body.data.postImageMutation.title, 'test1', 'there should be the title of the image'));
+            .then(res => res.body.data.postImageMutation.title);
+        assert.deepEqual(query, 'test1', 'there should be the title of the image');
     });
 
     it('should create a like entry', async () => {

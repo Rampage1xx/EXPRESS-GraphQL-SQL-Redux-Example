@@ -7,5 +7,4 @@ export const ModalClosingTag = (props) => {
     }
     return <Button color='primary' onClick={ toggle }>{ closingTag }</Button>;
 
-
 };

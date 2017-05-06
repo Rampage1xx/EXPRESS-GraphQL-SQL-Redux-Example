@@ -23,21 +23,19 @@ body {
 
   &::after {
     content: "";
-    background-url: url(/icons/$(name) . png);
+    background-url: url(/icons/$(name).png);
     background-color: $(name)
   }
 }
 
-@define-mixin flexDirectionWrap $direction $wrap {
+@define-mixin flexDirectionWrap $direction, $wrap {
   display: flex;
   flex-direction: $(direction);
   flex-wrap: $(wrap);
 }
 
-@define-mixin parentName_ChildNumber_Color $parent $child $color {
-  .$
-
-(parent):nth-child($(child)) {
+@define-mixin parentName_ChildNumber_Color $parent, $child, $color {
+  .$(parent):nth-child($(child)) {
   background-color: $(color);
 }
 }

@@ -106,7 +106,7 @@
     "no-control-regex": true,
     "no-cookies": true,
     "no-debugger": true,
-    "no-default-export": true,
+    "no-default-export": false,
     "no-delete-expression": true,
     "no-disable-auto-sanitization": true,
     "no-document-domain": true,
