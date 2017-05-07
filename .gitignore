@@ -415,8 +415,9 @@ node_modules/
 /Client/src/Utils/GraphQL/mocks.tsx
 /Client/src/Component/Card/mock.tsx
 Client/Client.rar
-/Backend/database/mocks.ts
+/Backend/database/CreateDummyCards.ts
 /docker-composeTestDB.yml
 /docker-compose3.yml
 !/docker-compose.yaml
 /postBackup.dockerfile
+!/Backend/database/CreateDummyCards.ts

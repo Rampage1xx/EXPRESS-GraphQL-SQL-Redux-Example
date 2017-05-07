@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import * as Sequelize from 'sequelize';
 import {Instance} from 'sequelize';
 import {twitterID, twitterUsername} from '../Strings';
-import {createDummyImages} from './mocks';
+import {createDummyImages} from './CreateDummyCards';
 
 const NODE_TEST = (process.env.NODE_ENV === 'test');
 const database: string = NODE_TEST ? 'test' : 'pinit';
