@@ -54,6 +54,22 @@ query imageList ($indexOffset: Int!){
   }
 }
 `;
+
+const fetchPins2 =  `
+query imageList ($indexOffset: String!){
+  imagesListGraphQL2(indexOffset: $indexOffset){
+    id,
+    title,
+    url,
+    description,
+    userName,
+    user_id,
+    totalLikes,
+    avatar,
+    created_at
+  }
+}
+`;
 const createDatabaseEntries = (user) => {
     for (let i = 0; i < 100; i++) {
         ImagesSequelize.create({
@@ -157,10 +173,10 @@ describe(' testing GraphQL queries', () => {
 
     const fetchImages = () => GraphQLQuery()
         .send({
-            query: fetchPins,
-            variables: {indexOffset: 0}
+            query: fetchPins2,
+            variables: {indexOffset: new Date()}
         })
-        .then(res => res.body.data.imagesListGraphQL);
+        .then(res => res.body.data.imagesListGraphQL2);
 
     before('creating a batch of images to operate with', async () => {
         const user: any = await userFind('hello');
@@ -170,6 +186,7 @@ describe(' testing GraphQL queries', () => {
 
     it('should retrieve the images list', async () => {
         const imagesArray = await fetchImages();
+        console.log(imagesArray, 'images tornate')
         assert.deepEqual(imagesArray.length, 24);
     });
 

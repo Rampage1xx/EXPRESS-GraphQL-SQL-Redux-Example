@@ -7,10 +7,12 @@ import {
     loggedUserImagesGraphQL,
     userNameFieldFormValidation
 } from './UserQuery';
+import {imagesListGraphQL2} from '../database/mocks';
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQuery',
     fields: () => ({
+        imagesListGraphQL2,
         loggedUserImagesGraphQL,
         imagesListGraphQL,
         userNameFieldFormValidation,

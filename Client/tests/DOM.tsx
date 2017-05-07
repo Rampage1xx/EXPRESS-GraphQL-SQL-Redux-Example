@@ -4,11 +4,26 @@ import {CardBodyText} from '../src/Component/Card/CardBodyText';
 import {CardSubtitle, CardText, CardTitle} from 'reactstrap';
 import {CardDelete} from '../src/Component/Card/CardDelete';
 import {CardBottom} from '../src/Component/Card/CardBottom';
-import {addLikeStatusToArray} from '../src/Utils/GraphQL/Queries';
+import {gql} from 'react-apollo';
 
 const title = 'title';
 const description = 'description';
-
+const fetchPins2 =  gql`
+query imageList ($indexOffset: String!){
+  imagesListGraphQL2(indexOffset: $indexOffset){
+    id,
+    title,
+    url,
+    description,
+    userName,
+    user_id,
+    totalLikes,
+    avatar,
+    created_at
+  }
+}
+`;
+console.log(process.env.NODE_ENV,'enviroment jest')
 describe('Card Body Text', () => {
     const wrapperMountCardBody = mount(<CardBodyText description={ description } title={ title }/>);
     const wrapperShallowCardBody = shallow(<CardBodyText description={ description } title={ title }/>);
@@ -33,7 +48,8 @@ describe('Card Body Text', () => {
 });
 
 describe('card bottom tests', () => {
-    const dummyFunction = (): void => {};
+    const dummyFunction = (): void => {
+    };
     const wrapperShallowCardBottom = shallow(
         <CardBottom avatar={ 'avatar' } totalLikes={ 2 } like={ true } userName={ 'user' }
                     findUserHandler={dummyFunction} likeHandler={ dummyFunction }/>
@@ -47,8 +63,6 @@ describe('card bottom tests', () => {
 
 describe('testing apollo functions', () => {
 
-    it('should return an array with the like status added', () => {
-        addLikeStatusToArray()
-
-    })
-});
+    it('should fetch the images', () => {
+        }
+)};

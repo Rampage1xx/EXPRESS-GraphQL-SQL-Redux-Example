@@ -1,14 +1,16 @@
 import createHistory from 'history/createBrowserHistory';
-import { ApolloClient, createNetworkInterface } from 'react-apollo';
-import { routerMiddleware, routerReducer } from 'react-router-redux';
-import { applyMiddleware, compose, createStore } from 'redux';
-import { reducer as formReducer } from 'redux-form/immutable';
-import { combineReducers } from 'redux-immutable';
-import { userReducer } from './reducer';
-
+import {ApolloClient, createNetworkInterface} from 'react-apollo';
+import {routerMiddleware, routerReducer} from 'react-router-redux';
+import {applyMiddleware, compose, createStore} from 'redux';
+import {reducer as formReducer} from 'redux-form/immutable';
+import {combineReducers} from 'redux-immutable';
+import {userReducer} from './reducer';
+declare const process;
+const uri = process.env.NODE_ENV === 'TEST' ? 'http://localhost:3000/graphql' : '/graphql';
+console.log(uri)
 export const client = new ApolloClient({
     networkInterface: createNetworkInterface({
-        uri: '/graphql',
+        uri: `${uri}`,
         opts: {
             credentials: 'same-origin'
         }

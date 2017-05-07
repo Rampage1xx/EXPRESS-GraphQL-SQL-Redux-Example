@@ -7,10 +7,10 @@ import {createDummyImages} from './CreateDummyCards';
 const NODE_TEST = (process.env.NODE_ENV === 'test');
 const database: string = NODE_TEST ? 'test' : 'pinit';
 const host: string = NODE_TEST ? 'postgres' : 'postgres';
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 export const connection = new Sequelize(`${database}`, 'meeseeks', 'MEESEEKS', {
-    //host: 'localhost',
     host: `${host}`,
-    // port: 3306,
+  //  port: 5432,
     port: 5432,
     logging: false,
     dialect: 'postgres'
@@ -149,8 +149,8 @@ UsersSequelize.hasMany(ImagesSequelize);
 UsersSequelize.hasMany(LikesSequelize);
 
 if (!NODE_TEST) {
-    connection.sync()
+    connection.sync({force: true})
         .then(connection => console.log('******CONNECTED TO POSTGRES******'))
         .catch(e => e);
-    createDummyImages();
+    sleep(4000).then(r => createDummyImages()).catch(e => console.log(e));
 }

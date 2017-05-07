@@ -6,9 +6,11 @@
   "scripts": {
     "test": "jest || ECHO.",
     "test-watch": "nodemon --exec \"npm test\"",
-    "test-jest": "jest --watch || ECHO. ",
+    "test-jest": "cross-env NODE_ENV=TEST jest --watch || ECHO. ",
     "build": "webpack",
-    "serve": "webpack-dev-server"
+    "serve": "webpack-dev-server",
+    "jest-container": "jest",
+    "build-watch": "webpack -w"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -29,9 +31,12 @@
   "dependencies": {
     "axios": "^0.16.1",
     "bootstrap": "^4.0.0-alpha.6",
-    "immutable": "next",
+    "html-webpack-plugin": "^2.28.0",
+    "immutable": "4.0.0-rc.2",
     "lodash": "^4.17.4",
     "react": "^15.5.4",
+    "react-addons-css-transition-group": "^15.5.2",
+    "react-addons-transition-group": "^15.5.2",
     "react-apollo": "^1.0.1",
     "react-dom": "^15.5.4",
     "react-masonry-component": "^5.0.5",
@@ -58,11 +63,9 @@
     "@types/react-redux": "^4.4.37",
     "@types/react-router-dom": "^4.0.4",
     "@types/react-router-redux": "^5.0.0",
-    "@types/react-virtualized": "^9.4.0",
-    "@types/redux-form": "next",
+    "@types/redux-form": "6.6.2",
     "@types/redux-immutable": "^3.0.33",
     "@types/redux-promise": "^0.5.24",
-    "@types/reselect": "^2.0.27",
     "@types/rx": "^4.1.1",
     "@types/rx-dom": "^7.0.0",
     "@types/superagent": "^2.0.36",
@@ -72,6 +75,7 @@
     "awesome-typescript-loader": "^3.1.2",
     "chai": "^3.5.0",
     "compression-webpack-plugin": "^0.4.0",
+    "cross-env": "^4.0.0",
     "css-loader": "^0.28.0",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
@@ -102,7 +106,6 @@
     "supertest": "^3.0.0",
     "ts-jest": "^19.0.2",
     "tslint": "4.5.0",
-    "tslint-eslint-rules": "^4.0.0",
     "tslint-loader": "^3.5.3",
     "tslint-microsoft-contrib": "^4.0.1",
     "tslint-react": "^2.6.0",

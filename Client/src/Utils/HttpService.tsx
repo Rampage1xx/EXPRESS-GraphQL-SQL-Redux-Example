@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { store } from '../store/Store';
-import { actionActivateModal, actionLoginStateChange } from '../Actions/ActionCreators';
+import {store} from '../store/Store';
+import {actionActivateModal, actionLoginStateChange} from '../Actions/ActionCreators';
 
-const instance1 = axios.create({
+export const instance1 = axios.create({
     baseURL: 'http://localhost:3000',
     headers: { 'Content-Type': 'application/json' },
     validateStatus: (status) => {

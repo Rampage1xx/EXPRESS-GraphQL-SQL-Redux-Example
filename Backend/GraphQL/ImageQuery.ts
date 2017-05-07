@@ -12,7 +12,8 @@ export const ImageType = new GraphQLObjectType({
         userName: {type: GraphQLString},
         totalLikes: {type: GraphQLInt},
         avatar: {type: GraphQLString},
-        user_id: {type: GraphQLString}
+        user_id: {type: GraphQLString},
+        created_at: {type: GraphQLString}
     })
 });
 

@@ -2,7 +2,6 @@ import * as React from 'react';
 import {ApolloProvider} from 'react-apollo';
 import * as ReactDOM from 'react-dom';
 import {Router} from 'react-router';
-import 'react-virtualized/styles.css';
 import {actionLoginStateChange} from './Actions/ActionCreators';
 import {client, History, store} from './store/Store';
 import './style.css';

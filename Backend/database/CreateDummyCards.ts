@@ -1,7 +1,6 @@
 import {ImagesSequelize, UsersSequelize} from './SequelizeTables';
 
 const createDatabaseEntries = (user) => {
-    console.log(user.id)
     for (let i = 0; i < 100; i++) {
         ImagesSequelize.create({
             url: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180',
@@ -10,9 +9,10 @@ const createDatabaseEntries = (user) => {
             userName: user.twitterUsername,
             avatar: 'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png',
             user_id: user.id
-        })
-            .catch(e => console.log(e));
+        }).then(r => r)
+            .catch(e => e);
     }
+    return null;
 
 };
 
@@ -25,6 +25,7 @@ export const createDummyImages = () => {
         avatar: 'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
     })
         .then(user => createDatabaseEntries(user))
-        .catch(e => console.log(e))
-    };
+        .catch(e => e);
+    return null;
+};
 
