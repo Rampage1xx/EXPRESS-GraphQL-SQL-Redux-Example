@@ -2,9 +2,10 @@ import {ImagesArrayProtoBuffer, redisClient} from './Redis';
 import {ImagesSequelize, LikesSequelize, UsersSequelize} from './SequelizeTables';
 import {get} from 'lodash';
 
-//TODO: implement an offset based on created_at
-export const findImagesSequelize = async (offset) => {
-    const cache = await redisClient.getAsync(offset);
+
+export const findImagesSequelize = async (createdAt: string) => {
+    const cache = await redisClient.getAsync(createdAt);
+    console.log(createdAt, 'created at')
 
     try {
         if (cache) {
@@ -13,13 +14,17 @@ export const findImagesSequelize = async (offset) => {
             return items.images;
         } else {
             const findImages = await ImagesSequelize.findAll({
-                offset: offset,
+                where: {
+                    created_at: {
+                        lte: createdAt
+                    }
+                },
                 limit: 24,
                 order: [['created_at', 'DESC']]
             });
             const payload: any = {images: findImages};
             const encodedResults = await ImagesArrayProtoBuffer({argument: payload, encode: true});
-            const cacheImages = await redisClient.setexAsync(offset, 1, encodedResults);
+            const cacheImages = await redisClient.setexAsync(createdAt, 1, encodedResults);
             return findImages;
         }
     } catch (err) {

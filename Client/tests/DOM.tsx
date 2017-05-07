@@ -4,11 +4,13 @@ import {CardBodyText} from '../src/Component/Card/CardBodyText';
 import {CardSubtitle, CardText, CardTitle} from 'reactstrap';
 import {CardDelete} from '../src/Component/Card/CardDelete';
 import {CardBottom} from '../src/Component/Card/CardBottom';
-import {gql} from 'react-apollo';
+import {addLikeStatusToArray} from '../src/Utils/GraphQL/Queries';
+import {imagesArrayTest, likesArrayTest} from './mocks/variables';
+import {get} from 'lodash';
 
 const title = 'title';
 const description = 'description';
-const fetchPins2 =  gql`
+const fetchPins2 = `
 query imageList ($indexOffset: String!){
   imagesListGraphQL2(indexOffset: $indexOffset){
     id,
@@ -23,7 +25,6 @@ query imageList ($indexOffset: String!){
   }
 }
 `;
-console.log(process.env.NODE_ENV,'enviroment jest')
 describe('Card Body Text', () => {
     const wrapperMountCardBody = mount(<CardBodyText description={ description } title={ title }/>);
     const wrapperShallowCardBody = shallow(<CardBodyText description={ description } title={ title }/>);
@@ -62,7 +63,18 @@ describe('card bottom tests', () => {
 });
 
 describe('testing apollo functions', () => {
+    const {imagesListGraphQL} = imagesArrayTest.data
+    it('should add like status to images',  () => {
+      const result =  addLikeStatusToArray(imagesListGraphQL, likesArrayTest);
+      expect(result[1].like).toBe(true);
+    });
 
-    it('should fetch the images', () => {
-        }
-)};
+    it('should return an empty array', () => {
+        const result = addLikeStatusToArray([], [])
+        expect(result).toEqual([])
+    });
+    it('should fetch created at', () => {
+       const result = get(imagesListGraphQL,[0,'created_at'])
+        console.log(result)
+    })
+});

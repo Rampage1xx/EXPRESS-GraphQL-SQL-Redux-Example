@@ -19,12 +19,11 @@ export const ImageType = new GraphQLObjectType({
 
 export const imagesListGraphQL = {
     type: new GraphQLList(ImageType),
-    args: {indexOffset: {type: GraphQLInt}},
-    resolve: (parentValue, args: { indexOffset: number }, req) => {
+    args: {indexOffset: {type: GraphQLString}},
+    resolve: (parentValue, args: { indexOffset: string }, req) => {
         return findImagesSequelize(args.indexOffset);
     }
 };
-
 export const postImageMutation = {
     type: ImageType,
     args: {

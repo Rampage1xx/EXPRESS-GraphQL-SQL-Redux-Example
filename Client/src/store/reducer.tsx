@@ -1,10 +1,10 @@
 import {List, Map} from 'immutable';
 import {ACTIVATE_MODAL, CLOSE_MODAL, INDEX_OFFSET, LOGIN_STATE_CHANGE} from '../Actions/ActionCreators';
 
-declare type TDefaultState = Map<string, boolean | number | List<any>>
+declare type TDefaultState = Map<string, boolean | number | Date | List<any>>
 
 const defaultState: TDefaultState = Map({
-    indexOffset: 0,
+    indexOffset: new Date(),
     closeModal: false,
     userID: 0,
     loginStateChange: false,

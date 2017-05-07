@@ -11,7 +11,7 @@ import {History, store} from '../store/Store';
 import {createUserMutationOptions} from '../Utils/GraphQL/Mutations';
 import {currentUserQueryOptions, fetchPinsQueryOptions2} from '../Utils/GraphQL/Queries';
 import {createUser, fetchPins, loggedInUserQuery} from '../Utils/GraphQL/QueryAndMutationsStrings';
-import {closeModalSelector, indexOffsetSelector, loginStateChangeSelector} from './AppSelector';
+import {closeModalSelector, indexOffset2Selector, indexOffsetSelector, loginStateChangeSelector} from './AppSelector';
 import {LoginCallback} from '../LoginCallback';
 import {UserImages} from '../Component/ImagesRequest/UserImages';
 import {get} from 'lodash';
@@ -67,7 +67,8 @@ export class AppContainer extends React.PureComponent<IProps, any> {
 const mapStateToProps = createStructuredSelector({
     closeModal: closeModalSelector,
     indexOffset: indexOffsetSelector,
-    loginStateChange: loginStateChangeSelector
+    loginStateChange: loginStateChangeSelector,
+    indexOffset2: indexOffset2Selector
 
 });
 
@@ -76,5 +77,5 @@ export const AppContainerConnected: any = compose(
     connect(mapStateToProps, undefined),
     graphql(loggedInUserQuery, currentUserQueryOptions),
     graphql(createUser, createUserMutationOptions),
-    graphql(fetchPins, fetchPinsQueryOptions2)
+    graphql(fetchPins, fetchPinsQueryOptions2),
 )(AppContainer);

@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import {createSelector} from 'reselect';
 
 const userReducerSelector = (state) => state.get('userReducer');
 
@@ -11,6 +11,7 @@ export const closeModalSelector = abstractUserReducerSelector('closeModal');
 export const indexOffsetSelector = abstractUserReducerSelector('indexOffset');
 export const loginStateChangeSelector = abstractUserReducerSelector('loginStateChange');
 export const activeModalStateChangeSelector = abstractUserReducerSelector('activeModal');
+export const indexOffset2Selector = abstractUserReducerSelector('indexOffset2');
 
 export const propsSelector = (state, props) => props
 export const idPropsSelector = createSelector(

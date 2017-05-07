@@ -35,7 +35,7 @@ export class Row extends React.PureComponent<IProps, any> {
     }
 
     public  render() {
-        try {
+
             return (
                 <Masonry
                     elementType={ 'ul' }
@@ -44,8 +44,6 @@ export class Row extends React.PureComponent<IProps, any> {
                 >
                     { this.items }
                 </Masonry>);
-        } catch (err) {
 
-        }
     }
 }

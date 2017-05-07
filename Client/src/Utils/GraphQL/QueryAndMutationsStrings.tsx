@@ -1,4 +1,4 @@
-import { gql } from 'react-apollo';
+import {gql} from 'react-apollo';
 
 // QUERIES AND MUTATIONS
 export const removeImageMutation = gql`
@@ -86,7 +86,7 @@ export const loggedInUserQuery = gql`
 
 `;
 export const fetchPins = gql`
-query imageList ($indexOffset: Int!){
+query imageList ($indexOffset: String!){
   imagesListGraphQL(indexOffset: $indexOffset){
     id,
     title,
@@ -96,6 +96,7 @@ query imageList ($indexOffset: Int!){
     user_id,
     totalLikes,
     avatar,
+    created_at
   }
 }
 `;

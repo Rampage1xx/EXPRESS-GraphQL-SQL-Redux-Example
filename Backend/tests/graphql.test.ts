@@ -1,7 +1,7 @@
 import {ImageType} from '../GraphQL/ImageQuery';
 import {GraphQLString} from 'graphql';
 import {agent} from 'supertest';
-import {app, server} from '../server';
+import {app, closeServer} from '../server';
 import * as assert from 'assert';
 import {ImagesSequelize, LikesSequelize, UsersSequelize} from '../database/SequelizeTables';
 const agent1 = agent(app);
@@ -197,4 +197,4 @@ describe(' testing GraphQL queries', () => {
     });
 });
 
-server.close();
+closeServer.close();
