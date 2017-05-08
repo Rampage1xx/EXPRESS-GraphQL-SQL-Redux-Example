@@ -21,7 +21,7 @@ interface IProps extends IPins {
 }
 
 export class AppContainer extends React.PureComponent<IProps, any> {
-
+// TODO: refactor put all the props filterin in there instead of splitting it in the various components
     constructor(props: IProps) {
         super(props);
         this.findUserHandler = this.findUserHandler.bind(this);
@@ -49,7 +49,9 @@ export class AppContainer extends React.PureComponent<IProps, any> {
         // get the logged in userID otherwise assign a guest value
         const id = get(loggedUserImagesGraphQL, 'id', 'Guest');
         //react router docs states that component needs to be bound inside render if we need to pass props to it
+        // tslint:disable-next-line
         const Main = () => <MainPage pins={ pins } id={ id } findUser={ this.findUserHandler }/>;
+        // tslint:disable-next-line
         const MyImagePage = () => <MyImages userImages={ currentUser }/>;
 
         return (
@@ -72,7 +74,6 @@ const mapStateToProps = createStructuredSelector({
 
 });
 
-// connect passes the props to the graphql query/mutation.
 export const AppContainerConnected: any = compose(
     connect(mapStateToProps, undefined),
     graphql(loggedInUserQuery, currentUserQueryOptions),

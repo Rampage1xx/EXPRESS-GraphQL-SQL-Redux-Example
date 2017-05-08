@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FullCard} from '../Card/FullCard';
+import {FullCard} from '../Component/Card/FullCard';
 
 declare type TGenerateMasonry = (parameters: {
     images: any[], deletePin: boolean,

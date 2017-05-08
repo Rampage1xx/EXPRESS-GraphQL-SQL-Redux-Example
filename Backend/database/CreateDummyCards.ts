@@ -7,7 +7,7 @@ const createDatabaseEntries = async (user) => {
                 url: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180',
                 description: `this is image ${i}`,
                 title: `title of image ${i}`,
-                userName: user.twitterUsername,
+                userName: user.userName,
                 avatar: 'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png',
                 user_id: user.id,
                 created_at: date.setSeconds(date.getSeconds() - (i * 10))
@@ -22,7 +22,7 @@ const createDatabaseEntries = async (user) => {
 export const createDummyImages = () => {
     UsersSequelize.create({
         email: 'donald@duck.com',
-        userName: 'donald',
+        userName: `donald`,
         password: 'donny',
         localAccount: true,
         avatar: 'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'

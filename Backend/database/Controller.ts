@@ -5,7 +5,7 @@ import {get} from 'lodash';
 
 export const findImagesSequelize = async (createdAt: string) => {
     const cache = await redisClient.getAsync(createdAt);
-    console.log(createdAt, 'created at')
+    console.log(createdAt, 'created at');
 
     try {
         if (cache) {
@@ -138,11 +138,16 @@ export const findUserSequelize = (args, id) => {
 };
 
 export const findUsernameSequelize = (args) => {
+
     try {
         return UsersSequelize.findOne({where: {userName: args.userName}})
             .then((result) => {
                 // the data we should send back in this case is only the username without any additional details.
-                return {userName: get(result, result.userName, 'available')};
+                if (!result) {
+                    return {userName: 'available'};
+                } else {
+                    return {userName: get(result, result.userName)};
+                }
             });
     } catch (err) {
         return {error: 'error while finding the user'};

@@ -1,5 +1,5 @@
 @import 'root.css';
-@import 'grid.css';
+@import 'Component/Row/grid.css';
 @import 'Component/navbar/Navbar.css';
 @import 'Component/Row/Row.css';
 @import 'Component/Card/FullCard.css';

@@ -34,9 +34,7 @@ export class FullCard extends React.Component<IProps, IState> {
     private totalLikes: number;
     private likeIdentifier: string;
     private imageId: string;
-    private likeCSS: string;
     private findUser: any;
-    private enableDelete: any;
 
     constructor(props: IProps) {
         super(props);

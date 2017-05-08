@@ -83,7 +83,6 @@ export const fetchPinsQueryOptions2 = {
         const loadMoreEntries = () => {
             const {imagesListGraphQL} = props.pins;
             const fetchLastCreatedAt = (get(imagesListGraphQL, 'length') as number) - 1;
-
             return props.pins.fetchMore({
                 variables: {
                    indexOffset: get(imagesListGraphQL, [fetchLastCreatedAt, 'created_at'], new Date())

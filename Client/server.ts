@@ -1,7 +1,7 @@
 const express = require('express')
 let path = require('path');
 
- const app = express()
+ export const app = express()
 
 app.use(express.static('dist'));
 

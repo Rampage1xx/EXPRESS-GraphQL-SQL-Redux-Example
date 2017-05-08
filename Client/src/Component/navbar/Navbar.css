@@ -64,7 +64,10 @@
 .brand__Navbar:hover {
   color: royalblue;
 }
-/*@mixin parentName_ChildNumber_Color Circle__navbar, 1, green;*/
-@mixin parentName_ChildNumber_Color Circle__navbar, 2, yellow;
-@mixin parentName_ChildNumber_Color Circle__navbar, 4, yellow;
+@mixin parentName_ChildNumber_Color Circle__navbar, 1, #76FF03;
+@mixin parentName_ChildNumber_Color Circle__navbar, 2, #76FF03;
+@mixin parentName_ChildNumber_Color Circle__navbar, 3, white;
+@mixin parentName_ChildNumber_Color Circle__navbar, 4, #f44336;
+@mixin parentName_ChildNumber_Color Circle__navbar, 5, #f44336;
+
 

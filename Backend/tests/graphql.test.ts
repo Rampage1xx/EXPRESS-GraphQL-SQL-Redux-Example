@@ -41,23 +41,8 @@ mutation RemoveLike ($identifier: String!){
 }
 `;
 const fetchPins = `
-query imageList ($indexOffset: Int!){
-  imagesListGraphQL(indexOffset: $indexOffset){
-    id,
-    title,
-    url,
-    description,
-    userName,
-    user_id,
-    totalLikes,
-    avatar,
-  }
-}
-`;
-
-const fetchPins2 =  `
 query imageList ($indexOffset: String!){
-  imagesListGraphQL2(indexOffset: $indexOffset){
+  imagesListGraphQL(indexOffset: $indexOffset){
     id,
     title,
     url,
@@ -70,6 +55,7 @@ query imageList ($indexOffset: String!){
   }
 }
 `;
+
 const createDatabaseEntries = (user) => {
     for (let i = 0; i < 100; i++) {
         ImagesSequelize.create({
@@ -173,7 +159,7 @@ describe(' testing GraphQL queries', () => {
 
     const fetchImages = () => GraphQLQuery()
         .send({
-            query: fetchPins2,
+            query: fetchPins,
             variables: {indexOffset: new Date()}
         })
         .then(res => res.body.data.imagesListGraphQL2);

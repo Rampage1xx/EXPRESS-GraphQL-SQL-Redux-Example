@@ -125,7 +125,7 @@
     "no-function-constructor-with-string-args": true,
     "no-function-expression": true,
     "no-http-string": [
-      true,
+      false,
       "http://www.example.com/?.*",
       "http://www.examples.com/?.*"
     ],

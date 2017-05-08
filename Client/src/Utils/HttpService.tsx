@@ -4,7 +4,7 @@ import {actionActivateModal, actionLoginStateChange} from '../Actions/ActionCrea
 
 export const instance1 = axios.create({
     baseURL: 'http://localhost:3000',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {'Content-Type': 'application/json'},
     validateStatus: (status) => {
         return status >= 200 && status < 300;
     },
@@ -12,16 +12,16 @@ export const instance1 = axios.create({
 
 });
 
-export const HttpLogin = ({ username, password }) => {
-    return instance1.post('/login', { username, password })
+export const HttpLogin = ({username, password}) => {
+    return instance1.post('/login', {username, password})
         .then((response) => response)
         .catch(e => store.dispatch(actionActivateModal(2)));
 };
 
-export const formLoginHandler = (formProps) : void => {
+export const formLoginHandler = (formProps): void => {
     const username = formProps.get('username');
     const password = formProps.get('password');
-    HttpLogin({ username, password })
+    HttpLogin({username, password})
         .then((res) => store.dispatch(actionLoginStateChange(true)))
         .catch(e => store.dispatch(actionActivateModal(2)));
 };
@@ -29,5 +29,7 @@ export const formLoginHandler = (formProps) : void => {
 export const logOutHandler = () => {
     instance1.get('/logout')
         .then(res => store.dispatch(actionLoginStateChange(true)))
-        .catch(e => {store.dispatch(actionActivateModal(2))})
+        .catch(e => {
+            store.dispatch(actionActivateModal(2));
+        });
 };

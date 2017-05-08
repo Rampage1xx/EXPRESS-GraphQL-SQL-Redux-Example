@@ -90,7 +90,7 @@ export const UsersSequelize = connection.define('users', {
         },
         instanceMethods: {
             verifyPassword: function (password: string): Promise<boolean> {
-                const user = this;
+                const user = this; // tslint:disable-line
                 return bcrypt.compare(password, user.password)
                     .then(result => result);
 
@@ -152,5 +152,6 @@ if (!NODE_TEST) {
     connection.sync({force: true})
         .then(connection => console.log('******CONNECTED TO POSTGRES******'))
         .catch(e => e);
-    sleep(4000).then(r => createDummyImages()).catch(e => console.log(e));
+    sleep(4000).then(r => createDummyImages())
+        .catch(e => console.log(e));
 }

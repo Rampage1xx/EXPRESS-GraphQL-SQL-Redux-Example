@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Masonry from 'react-masonry-component';
-import {GenerateMasonry} from './GenerateMasonry';
+import {GenerateMasonry} from '../../Utils/GenerateMasonry';
+import {get} from 'lodash';
 interface IProps {
     userImages: TCurrentUser
 }
@@ -20,19 +21,22 @@ export class MyImages extends React.PureComponent<IProps, any> {
         this.setState({deletedItems: this.state.deletedItems + 1});
     }
 
-    private generateMasonryCards(propsLocation: IProps) {
+    private generateMasonryCards(propsPassed: IProps) {
         // we generate the user masonry
-        const {userImages} = propsLocation;
+        const {userImages} = propsPassed;
         this.myItems = [];
         if (userImages) {
             const {images, loggedUserImagesGraphQL} = userImages;
-            const { id } = loggedUserImagesGraphQL;
-            this.myItems = GenerateMasonry({
-                images,
-                deletePin: true,
-                deleteCardFunction: this.deleteCard,
-                id
-            });
+            // checks if the id is fetched from the server otherwise assigns false
+            const id: any = get(loggedUserImagesGraphQL, 'id', false) as string | boolean;
+            if (id) {
+                this.myItems = GenerateMasonry({
+                    images,
+                    deletePin: true,
+                    deleteCardFunction: this.deleteCard,
+                    id
+                });
+            }
 
         }
     }
@@ -41,6 +45,7 @@ export class MyImages extends React.PureComponent<IProps, any> {
         this.generateMasonryCards(nextProps);
 
     }
+
     public  render() {
         return (
             <Masonry

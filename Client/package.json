@@ -23,8 +23,9 @@
     },
     "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
     "testMatch": [
-      "**/tests/*.(ts|tsx|js)"
-    ]
+      "**/**/tests.(ts|tsx|js)"
+    ],
+    "testURL": "http://localhost:3000"
   },
   "author": "",
   "license": "ISC",
@@ -57,6 +58,7 @@
     "@types/jest": "^19.2.2",
     "@types/lodash": "^4.14.63",
     "@types/mocha": "^2.2.40",
+    "@types/moxios": "^0.4.1",
     "@types/react": "^15.0.16",
     "@types/react-autosuggest": "^8.0.0",
     "@types/react-dom": "^0.14.23",
@@ -84,6 +86,7 @@
     "file-loader": "^0.11.1",
     "jest": "^19.0.2",
     "jest-enzyme": "^3.0.0",
+    "moxios": "^0.4.0",
     "postcss": "^5.2.16",
     "postcss-autoreset": "^1.2.1",
     "postcss-cli": "^3.0.0",

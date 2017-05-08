@@ -3,8 +3,10 @@ import {Row} from '../Row/Row';
 
 interface IProps extends IPins, IFindUser {}
 
-export class MainPage extends React.Component<IProps, any> {
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms))
 
+export class MainPage extends React.Component<IProps, any> {
+       private loading : boolean = false;
     constructor(props: IProps) {
         super(props);
         this.fetchMore = this.fetchMore.bind(this);
@@ -12,7 +14,13 @@ export class MainPage extends React.Component<IProps, any> {
     };
 
     private fetchMore() {
-        this.props.pins.loadMoreEntries();
+        // avoiding multiple same fetches
+        // having issues with loading built in apollo
+        if (!this.loading) {
+            this.loading = true;
+            this.props.pins.loadMoreEntries();
+            sleep(1500).then(r => this.loading = false)
+        }
     }
 
     public render() {

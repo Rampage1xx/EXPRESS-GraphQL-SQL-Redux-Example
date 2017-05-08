@@ -1,10 +1,11 @@
+export const user_id = 'b7a302ae-6acf-4bf1-8bf6-bba0143a6d5c';
 
 export const likesArrayTest = [
     {image_id: '05225dc7-8a72-4568-8e6a-c404c78507fe'},
     {image_id: 'ea2cb99f-fab4-465a-b6b6-0cdf50337d43'}
-    ];
+];
 
-export const imagesArrayTest = {
+export const imagesArrayTest: { data: { imagesListGraphQL: any[] } } = {
     'data': {
         'imagesListGraphQL': [
             {
@@ -225,4 +226,4 @@ export const imagesArrayTest = {
             }
         ]
     }
-}
+};

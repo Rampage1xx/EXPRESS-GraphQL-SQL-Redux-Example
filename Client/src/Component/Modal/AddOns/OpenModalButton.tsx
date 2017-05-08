@@ -1,6 +1,12 @@
 import * as React from 'react';
 
-export const OpenModalButton = (props) => {
+interface IProps {
+    name: string,
+    toggle(): any,
+    invisible: boolean,
+}
+
+export const OpenModalButton = (props: IProps) => {
     const {invisible, toggle, name} = props;
     if (invisible) {
         return null;

@@ -27,7 +27,7 @@ export const asyncCreateAccountValidation = (formValues) => {
     const field = userName ? userName : email;
     const query = gql`
 {
-  userFormValidation(userName: "${field}") {
+  userNameFieldFormValidation(userName: "${field}") {
     id
   }
 }
