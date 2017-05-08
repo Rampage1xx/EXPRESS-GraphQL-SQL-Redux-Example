@@ -51,7 +51,8 @@
     "redux-form": "^6.6.3",
     "redux-immutable": "^4.0.0",
     "redux-saga": "^0.14.6",
-    "reselect": "^3.0.0"
+    "reselect": "^3.0.0",
+    "validator": "^7.0.0"
   },
   "devDependencies": {
     "@types/enzyme": "^2.7.6",
@@ -72,6 +73,7 @@
     "@types/rx-dom": "^7.0.0",
     "@types/superagent": "^2.0.36",
     "@types/supertest": "^2.0.0",
+    "@types/validator": "^6.2.0",
     "assert": "^1.4.1",
     "autoprefixer": "^6.7.7",
     "awesome-typescript-loader": "^3.1.2",

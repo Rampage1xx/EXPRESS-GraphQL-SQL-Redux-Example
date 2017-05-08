@@ -67,3 +67,6 @@ interface IFindUser {
 interface IFetchPinsProps extends IOwnProps, IPins {
 }
 
+declare type AsyncValidationParameters = { userName: string, email: string }
+
+declare type AsyncQueryParameters = (parameter: {field: string, value: string}) => any

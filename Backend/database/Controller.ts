@@ -5,8 +5,6 @@ import {get} from 'lodash';
 
 export const findImagesSequelize = async (createdAt: string) => {
     const cache = await redisClient.getAsync(createdAt);
-    console.log(createdAt, 'created at');
-
     try {
         if (cache) {
             console.log('****** SENT BY REDIS ******');

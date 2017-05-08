@@ -44,7 +44,7 @@ describe('card bottom tests', () => {
     );
     it('should render total likes and like status', () => {
         expect(wrapperShallowCardBottom.find('.faLightGreen').exists()).toBe(true);
-        expect(wrapperShallowCardBottom.find('.totalLikes__card__p').contains(2)).toBe(true);
+        expect(wrapperShallowCardBottom.find('.totalLikes__card__p').text()).toBe(' 2');
 
     });
 });

@@ -1,6 +1,17 @@
 import {client} from '../../store/Store';
 import {findUserImagesQuery} from './QueryAndMutationsStrings';
 import {get} from 'lodash';
+
+export const formAsyncValidationQuery = (query) => {
+    return client.query({query}).then((res: any) => {
+        if (res.userName && res.userName !== 'available') {
+            throw {username: 'Already Taken'};
+        } else if (res.email && res.email !== 'available') {
+            throw {email: 'Already Taken'};
+        }
+    })
+};
+
 export const addLikeStatusToArray = (imagesList: any[], likes: any[]) => {
     // adding the like status to the images that the user has liked
     const arrayRebuilding = [];
@@ -85,7 +96,7 @@ export const fetchPinsQueryOptions2 = {
             const fetchLastCreatedAt = (get(imagesListGraphQL, 'length') as number) - 1;
             return props.pins.fetchMore({
                 variables: {
-                   indexOffset: get(imagesListGraphQL, [fetchLastCreatedAt, 'created_at'], new Date())
+                    indexOffset: get(imagesListGraphQL, [fetchLastCreatedAt, 'created_at'], new Date())
                 },
                 updateQuery: (previousResult, next) => {
 
@@ -128,3 +139,4 @@ export const fetchPinsQueryOptions2 = {
     }
 
 };
+

@@ -111,3 +111,12 @@ mutation createUser($email:String!, $userName: String!, $password:String!) {
 }
 
 `;
+
+export const userNameFieldFormValidation: AsyncQueryParameters = ({field, value}) => gql`
+{
+  ${field}FieldFormValidation(userName: "${value}") {
+    id
+  }
+}
+
+`;
