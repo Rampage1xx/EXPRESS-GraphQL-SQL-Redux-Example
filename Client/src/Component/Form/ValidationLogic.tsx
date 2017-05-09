@@ -5,7 +5,6 @@ import {formAsyncValidationQuery} from '../../Utils/GraphQL/Queries';
 
 export const createAccountValidation = (values) => {
     const errors: any = {};
-
     if (!values) {
         errors.username = 'Required';
         errors.password = 'Required';
@@ -25,17 +24,21 @@ export const createAccountValidation = (values) => {
         errors.username = 'Should be less than 15 characters';
     }
     //EMAIL//
+
+    // a more comprehensive regex /[a-z0-9!#$%&'*+/=?^_`{|}~-]+
+    // (?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+
+    // (?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/.test
     if (!parameters[0]) {
         errors.email = 'Required';
-    } else if (isEmail(parameters[0])) {
+    } else if (!isEmail(parameters[0])) {
         errors.email = 'Invalid email address';
     }
 
     //PASSWORD//
     if (!parameters[1]) {
         errors.password = 'Required';
-    } else if (parameters[2].length < 7) {
-        errors.username = 'Should  be at least 7 characters';
+    } else if (parameters[1].length < 7) {
+        errors.password = 'Should  be at least 7 characters';
     }
 
     return errors;
@@ -60,3 +63,4 @@ export const asyncCreateAccountValidation = async (formValues) => {
         return await formAsyncValidationQuery(query);
     }
 };
+

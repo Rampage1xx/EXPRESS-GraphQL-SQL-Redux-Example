@@ -5,6 +5,9 @@ import {OpenModalButton} from './AddOns/OpenModalButton';
 
 const fakeToggle = () => void  {};
 
+
+
+
 describe('testing modal functionality', () => {
     const mountModal = mount(<ModalComponent activeModal={ 9 } name={ 'test' }/>);
     const shallowModalButton = shallow(<OpenModalButton toggle={ fakeToggle } name={ 'buttonTest' } invisible={ false } />)
@@ -17,7 +20,7 @@ describe('testing modal functionality', () => {
     it('should render the props', () => {
         expect(mountModal.find(OpenModalButton).find('div').text()).toBe('test')
         expect(shallowModalButton.text()).toBe('buttonTest')
-    })
+    });
 
     it('should change modal state on click', () => {
         expect(mountModal.state().modal).toBe(false);

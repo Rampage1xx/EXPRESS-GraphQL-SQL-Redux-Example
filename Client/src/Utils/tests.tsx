@@ -4,10 +4,10 @@ import {imagesArrayTest, likesArrayTest, user_id} from '../../tests/mocks/variab
 import {shallow} from 'enzyme';
 import {Row} from '../Component/Row/Row';
 import {addLikeStatusToArray} from './GraphQL/Queries';
-const fakeFunction = (index: number) => void {};
-const fakeFindUser = () => void {}
-const {imagesListGraphQL} = imagesArrayTest.data;
 
+const fakeFunction = (index: number) => void {};
+const fakeFindUser = () => void {};
+const {imagesListGraphQL} = imagesArrayTest.data;
 
 describe('testing masonry creation', () => {
 

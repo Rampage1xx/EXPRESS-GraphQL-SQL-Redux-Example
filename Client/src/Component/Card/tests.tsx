@@ -4,10 +4,9 @@ import {CardBodyText} from './CardBodyText';
 import {mount, shallow} from 'enzyme';
 import {CardDelete} from './CardDelete';
 import {CardSubtitle, CardText, CardTitle} from 'reactstrap';
+
 const title = 'title';
 const description = 'description';
-
-
 
 describe('Card Body Text', () => {
     const ShallowCardBody = shallow(<CardBodyText description={ description } title={ title }/>);
