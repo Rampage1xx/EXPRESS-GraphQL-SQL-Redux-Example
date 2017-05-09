@@ -1,5 +1,5 @@
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
-import {addLikeSequelize, removeLikeSequelize} from '../database/Controller';
+import {addLikeSequelize, removeLikeSequelize} from '../database/ControllerGraphQL';
 
 export const LikesType = new GraphQLObjectType({
     name: 'likes',

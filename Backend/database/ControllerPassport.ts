@@ -1,4 +1,4 @@
-import {UsersSequelize} from '../../database/SequelizeTables';
+import {UsersSequelize} from './SequelizeTables';
 
 export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow}): Promise<any> => {
     const findUserError = 'error while finding user';

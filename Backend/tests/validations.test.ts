@@ -1,4 +1,4 @@
-import {findImagesSequelize} from '../database/Controller';
+import {findImagesSequelize} from '../database/ControllerGraphQL';
 import * as assert from 'assert';
 
 

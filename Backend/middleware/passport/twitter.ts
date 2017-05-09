@@ -1,7 +1,7 @@
 import * as passport from 'passport';
 import * as Passport from 'passport-twitter';
 import {twitter, twitterID, twitterUsername} from '../../Strings';
-import {oAuthLoginFunction} from './CommonFunctions';
+import {oAuthLoginFunction} from '../../database/ControllerPassport';
 
 const TwitterLoginFunction: oAuthTwitter = async (token, tokenSecret, profile, cb) => {
     const {_json, displayName, id} = profile;

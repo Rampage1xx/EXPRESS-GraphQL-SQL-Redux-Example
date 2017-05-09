@@ -2,7 +2,7 @@ import {GraphQLBoolean, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLS
 import {googleID, twitterID} from '../Strings';
 import {ImageType} from './ImageQuery';
 import {LikesType} from './LikeQuery';
-import {findUsernameSequelize, findUserSequelize} from '../database/Controller';
+import {findUsernameSequelize, findUserSequelize} from '../database/ControllerGraphQL';
 import {validateCreateUser} from './Validation';
 
 export const UserType = new GraphQLObjectType({

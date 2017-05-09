@@ -1,6 +1,6 @@
 import {GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
-import {postImageSequelize, removeImageSequelize} from '../database/Controller';
+import {postImageSequelize, removeImageSequelize} from '../database/ControllerGraphQL';
 import {findImageValidation} from './Validation';
 
 export const ImageType = new GraphQLObjectType({
