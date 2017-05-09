@@ -2,7 +2,8 @@ import {GraphQLBoolean, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLS
 import {googleID, twitterID} from '../Strings';
 import {ImageType} from './ImageQuery';
 import {LikesType} from './LikeQuery';
-import {createUserSequelize, findUsernameSequelize, findUserSequelize} from '../database/Controller';
+import {findUsernameSequelize, findUserSequelize} from '../database/Controller';
+import {validateCreateUser} from './Validation';
 
 export const UserType = new GraphQLObjectType({
     name: 'UserQL',
@@ -74,7 +75,8 @@ export const addUserMutation = {
     },
     resolve: (parentValue, args) => {
         const avatar = args.avatar ? args.avatar : undefined;
-        return createUserSequelize(args, avatar);
+       // return createUserSequelize(args, avatar);
+        return validateCreateUser(args, avatar)
 
     }
 

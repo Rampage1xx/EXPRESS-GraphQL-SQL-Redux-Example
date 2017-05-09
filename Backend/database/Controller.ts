@@ -1,11 +1,13 @@
 import {ImagesArrayProtoBuffer, redisClient} from './Redis';
 import {ImagesSequelize, LikesSequelize, UsersSequelize} from './SequelizeTables';
 import {get} from 'lodash';
-
+import {isDate, toDate} from 'validator';
 
 export const findImagesSequelize = async (createdAt: string) => {
-    const cache = await redisClient.getAsync(createdAt);
+
     try {
+        const cache = await redisClient.getAsync(createdAt);
+
         if (cache) {
             console.log('****** SENT BY REDIS ******');
             const items = await ImagesArrayProtoBuffer({argument: cache, decode: true});
@@ -20,13 +22,17 @@ export const findImagesSequelize = async (createdAt: string) => {
                 limit: 24,
                 order: [['created_at', 'DESC']]
             });
+
             const payload: any = {images: findImages};
+
             const encodedResults = await ImagesArrayProtoBuffer({argument: payload, encode: true});
+
             const cacheImages = await redisClient.setexAsync(createdAt, 1, encodedResults);
+
             return findImages;
         }
     } catch (err) {
-        return {error: ' error while finding the image'};
+        return err;
     }
 };
 
