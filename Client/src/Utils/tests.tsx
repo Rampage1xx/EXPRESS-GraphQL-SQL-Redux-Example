@@ -8,9 +8,7 @@ const fakeFunction = (index: number) => void {};
 const fakeFindUser = () => void {}
 const {imagesListGraphQL} = imagesArrayTest.data;
 
-declare const describe;
-declare const it;
-declare const expect;
+
 describe('testing masonry creation', () => {
 
     it(' should generate a  masonry of 24 pieces', () => {

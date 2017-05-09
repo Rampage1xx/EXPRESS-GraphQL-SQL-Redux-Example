@@ -7,9 +7,7 @@ import {CardSubtitle, CardText, CardTitle} from 'reactstrap';
 const title = 'title';
 const description = 'description';
 
-declare const describe;
-declare const it;
-declare const expect;
+
 
 describe('Card Body Text', () => {
     const ShallowCardBody = shallow(<CardBodyText description={ description } title={ title }/>);

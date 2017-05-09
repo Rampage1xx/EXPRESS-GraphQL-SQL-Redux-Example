@@ -9,7 +9,9 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
   //  "allowSyntheticDefaultExports": true,
-    "types": [],
+    "types": [
+      "jest"
+    ],
     "lib": [
       "es2017",
       "dom",

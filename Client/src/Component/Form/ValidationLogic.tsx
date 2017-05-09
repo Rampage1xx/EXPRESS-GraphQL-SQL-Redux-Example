@@ -1,13 +1,21 @@
 import {isEmail} from 'validator';
 import {userNameFieldFormValidation} from '../../Utils/GraphQL/QueryAndMutationsStrings';
 import {formAsyncValidationQuery} from '../../Utils/GraphQL/Queries';
-export const createAccountValidation = (values) => {
 
+
+export const createAccountValidation = (values) => {
+    const errors: any = {};
+
+    if (!values) {
+        errors.username = 'Required';
+        errors.password = 'Required';
+        errors.email = 'Required';
+        return errors
+    }
     // NEEDS REFACTOR TOO MANY IF ELSE
 
     const getValues = (prop: string) => values.get(prop);
     const parameters = ['email', 'password', 'username'].map((parameter) => getValues(parameter));
-    const errors: any = {};
     //USERNAME//
     if (!parameters[2]) {
         errors.username = 'Required';

@@ -6,7 +6,10 @@
     "sourceMap": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "./Compiled/"
+    "outDir": "./Compiled/",
+    "types": [
+      "mocha"
+    ]
   },
   "exclude": [
     "node_modules"
