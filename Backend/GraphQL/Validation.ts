@@ -21,7 +21,7 @@ export const validateCreateUser = (args, avatar) => {
 };
 
 export const findImageValidation = (date) => {
-    const notADate = {error: 'not a valid date'};
+    const notADate = 'not a valid date';
     try {
         const validatedDate = toDate(date);
 

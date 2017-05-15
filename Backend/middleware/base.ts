@@ -8,6 +8,7 @@ import {RootSchema} from '../GraphQL/RootGraphQL';
 import * as SequelizeStore from 'connect-session-sequelize';
 import {connection} from '../database/SequelizeTables';
 import * as  compression from 'compression';
+import * as helmet from 'helmet';
 
 const sessionStorage = SequelizeStore(session.Store);
 const corsOptions =  {
@@ -32,6 +33,7 @@ export class BaseMiddleware {
 
     static get Configuration() {
         const app = Express();
+        app.use(helmet())
         app.use(session(sessionParameters));
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended: false}));

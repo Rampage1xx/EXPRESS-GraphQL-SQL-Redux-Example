@@ -6,12 +6,11 @@ import {ImagesArrayProtoBuffer, redisClient} from '../database/Redis';
 const root = new protobuf.Root();
 
 before('clear databases', async () => {
-    this.timeout = 5000;
     console.log('*********CLEARING DATABASES**************');
     redisClient.flushdbAsync()
         .then(r => console.log('redis flushed'));
 
-    await connection.sync({force: true})
+    await  connection.sync({force: true})
         .then(r => console.log('postgres cleared'))
         .catch(e => e);
 

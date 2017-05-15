@@ -75,8 +75,8 @@ export const addUserMutation = {
     },
     resolve: (parentValue, args) => {
         const avatar = args.avatar ? args.avatar : undefined;
-       // return createUserSequelize(args, avatar);
-        return validateCreateUser(args, avatar)
+        // return createUserSequelize(args, avatar);
+        return validateCreateUser(args, avatar);
 
     }
 

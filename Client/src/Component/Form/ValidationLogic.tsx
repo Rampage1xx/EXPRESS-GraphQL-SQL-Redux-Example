@@ -2,7 +2,6 @@ import {isEmail} from 'validator';
 import {userNameFieldFormValidation} from '../../Utils/GraphQL/QueryAndMutationsStrings';
 import {formAsyncValidationQuery} from '../../Utils/GraphQL/Queries';
 
-
 export const createAccountValidation = (values) => {
     const errors: any = {};
     if (!values) {
