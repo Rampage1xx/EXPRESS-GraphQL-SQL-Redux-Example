@@ -423,3 +423,4 @@ Client/Client.rar
 !/Backend/database/CreateDummyCards.ts
 /Backend/database/mocks.ts
 /mock.yaml
+/Backend/middleware/passport/config.ts

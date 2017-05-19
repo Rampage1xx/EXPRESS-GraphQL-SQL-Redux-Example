@@ -1,7 +1,8 @@
 import * as passport from 'passport';
 import * as Passport from 'passport-twitter';
-import {twitter, twitterID, twitterUsername} from '../../Strings';
 import {oAuthLoginFunction} from '../../database/ControllerPassport';
+import {twitter, twitterID, twitterUsername} from '../../Strings';
+import {twitterConsumer, twitterSecret} from './config';
 
 const TwitterLoginFunction: oAuthTwitter = async (token, tokenSecret, profile, cb) => {
     const {_json, displayName, id} = profile;
@@ -19,8 +20,8 @@ const TwitterLoginFunction: oAuthTwitter = async (token, tokenSecret, profile, c
 };
 
 passport.use(twitter, new Passport.Strategy({
-        consumerKey: 'IeDNc5MSTaBNQ8PEiItSxS1Jj',
-        consumerSecret: 'QnhT48dG4b0QwlmmeXeSFIlWmhbHRBxMIKgWN4AJPu9btWHrn8',
+        consumerKey: `${twitterConsumer}`,
+        consumerSecret: `${twitterSecret}`,
         callbackURL: 'http://localhost:3000/auth/twitter/callback',
         includeEmail: true
     }, TwitterLoginFunction
