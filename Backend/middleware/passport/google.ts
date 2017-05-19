@@ -1,8 +1,9 @@
 import * as passport from 'passport';
 import * as  Google from 'passport-google-oauth2';
+import {googleClientID, googleClientSecret} from '../../config/keys';
 import {oAuthLoginFunction} from '../../database/ControllerPassport';
 import {googleID, googleUsername} from '../../Strings';
-import {googleClientID, googleClientSecret} from './config';
+
 declare const ENV_CLIENT_GOOGLE;
 declare const ENV_SECRET_GOOGLE;
 const googleLoginFunction: oAuthGoogle = async (request, accessToken, refreshToken, profile, cb) => {
