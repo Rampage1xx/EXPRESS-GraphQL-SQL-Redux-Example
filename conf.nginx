@@ -8,24 +8,32 @@ events {
 }
 
 http {
+    include       /etc/nginx/mime.types;
     sendfile on;
+    include mime.types;
+
+    gzip on;
+    gzip_comp_level 6;
+    gzip_vary on;
+    gzip_min_length  1000;
+    gzip_proxied any;
+    gzip_types text/plain text/html text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+    gzip_buffers 16 8k;
 
     upstream node {
         server node:3000;
     }
-#    server {
-#        listen 80;
-#        listen 443 ssl;
-#
-#        location ~ \.(js) {
-#            root /etc/nginx/html/app1/;
-#            access_log off;
-#            expires max;
-#        }
-#    }
+
+
 
     server {
         listen 80;
+
+        location ~*.(html|js)$ {
+            root /etc/nginx/html/app1/;
+            access_log off;
+            expires max;
+        }
         location / {
             proxy_pass         http://node;
             proxy_redirect     off;
@@ -35,4 +43,6 @@ http {
             proxy_set_header   X-Forwarded-Host $server_name;
         }
     }
+
+
 }

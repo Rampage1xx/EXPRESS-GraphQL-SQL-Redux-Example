@@ -8,6 +8,7 @@ interface IProps {
     SubmitForm(formProps: object): void
     handleSubmit(immutableProps: any): any
 }
+
 class FormContainer extends React.Component<IProps, any> {
     constructor(props: IProps) {
         super(props);
