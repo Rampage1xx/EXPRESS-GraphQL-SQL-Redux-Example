@@ -8,7 +8,9 @@
     "allowSyntheticDefaultImports": true,
     "outDir": "./Compiled/",
     "types": [
-      "mocha"
+      "mocha",
+      "node",
+      "long"
     ]
   },
   "exclude": [

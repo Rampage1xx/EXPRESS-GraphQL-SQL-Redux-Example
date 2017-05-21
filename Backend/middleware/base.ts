@@ -1,14 +1,14 @@
 import * as bodyParser from 'body-parser';
+import * as  compression from 'compression';
+import * as SequelizeStore from 'connect-session-sequelize';
 import * as Express from 'express';
+import * as expressGraphQL from 'express-graphql';
 import * as session from 'express-session';
 import * as passport from 'passport';
-import {BaseRoutes} from '../Routes/baseRoutes';
-import * as expressGraphQL from 'express-graphql';
-import {RootSchema} from '../GraphQL/RootGraphQL';
-import * as SequelizeStore from 'connect-session-sequelize';
 import {connection} from '../database/SequelizeTables';
-import * as  compression from 'compression';
-import * as helmet from 'helmet';
+import {RootSchema} from '../GraphQL/RootGraphQL';
+import {BaseRoutes} from '../Routes/baseRoutes';
+//import * as helmet from 'helmet';
 
 const sessionStorage = SequelizeStore(session.Store);
 const corsOptions =  {
@@ -33,7 +33,7 @@ export class BaseMiddleware {
 
     static get Configuration() {
         const app = Express();
-        app.use(helmet())
+        //app.use(helmet())
         app.use(session(sessionParameters));
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended: false}));

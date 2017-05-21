@@ -1,9 +1,9 @@
 import * as express from 'express';
-import {BaseMiddleware} from './middleware/base';
-import './database/SequelizeTables';
 import './database/Redis';
-export const app = express();
+import './database/SequelizeTables';
+import {BaseMiddleware} from './middleware/base';
 
+export const app = express();
 app.use(express.static('dist'));
 
 app.use(BaseMiddleware.Configuration);
@@ -11,3 +11,4 @@ app.use(BaseMiddleware.Configuration);
 export const closeServer = app.listen(3000, () => {
     console.log('server running');
 });
+

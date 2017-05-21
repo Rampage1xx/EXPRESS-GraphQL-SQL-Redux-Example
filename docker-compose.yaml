@@ -2,6 +2,21 @@ version: '3'
 
 services:
 
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    networks:
+     - nodeapp-network
+    volumes:
+     - ./conf.nginx:/etc/nginx/nginx.conf:ro
+     - ./Backend/Compiled/dist/:/etc/nginx/html/app1/
+    ports:
+     - '80:80'
+    depends_on:
+      - node
+
   redis:
     image: redis
     networks:
