@@ -8,13 +8,15 @@ import * as passport from 'passport';
 import {connection} from '../database/SequelizeTables';
 import {RootSchema} from '../GraphQL/RootGraphQL';
 import {BaseRoutes} from '../Routes/baseRoutes';
-//import * as helmet from 'helmet';
+import * as helmet from 'helmet';
+import * as morgan from 'morgan';
+import * as cors from 'cors';
 
 const sessionStorage = SequelizeStore(session.Store);
 const corsOptions =  {
     credentials: true,
     optionsSuccessStatus: 200,
-    origin: 'http://localhost:8000',
+    origin: 'http://localhost:80',
     methods: ['GET', 'POST']
 };
 
@@ -33,12 +35,13 @@ export class BaseMiddleware {
 
     static get Configuration() {
         const app = Express();
-        //app.use(helmet())
+        app.use(helmet())
         app.use(session(sessionParameters));
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended: false}));
         app.use(compression());
-      //  app.use(cors(corsOptions));
+        app.use(morgan('tiny'));
+        app.use(cors(corsOptions));
         app.use(passport.initialize());
         app.use(passport.session());
         app.use('/graphql', expressGraphQL({

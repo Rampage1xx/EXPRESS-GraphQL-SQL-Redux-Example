@@ -4,6 +4,7 @@ import './database/SequelizeTables';
 import {BaseMiddleware} from './middleware/base';
 
 export const app = express();
+
 app.use(express.static('dist'));
 
 app.use(BaseMiddleware.Configuration);

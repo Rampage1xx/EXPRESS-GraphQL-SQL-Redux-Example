@@ -58,8 +58,8 @@ services:
       - ./Backend/package.json:/var/www/package.json
       - ./Backend/pm2.config.json:/var/www/pm2.config.json
       - ./Backend/database/Images.proto:/var/www/database/Images.proto
-    ports:
-     - "3000:3000"
+#    ports:
+#     - "3000:3000"
     networks:
      - nodeapp-network
 
