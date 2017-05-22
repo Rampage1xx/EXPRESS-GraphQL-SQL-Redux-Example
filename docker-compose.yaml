@@ -10,7 +10,8 @@ services:
     networks:
      - nodeapp-network
     volumes:
-     - ./conf.nginx:/etc/nginx/nginx.conf:ro
+     - ./nginx/:/etc/nginx/
+     - ./nginx/conf.nginx:/etc/nginx/nginx.conf
      - ./Backend/Compiled/dist/:/etc/nginx/html/app1/
     ports:
      - '80:80'
