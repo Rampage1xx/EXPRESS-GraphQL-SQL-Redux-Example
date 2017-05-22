@@ -4,14 +4,13 @@ server {
     #listen 443 ssl;
 
     location ~*.(html|js)$ {
-        alias html/app1;
+        root /etc/nginx/html/app1/;
         access_log main;
         expires max;
     }
 
     location / {
         access_log main;
-        #     server_name www.domain.com;
         proxy_pass         http://nodecluster;
         proxy_redirect     off;
         proxy_set_header   Host $host;

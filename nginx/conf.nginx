@@ -81,11 +81,6 @@ http {
     }
 
 
-    #    server {
-    #        listen [::]:80 default_server deferred;
-    #        return 444;
-    #    }
-
 
     include sites-enabled/*;
 
