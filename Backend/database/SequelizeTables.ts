@@ -10,31 +10,32 @@ const host: string = NODE_TEST ? 'postgres' : 'postgres';
 export const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 export const connection = new Sequelize(`${database}`, 'meeseeks', 'MEESEEKS', {
     host: `${host}`,
-  //  port: 5432,
+    //  port: 5432,
     port: 5432,
     logging: false,
     dialect: 'postgres'
 
 });
 
-
 interface IUserAttributes {
-    id: string;
-    enabled: boolean;
-    userName: string;
-    password: string;
-    localAccount: boolean;
-    email: string;
-    twitterID: string;
-    twitterUsername: string;
-    googleID: string;
-    googleUsername: string;
+    id?: string;
+    enabled?: boolean;
+    userName?: string;
+    password?: string;
+    localAccount?: boolean;
+    email?: string;
+    twitterID?: string;
+    twitterUsername?: string;
+    googleID?: string;
+    googleUsername?: string;
+    avatar?: string;
+    username?: string;
 }
 
-interface IUserInstance extends Sequelize.Instance<IUserAttributes>, IUserAttributes {
+export interface IUserInstance extends Sequelize.Instance<IUserAttributes>, IUserAttributes {
     verifyPassword(password: string): boolean;
 }
-export const UsersSequelize = connection.define<IUserInstance, IUserAttributes >('users', {
+export const UsersSequelize = connection.define<IUserInstance, IUserAttributes>('users', {
         id: {
             type: Sequelize.UUID,
             primaryKey: true,
@@ -117,13 +118,15 @@ export const UsersSequelize = connection.define<IUserInstance, IUserAttributes >
 );
 
 interface IImagesAttributes {
-    id: string;
-    title: string;
-    url: string;
-    totalLikes: number;
-    userName: string;
-    avatar: string;
-    description: string;
+    id?: string;
+    title?: string;
+    url?: string;
+    totalLikes?: number;
+    userName?: string;
+    avatar?: string;
+    description?: string;
+    user_id?: string;
+    created_at?: number;
 }
 
 interface IImageInstance extends Sequelize.Instance<IImagesAttributes>, IImagesAttributes {
@@ -163,8 +166,10 @@ export const ImagesSequelize = connection.define<IImageInstance, IImagesAttribut
     });
 
 interface ILikesAttributes {
-    id: string | number;
-    identifier: string;
+    id?: string | number;
+    identifier?: string;
+    user_id?: string;
+    image_id?: string;
 }
 interface ILikesInstance extends Sequelize.Instance<ILikesAttributes>, ILikesAttributes {
 

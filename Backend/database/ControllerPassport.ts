@@ -1,4 +1,4 @@
-import {UsersSequelize} from './SequelizeTables';
+import {IUserInstance, UsersSequelize} from './SequelizeTables';
 
 export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow}): Promise<any> => {
     const findUserError = 'error while finding user';
@@ -26,7 +26,7 @@ export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDi
         });
 };
 // SHOULD THE USER CHOOSE A GLOBAL USERNAME?
-export const createUser = (profile: profileParameters): Promise<string> => {
+export const createUser = (profile: profileParameters): Promise<IUserInstance> => {
     const {email, SocialDatabaseUsernameRow, SocialDatabaseIDRow, socialDisplayName, SocialID} = profile;
     const createUserError = 'loggedUserImagesGraphQL already exists';
     return UsersSequelize.create({

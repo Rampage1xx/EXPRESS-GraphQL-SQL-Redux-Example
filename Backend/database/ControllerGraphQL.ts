@@ -1,7 +1,7 @@
-import {ImagesArrayProtoBuffer, redisClient} from './Redis';
-import {ImagesSequelize, LikesSequelize, UsersSequelize} from './SequelizeTables';
 import {get} from 'lodash';
 import {isDate, toDate} from 'validator';
+import {ImagesArrayProtoBuffer, redisClient} from './Redis';
+import {ImagesSequelize, LikesSequelize, UsersSequelize} from './SequelizeTables';
 
 export const findImagesSequelize = async (createdAt: string) => {
 
@@ -132,8 +132,8 @@ export const findUserSequelize = (args, id) => {
         return UsersSequelize.findById(
             id,
             {include: [ImagesSequelize, LikesSequelize]}
-        )
-            .then((result: { dataValues: { images?: any[] } }) => {
+            )
+            .then((result) => {
                 return result;
             }).catch(e => e);
     } catch (err) {
