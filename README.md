@@ -8,5 +8,6 @@
 ### Things still missing:
 - Docker Swarm
 - Perhaps a better nginx conf
+- Some types
 <br/>🐳 Work In Progress 🐳
 
