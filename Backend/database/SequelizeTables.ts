@@ -17,7 +17,24 @@ export const connection = new Sequelize(`${database}`, 'meeseeks', 'MEESEEKS', {
 
 });
 
-export const UsersSequelize = connection.define('users', {
+
+interface IUserAttributes {
+    id: string;
+    enabled: boolean;
+    userName: string;
+    password: string;
+    localAccount: boolean;
+    email: string;
+    twitterID: string;
+    twitterUsername: string;
+    googleID: string;
+    googleUsername: string;
+}
+
+interface IUserInstance extends Sequelize.Instance<IUserAttributes>, IUserAttributes {
+    verifyPassword(password: string): boolean;
+}
+export const UsersSequelize = connection.define<IUserInstance, IUserAttributes >('users', {
         id: {
             type: Sequelize.UUID,
             primaryKey: true,
@@ -99,7 +116,21 @@ export const UsersSequelize = connection.define('users', {
     }
 );
 
-export const ImagesSequelize = connection.define('images', {
+interface IImagesAttributes {
+    id: string;
+    title: string;
+    url: string;
+    totalLikes: number;
+    userName: string;
+    avatar: string;
+    description: string;
+}
+
+interface IImageInstance extends Sequelize.Instance<IImagesAttributes>, IImagesAttributes {
+
+}
+
+export const ImagesSequelize = connection.define<IImageInstance, IImagesAttributes>('images', {
         id: {
             type: Sequelize.UUID,
             primaryKey: true,
@@ -131,7 +162,14 @@ export const ImagesSequelize = connection.define('images', {
         underscored: true
     });
 
-export const LikesSequelize = connection.define('likes', {
+interface ILikesAttributes {
+    id: string | number;
+    identifier: string;
+}
+interface ILikesInstance extends Sequelize.Instance<ILikesAttributes>, ILikesAttributes {
+
+}
+export const LikesSequelize = connection.define<ILikesInstance, ILikesAttributes>('likes', {
         identifier: {
             type: Sequelize.STRING,
             allowNull: false,

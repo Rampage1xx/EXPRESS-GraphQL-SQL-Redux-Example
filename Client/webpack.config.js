@@ -37,14 +37,13 @@ module.exports = {
                 use: [
                     {loader: 'style-loader'},
                     {loader: 'css-loader?importLoaders=1',options:{url: false}},
-                    {loader: 'postcss-loader'},
-
+                    {loader: 'postcss-loader'}
 
                 ]
             },
             {
                 test: /\.jpg$/,
-                loader: "url-loader",
+                loader: "url-loader"
             },
             {
                 test: /\.mp3$/,
@@ -65,7 +64,7 @@ module.exports = {
                 exclude: /node_modules/
             }
 
-        ],
+        ]
 
 
     },
@@ -87,7 +86,6 @@ module.exports = {
             threshold: 10240,
             minRatio: 0.8
         })
-        //  new webpack.optimize.UglifyJsPlugin(),
     ]
 
 };

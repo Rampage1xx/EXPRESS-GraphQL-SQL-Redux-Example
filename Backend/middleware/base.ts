@@ -1,16 +1,16 @@
 import * as bodyParser from 'body-parser';
 import * as  compression from 'compression';
 import * as SequelizeStore from 'connect-session-sequelize';
+import * as cors from 'cors';
 import * as Express from 'express';
 import * as expressGraphQL from 'express-graphql';
 import * as session from 'express-session';
+import * as helmet from 'helmet';
+import * as morgan from 'morgan';
 import * as passport from 'passport';
 import {connection} from '../database/SequelizeTables';
 import {RootSchema} from '../GraphQL/RootGraphQL';
 import {BaseRoutes} from '../Routes/baseRoutes';
-import * as helmet from 'helmet';
-import * as morgan from 'morgan';
-import * as cors from 'cors';
 
 const sessionStorage = SequelizeStore(session.Store);
 const corsOptions =  {
@@ -28,7 +28,7 @@ const sessionParameters = {
     saveUninitialized: 'false',
     cookie: {maxAge: 6000000},
     checkExpirationInterval: 15 * 60 * 1000,
-    expiration: 24 * 60 * 60 * 30
+    expiration: 24 * 60 * 60 * 30,
 };
 
 export class BaseMiddleware {

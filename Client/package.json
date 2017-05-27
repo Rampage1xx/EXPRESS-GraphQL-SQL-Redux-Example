@@ -10,7 +10,8 @@
     "build": "webpack",
     "serve": "webpack-dev-server",
     "jest-container": "jest",
-    "build-watch": "webpack -w"
+    "build-watch": "webpack -w",
+    "production": "cross-env NODE_ENV=production webpack -p"
   },
   "jest": {
     "moduleFileExtensions": [
