@@ -1,6 +1,6 @@
-import {ImagesSequelize, UsersSequelize} from './SequelizeTables';
+import {IImageInstance, ImagesSequelize, UsersSequelize} from './SequelizeTables';
 
-const createDatabaseEntries = async (user) => {
+const createDatabaseEntries = async (user): Promise<IImageInstance> => {
     for (let i = 0; i < 100; i++) {
         const date = new Date();
         ImagesSequelize.create({

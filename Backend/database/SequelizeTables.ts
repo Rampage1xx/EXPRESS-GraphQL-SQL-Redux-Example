@@ -2,13 +2,15 @@ import * as bcrypt from 'bcrypt';
 import * as Sequelize from 'sequelize';
 import {Instance} from 'sequelize';
 import {twitterID, twitterUsername} from '../Strings';
+import {ILikesAttributes, ILikesInstance, IUserAttributes, IUserInstance} from '../types/database.types';
 import {createDummyImages} from './CreateDummyCards';
 
-const NODE_TEST = (process.env.NODE_ENV === 'test');
+const NODE_TEST: boolean = (process.env.NODE_ENV === 'test');
 const database: string = NODE_TEST ? 'test' : 'pinit';
 const host: string = NODE_TEST ? 'postgres' : 'postgres';
 export const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-export const connection = new Sequelize(`${database}`, 'meeseeks', 'MEESEEKS', {
+
+export const connection: Sequelize.Sequelize = new Sequelize(`${database}`, 'meeseeks', 'MEESEEKS', {
     host: `${host}`,
     //  port: 5432,
     port: 5432,
@@ -17,24 +19,6 @@ export const connection = new Sequelize(`${database}`, 'meeseeks', 'MEESEEKS', {
 
 });
 
-interface IUserAttributes {
-    id?: string;
-    enabled?: boolean;
-    userName?: string;
-    password?: string;
-    localAccount?: boolean;
-    email?: string;
-    twitterID?: string;
-    twitterUsername?: string;
-    googleID?: string;
-    googleUsername?: string;
-    avatar?: string;
-    username?: string;
-}
-
-export interface IUserInstance extends Sequelize.Instance<IUserAttributes>, IUserAttributes {
-    verifyPassword(password: string): boolean;
-}
 export const UsersSequelize = connection.define<IUserInstance, IUserAttributes>('users', {
         id: {
             type: Sequelize.UUID,
@@ -129,8 +113,8 @@ interface IImagesAttributes {
     created_at?: number;
 }
 
-interface IImageInstance extends Sequelize.Instance<IImagesAttributes>, IImagesAttributes {
-
+export interface IImageInstance extends Sequelize.Instance<IImagesAttributes>, IImagesAttributes {
+isNewRecord: boolean;
 }
 
 export const ImagesSequelize = connection.define<IImageInstance, IImagesAttributes>('images', {
@@ -165,15 +149,7 @@ export const ImagesSequelize = connection.define<IImageInstance, IImagesAttribut
         underscored: true
     });
 
-interface ILikesAttributes {
-    id?: string | number;
-    identifier?: string;
-    user_id?: string;
-    image_id?: string;
-}
-interface ILikesInstance extends Sequelize.Instance<ILikesAttributes>, ILikesAttributes {
 
-}
 export const LikesSequelize = connection.define<ILikesInstance, ILikesAttributes>('likes', {
         identifier: {
             type: Sequelize.STRING,

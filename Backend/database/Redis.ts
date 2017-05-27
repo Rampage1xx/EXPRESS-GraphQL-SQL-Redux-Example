@@ -1,6 +1,7 @@
-import * as redis from 'redis';
 import * as bluebird from 'bluebird';
 import * as protobuf from 'protobufjs';
+import * as redis from 'redis';
+import {TProtoBuffer} from '../types/database.types';
 
 bluebird.promisifyAll((redis as any).RedisClient.prototype);
 bluebird.promisifyAll((redis as any).Multi.prototype);

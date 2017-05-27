@@ -1,9 +1,9 @@
 import {get} from 'lodash';
 import {isDate, toDate} from 'validator';
 import {ImagesArrayProtoBuffer, redisClient} from './Redis';
-import {ImagesSequelize, LikesSequelize, UsersSequelize} from './SequelizeTables';
+import {IImageInstance, ImagesSequelize, LikesSequelize, UsersSequelize} from './SequelizeTables';
 
-export const findImagesSequelize = async (createdAt: string) => {
+export const findImagesSequelize = async (createdAt: string): Promise<IImageInstance[]> => {
 
     try {
         const cache = await redisClient.getAsync(createdAt);
@@ -141,7 +141,7 @@ export const findUserSequelize = (args, id) => {
     }
 };
 
-export const findUsernameSequelize = (args) => {
+export const findUsernameSequelize = (args): {error: string} | Promise<{userName: string}> => {
 
     try {
         return UsersSequelize.findOne({where: {userName: args.userName}})

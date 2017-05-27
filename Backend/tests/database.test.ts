@@ -1,7 +1,8 @@
 import * as assert from 'assert';
 import * as protobuf from 'protobufjs';
-import {connection, ImagesSequelize, LikesSequelize, UsersSequelize} from '../database/SequelizeTables';
 import {ImagesArrayProtoBuffer, redisClient} from '../database/Redis';
+import {connection, IImageInstance, ImagesSequelize, LikesSequelize, UsersSequelize} from '../database/SequelizeTables';
+import {ILikesInstance, IUserAttributes, IUserInstance} from '../types/database.types';
 
 const root = new protobuf.Root();
 
@@ -43,13 +44,13 @@ const payload = [
         }
     }];
 
-const findUser = () => UsersSequelize.findOne({
+const findUser: () => Promise<IUserInstance> = () => UsersSequelize.findOne({
     where: {
         email: 'donald@duck.com'
     }
 });
 
-const findImage = () => ImagesSequelize.findOne({
+const findImage: () => Promise<IImageInstance> = () => ImagesSequelize.findOne({
     where: {
         title: `title of image`
     }
@@ -68,7 +69,7 @@ describe('CRUD', () => {
 
     it('should create an image', async () => {
         const createImage: any = await findUser()
-            .then(user =>
+            .then((user: IUserAttributes) =>
                 ImagesSequelize.create({
                     url: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180',
                     description: `this is image `,
@@ -82,11 +83,11 @@ describe('CRUD', () => {
     });
 
     it('it should create a like', async () => {
-        const user = await findUser();
+        const user: IUserInstance = await findUser();
 
-        const image: any = await findImage();
+        const image: IImageInstance = await findImage();
 
-        const like: any = await LikesSequelize.create({
+        const like: ILikesInstance = await LikesSequelize.create({
             user_id: user.id,
             image_id: image.id,
             identifier: user.id.concat(image.id)
@@ -97,9 +98,9 @@ describe('CRUD', () => {
     });
 
     it('should add +1 to  image totalLikes', async () => {
-        const image: any = await findImage();
+        const image: IImageInstance = await findImage();
 
-        const updateImage = await image.increment('totalLikes');
+        const updateImage: IImageInstance = await image.increment('totalLikes');
 
         assert.deepEqual(updateImage.totalLikes, 1);
     });
@@ -108,7 +109,7 @@ describe('CRUD', () => {
 
         await  findUser().then(user => user.destroy());
 
-        const checkIfDeleted = await findUser();
+        const checkIfDeleted: IUserInstance = await findUser();
         assert.deepEqual(checkIfDeleted, null);
     });
 

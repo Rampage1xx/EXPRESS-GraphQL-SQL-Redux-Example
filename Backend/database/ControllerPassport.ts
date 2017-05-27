@@ -1,13 +1,14 @@
-import {IUserInstance, UsersSequelize} from './SequelizeTables';
+import {IUserInstance} from '../types/database.types';
+import {UsersSequelize} from './SequelizeTables';
 
-export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow}): Promise<any> => {
+export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow}): Promise<IUserInstance> => {
     const findUserError = 'error while finding user';
     return UsersSequelize.findOne({
         where: {
             email
         }
     })
-        .then((user) => {
+        .then((user: any) => {
             // we check:
             // a)  if there is a result,
             // b)  if that result has the social data
@@ -38,7 +39,7 @@ export const createUser = (profile: profileParameters): Promise<IUserInstance> =
     });
 };
 
-export const oAuthLoginFunction = async (profile: profileParameters, cb) => {
+export const oAuthLoginFunction = async (profile: profileParameters, cb): Promise<any> => {
     const {avatar, SocialDatabaseUsernameRow} = profile;
     try {
         // a) find the user
@@ -47,7 +48,7 @@ export const oAuthLoginFunction = async (profile: profileParameters, cb) => {
         const findUserResult = await findUserPassport(profile).catch((e) => {
             throw e;
         });
-        const result: resultsDatabasePassport = findUserResult ? findUserResult
+        const result: IUserInstance | any = findUserResult ? findUserResult
             :
             await createUser(profile);
         // data that leaves the server

@@ -1,9 +1,9 @@
 import {GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
-
 import {postImageSequelize, removeImageSequelize} from '../database/ControllerGraphQL';
+import {IImageListGraphQL} from '../types/GraphQL.types';
 import {findImageValidation} from './Validation';
 
-export const ImageType = new GraphQLObjectType({
+export const ImageType: GraphQLObjectType = new GraphQLObjectType({
     name: 'ImageQL',
     fields: () => ({
         id: {type: GraphQLString},
@@ -18,11 +18,13 @@ export const ImageType = new GraphQLObjectType({
     })
 });
 
-export const imagesListGraphQL = {
+
+
+export const imagesListGraphQL: IImageListGraphQL = {
     type: new GraphQLList(ImageType),
     args: {indexOffset: {type: GraphQLString}},
-    resolve: (parentValue, args: { indexOffset: string }, req) => {
-     //   return findImagesSequelize(args.indexOffset);
+    resolve: (parentValue, args, req) => {
+        //   return findImagesSequelize(args.indexOffset);
         return findImageValidation(args.indexOffset);
     }
 };
