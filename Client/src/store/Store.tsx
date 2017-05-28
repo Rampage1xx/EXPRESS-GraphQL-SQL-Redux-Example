@@ -22,9 +22,9 @@ declare const window: any;
 // debug for redux
 const composeEnhancers: any = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// we create an History model kinda intercepts the url from the browser (not accurate)
+// history model
 export const History = createHistory();
-
+// inject history model into the router
 const historyRouter = routerMiddleware(History);
 // here we  insert the various reducers that flow into the store
 const reducers = combineReducers({
