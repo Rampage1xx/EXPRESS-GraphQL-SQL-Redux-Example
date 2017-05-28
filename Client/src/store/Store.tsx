@@ -26,7 +26,7 @@ const composeEnhancers: any = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || com
 export const History = createHistory();
 // inject history model into the router
 const historyRouter = routerMiddleware(History);
-// here we  insert the various reducers that flow into the store
+// combining the reducer before putting them into the store
 const reducers = combineReducers({
     router: routerReducer,
     userReducer: userReducer,
