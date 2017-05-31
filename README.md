@@ -5,6 +5,7 @@
 - Insert the social keys in ./Backend/Config/keys.ts 
 - npm run setup 
 - npm start 
+- browse to localhost:80
 ### Things still missing:
 - Docker Swarm
 - Perhaps a better nginx conf
