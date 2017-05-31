@@ -6,10 +6,16 @@
 - npm run setup 
 - npm start 
 - browse to localhost:80
-### Things still missing:
+### Core things still missing:
 - Docker Swarm
 - Perhaps a better nginx conf
 - Some types
-- Pretty CSS
+- Pretty CSS (zero creativity right now :boom:)
 <br/>🐳 Work In Progress 🐳
+
+### Coming Soon™ (wish I had an infinte day)
+- Friends network
+- Socket.IO chat
+- Video Chat
+- perhaps more
 
