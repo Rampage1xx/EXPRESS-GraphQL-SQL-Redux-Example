@@ -7,6 +7,7 @@
 - npm start 
 - browse to localhost:80
 ### Core things still missing:
+- Improved file structure to accomodate the new features
 - Docker Swarm
 - Perhaps a better nginx conf
 - Some types
