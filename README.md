@@ -9,5 +9,6 @@
 - Docker Swarm
 - Perhaps a better nginx conf
 - Some types
+- CSS
 <br/>🐳 Work In Progress 🐳
 
