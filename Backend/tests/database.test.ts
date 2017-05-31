@@ -1,17 +1,23 @@
 import * as assert from 'assert';
 import * as protobuf from 'protobufjs';
 import {ImagesArrayProtoBuffer, redisClient} from '../database/Redis';
+import {resolvePendingFriendship} from '../database/Sequelize/NativeQueries/FriendRequestsQueries';
 import {connection} from '../database/Sequelize/SequelizeConfiguration';
+import '../database/Sequelize/SequelizeConnect';
+import {FriendRequestSequelize, IFriendRequestInstance} from '../database/Sequelize/Tables/FriendRequestsSequelize';
+import {FriendsSequelize} from '../database/Sequelize/Tables/FriendsSequelize';
 import {IImageInstance, ImagesSequelize} from '../database/Sequelize/Tables/ImagesSequelize';
 import {LikesSequelize} from '../database/Sequelize/Tables/LikesSequelize';
 import {UsersSequelize} from '../database/Sequelize/Tables/UsersSequelize';
 import {ILikesInstance, IUserAttributes, IUserInstance} from '../types/database.types';
+import {userFind} from './variables';
 
 const root = new protobuf.Root();
 
-before('clear databases', async () => {
+before('clear databases', async function () {
+    this.timeout(3000)
     console.log('*********CLEARING DATABASES**************');
-    redisClient.flushdbAsync()
+    await redisClient.flushdbAsync()
         .then(r => console.log('redis flushed'));
 
     await  connection.sync({force: true})
@@ -64,9 +70,15 @@ describe('CRUD', () => {
     it('should create an user', async () => {
         const createUser = await UsersSequelize.create({
             email: 'donald@duck.com',
-            username: 'donald'
+            userName: 'donald'
         });
-        assert.deepEqual(createUser.email, 'donald@duck.com');
+
+        const createUser2 = await UsersSequelize.create({
+            email: 'battle@toads.com',
+            userName: 'battletoads'
+        });
+        assert.deepEqual(createUser2.email, 'battle@toads.com');
+        assert.strictEqual(createUser.email, 'donald@duck.com');
 
     });
 
@@ -82,7 +94,7 @@ describe('CRUD', () => {
                     user_id: user.id
                 })
             );
-        assert.deepEqual(createImage.title, `title of image`);
+        assert.strictEqual(createImage.title, `title of image`);
     });
 
     it('it should create a like', async () => {
@@ -108,12 +120,46 @@ describe('CRUD', () => {
         assert.deepEqual(updateImage.totalLikes, 1);
     });
 
-    it('should delete a user', async () => {
+    it('should create a friend request', async () => {
+        const user1 = await userFind('donald');
+        const user2 = await userFind('battletoads');
+        const request: IFriendRequestInstance = await FriendRequestSequelize.create({
+            user_one: user1.id,
+            user_two: user2.id
+        });
+
+        assert.deepEqual(request.user_one, user1.id);
+        assert.deepEqual(request.user_two, user2.id);
+
+    });
+
+    it('should accept a friend request', async () => {
+
+        // needs to be refactored too much repetition
+        const user1 = await userFind('donald');
+        const user2 = await userFind('battletoads');
+
+        const accept = await connection.query(
+            resolvePendingFriendship({
+                status: 'ACCEPTED',
+                user_two: user2.id,
+                user_one: user1.id
+            }),
+            {plain: true, logging: true}
+        );
+
+        const friendRequest = await FriendRequestSequelize.findOne();
+        const friendStatus = await FriendsSequelize.findOne();
+        assert.deepEqual(friendRequest, null);
+        assert.deepEqual(friendStatus.user_one, user1.id)
+    });
+
+    xit('should delete a user', async () => {
 
         await  findUser().then(user => user.destroy());
 
         const checkIfDeleted: IUserInstance = await findUser();
-        assert.deepEqual(checkIfDeleted, null);
+        assert.strictEqual(checkIfDeleted, null);
     });
 
 });
@@ -135,7 +181,7 @@ describe(' protocol buffer tests', () => {
                     const buffer = ImageArray.encode(message).finish();
                     const decrypt = ImageArray.decode(buffer);
                     const transformBackToArray = decrypt.toObject({arrays: true});
-                    return assert.deepEqual(payload, transformBackToArray.images);
+                    return assert.deepEqual(payload[0].dataValues.id, transformBackToArray.images[0].dataValues.id);
                 });
         }
     );
@@ -148,4 +194,5 @@ describe(' protocol buffer tests', () => {
         const decoded = await ImagesArrayProtoBuffer({argument: data, decode: true});
         assert.deepEqual(decoded.images, payload);
     });
+
 });
