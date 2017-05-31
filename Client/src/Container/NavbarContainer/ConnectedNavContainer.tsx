@@ -9,9 +9,9 @@ import {NotLoggedInComponents} from '../../Component/navbar/NotLoggedInComponent
 import {activeModalStateChangeSelector, closeModalSelector, idPropsSelector} from '../AppSelector';
 
 interface IProps {
-    id: string,
-    closeModal: boolean,
-    activeModal: number,
+    id: string;
+    closeModal: boolean;
+    activeModal: number;
 }
 
 class NavContainer extends React.Component<IProps, any> {
@@ -19,7 +19,7 @@ class NavContainer extends React.Component<IProps, any> {
         super(props);
     }
 
-    public render() {
+    public render(): JSX.Element {
         const { closeModal, id, activeModal } = this.props;
 
         return (
@@ -32,10 +32,10 @@ class NavContainer extends React.Component<IProps, any> {
             </Nav>
 
         );
-    };
+    }
 }
 
-const mapStateToProps = createStructuredSelector({
+const mapStateToProps: any = createStructuredSelector({
     id : idPropsSelector,
     closeModal : closeModalSelector,
     activeModal : activeModalStateChangeSelector

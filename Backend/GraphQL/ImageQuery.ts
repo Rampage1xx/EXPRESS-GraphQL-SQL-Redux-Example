@@ -1,5 +1,5 @@
 import {GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
-import {postImageSequelize, removeImageSequelize} from '../database/ControllerGraphQL';
+import {postImageSequelize, removeImageSequelize} from '../Controller/ControllerGraphQL';
 import {IImageListGraphQL} from '../types/GraphQL.types';
 import {findImageValidation} from './Validation';
 

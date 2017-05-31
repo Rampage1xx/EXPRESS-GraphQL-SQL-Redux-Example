@@ -1,5 +1,6 @@
-import {ImagesSequelize, UsersSequelize} from '../database/SequelizeTables';
 import {agent} from 'supertest';
+import {ImagesSequelize} from '../database/Sequelize/Tables/ImagesSequelize';
+import {UsersSequelize} from '../database/Sequelize/Tables/UsersSequelize';
 import {app} from '../server';
 export const agent1 = agent(app);
 

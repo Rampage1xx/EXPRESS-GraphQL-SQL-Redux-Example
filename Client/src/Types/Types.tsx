@@ -27,10 +27,11 @@ declare type TLoggedInUser = {
     images: TSingleImage[],
     __typename: string
 }
-// images here is the result of the filtering of the two precedents arrays
+
 declare type TCurrentUser = {
     loggedUserImagesGraphQL: TLoggedInUser,
     refetch(): void,
+    // images containing the likes
     images: TSingleImage[],
     fetchMore(): void,
     subscribeToMore(): void,

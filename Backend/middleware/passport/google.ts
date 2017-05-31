@@ -1,7 +1,7 @@
 import * as passport from 'passport';
 import * as  Google from 'passport-google-oauth2';
 import {googleClientID, googleClientSecret} from '../../config/keys';
-import {oAuthLoginFunction} from '../../database/ControllerPassport';
+import {oAuthLoginFunction} from '../../Controller/ControllerPassport';
 import {googleID, googleUsername} from '../../Strings';
 
 declare const ENV_CLIENT_GOOGLE;

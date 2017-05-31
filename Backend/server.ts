@@ -1,6 +1,6 @@
 import * as express from 'express';
 import './database/Redis';
-import './database/SequelizeTables';
+import './database/Sequelize/SequelizeConfiguration';
 import {BaseMiddleware} from './middleware/base';
 
 export const app = express();

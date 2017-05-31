@@ -8,12 +8,13 @@ import * as session from 'express-session';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as passport from 'passport';
-import {connection} from '../database/SequelizeTables';
+import {connection} from '../database/Sequelize/SequelizeConfiguration';
+import '../database/Sequelize/SequelizeConnect';
 import {RootSchema} from '../GraphQL/RootGraphQL';
 import {BaseRoutes} from '../Routes/baseRoutes';
 
 const sessionStorage = SequelizeStore(session.Store);
-const corsOptions =  {
+const corsOptions = {
     credentials: true,
     optionsSuccessStatus: 200,
     origin: 'http://localhost:80',
@@ -28,14 +29,14 @@ const sessionParameters = {
     saveUninitialized: 'false',
     cookie: {maxAge: 6000000},
     checkExpirationInterval: 15 * 60 * 1000,
-    expiration: 24 * 60 * 60 * 30,
+    expiration: 24 * 60 * 60 * 30
 };
 
 export class BaseMiddleware {
 
     static get Configuration() {
         const app = Express();
-        app.use(helmet())
+        app.use(helmet());
         app.use(session(sessionParameters));
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended: false}));

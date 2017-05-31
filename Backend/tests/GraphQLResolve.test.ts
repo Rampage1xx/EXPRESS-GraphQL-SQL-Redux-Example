@@ -1,17 +1,11 @@
-import './database.test';
 import * as assert from 'assert';
-import {ImageType} from '../GraphQL/ImageQuery';
 import {GraphQLString} from 'graphql';
+import {LikesSequelize} from '../database/Sequelize/Tables/LikesSequelize';
+import {ImageType} from '../GraphQL/ImageQuery';
+import './database.test';
 import {
-    addLikeMutation,
-    agent1,
-    createImageMutation,
-    createUserMutation,
-    imageFind,
-    removeLikeMutation,
-    userFind
+    addLikeMutation, agent1, createImageMutation, createUserMutation, imageFind, removeLikeMutation, userFind
 } from './variables';
-import {LikesSequelize} from '../database/SequelizeTables';
 
 const GraphQLQuery = () => agent1.post('/graphql');
 

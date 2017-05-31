@@ -1,20 +1,21 @@
-import {createSelector} from 'reselect';
+import {Store} from 'react-redux';
+import {createSelector, OutputSelector} from 'reselect';
 
 const userReducerSelector = (state) => state.get('userReducer');
 
-const abstractUserReducerSelector = (value: string) => createSelector(
+const abstractUserReducerSelector: any = (value: string): any => createSelector(
     userReducerSelector,
     (userReducerSelector) => userReducerSelector.get(value)
 );
 
-export const closeModalSelector = abstractUserReducerSelector('closeModal');
-export const indexOffsetSelector = abstractUserReducerSelector('indexOffset');
-export const loginStateChangeSelector = abstractUserReducerSelector('loginStateChange');
-export const activeModalStateChangeSelector = abstractUserReducerSelector('activeModal');
-export const indexOffset2Selector = abstractUserReducerSelector('indexOffset2');
+export const closeModalSelector: OutputSelector<any, any, any> = abstractUserReducerSelector('closeModal');
+export const indexOffsetSelector: OutputSelector<any, any, any> = abstractUserReducerSelector('indexOffset');
+export const loginStateChangeSelector: OutputSelector<any, any, any> = abstractUserReducerSelector('loginStateChange');
+export const activeModalStateChangeSelector: OutputSelector<any, any, any> = abstractUserReducerSelector('activeModal');
+export const indexOffset2Selector: OutputSelector<any, any, any> = abstractUserReducerSelector('indexOffset2');
 
-export const propsSelector = (state, props) => props
+export const propsSelector = (state: Store<{}>, props: {id: string | number}): {} => props;
 export const idPropsSelector = createSelector(
     propsSelector,
-    (props) => props.id
+    (props: {id: string | number}) => props.id
 );

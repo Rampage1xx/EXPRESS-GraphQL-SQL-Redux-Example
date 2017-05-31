@@ -1,6 +1,6 @@
 import * as passport from 'passport';
 import * as Local from 'passport-local';
-import {UsersSequelize} from '../../database/SequelizeTables';
+import {UsersSequelize} from '../../database/Sequelize/Tables/UsersSequelize';
 
 passport.use('local', new Local.Strategy(
     async (userName, password, done) => {

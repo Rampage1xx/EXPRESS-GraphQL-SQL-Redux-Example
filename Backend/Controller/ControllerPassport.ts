@@ -1,5 +1,5 @@
+import {UsersSequelize} from '../database/Sequelize/Tables/UsersSequelize';
 import {IUserInstance} from '../types/database.types';
-import {UsersSequelize} from './SequelizeTables';
 
 export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow}): Promise<IUserInstance> => {
     const findUserError = 'error while finding user';

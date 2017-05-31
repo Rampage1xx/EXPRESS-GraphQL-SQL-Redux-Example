@@ -1,7 +1,10 @@
 import * as assert from 'assert';
 import * as protobuf from 'protobufjs';
 import {ImagesArrayProtoBuffer, redisClient} from '../database/Redis';
-import {connection, IImageInstance, ImagesSequelize, LikesSequelize, UsersSequelize} from '../database/SequelizeTables';
+import {connection} from '../database/Sequelize/SequelizeConfiguration';
+import {IImageInstance, ImagesSequelize} from '../database/Sequelize/Tables/ImagesSequelize';
+import {LikesSequelize} from '../database/Sequelize/Tables/LikesSequelize';
+import {UsersSequelize} from '../database/Sequelize/Tables/UsersSequelize';
 import {ILikesInstance, IUserAttributes, IUserInstance} from '../types/database.types';
 
 const root = new protobuf.Root();

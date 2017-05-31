@@ -1,8 +1,8 @@
-import './GraphQLResolve.test';
 import * as assert from 'assert';
-import {ImagesSequelize} from '../database/SequelizeTables';
-import {fetchPins, GraphQLQuery, userFind} from './variables';
+import {ImagesSequelize} from '../database/Sequelize/Tables/ImagesSequelize';
 import {closeServer} from '../server';
+import './GraphQLResolve.test';
+import {fetchPins, GraphQLQuery, userFind} from './variables';
 
 describe(' testing GraphQL queries', () => {
     const userName = 'hello12345';

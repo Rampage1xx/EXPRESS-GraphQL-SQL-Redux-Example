@@ -1,7 +1,7 @@
 import {List, Map} from 'immutable';
 import {ACTIVATE_MODAL, CLOSE_MODAL, INDEX_OFFSET, LOGIN_STATE_CHANGE} from '../Actions/ActionCreators';
 
-declare type TDefaultState = Map<string, boolean | number | Date | List<any>>
+declare type TDefaultState = Map<string, boolean | number | Date | List<{}>>;
 
 const defaultState: TDefaultState = Map({
     indexOffset: new Date(),
@@ -15,7 +15,7 @@ const defaultState: TDefaultState = Map({
 declare type TUserReducer<T> =  (state: T, action: {
     modal: boolean, offset: number,
     type: string, login: boolean, modalNumber: number
-}) => any
+}) => {};
 
 export const userReducer: TUserReducer<TDefaultState> = (state = defaultState, action?) => {
     switch (action.type) {

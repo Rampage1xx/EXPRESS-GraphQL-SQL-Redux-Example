@@ -4,5 +4,5 @@ import {AppContainerConnected} from './Container/AppContainer';
 
 export default (
     <div>
-        <Route path = '/' component = { AppContainerConnected } />
+        <Route path = "/" component = { AppContainerConnected } />
     </div>);

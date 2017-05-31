@@ -1,5 +1,5 @@
-import {IImageInstance, ImagesSequelize, UsersSequelize} from './SequelizeTables';
-
+import {IImageInstance, ImagesSequelize} from './Sequelize/Tables/ImagesSequelize';
+import {UsersSequelize} from './Sequelize/Tables/UsersSequelize';
 const createDatabaseEntries = async (user): Promise<IImageInstance> => {
     for (let i = 0; i < 100; i++) {
         const date = new Date();
@@ -20,6 +20,7 @@ const createDatabaseEntries = async (user): Promise<IImageInstance> => {
 };
 
 export const createDummyImages = () => {
+
     UsersSequelize.create({
         email: 'donald@duck.com',
         userName: `donald`,
