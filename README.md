@@ -20,4 +20,3 @@
 - Video Chat
 - perhaps more
 
-### :star: Drop a star if you like it! :star:
