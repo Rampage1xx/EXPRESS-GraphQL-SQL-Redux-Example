@@ -15,7 +15,6 @@ export class MainPage extends React.Component<IProps, any> {
 
     private fetchMore() {
         // avoiding multiple same fetches
-        // having issues with loading built in apollo
         if (!this.loading) {
             this.loading = true;
             this.props.pins.loadMoreEntries();

@@ -1,23 +1,12 @@
 import * as React from 'react';
 import {
-    Button,
-    Card,
-    CardBlock,
-    CardColumns,
-    CardDeck,
-    CardImg,
-    CardLink,
-    CardSubtitle,
-    CardText,
-    CardTitle,
-    Col,
-    Row
+    Button, Card, CardBlock, CardColumns, CardDeck, CardImg, CardLink, CardSubtitle, CardText, CardTitle, Col, Row
 } from 'reactstrap';
-import {addLikeHandler, removeImageHandler, removeLikeHandler} from '../../Utils/GraphQL/Mutations';
 import {History} from '../../store/Store';
-import {CardDelete} from './CardDelete';
+import {addLikeHandler, removeImageHandler, removeLikeHandler} from '../../Utils/GraphQL/Mutations';
 import {CardBodyText} from './CardBodyText';
 import {CardBottom} from './CardBottom';
+import {CardDelete} from './CardDelete';
 
 interface IProps {
     singleImage: TSingleImage,
@@ -61,7 +50,7 @@ export class FullCard extends React.Component<IProps, IState> {
         this.deleteImage = this.deleteImage.bind(this);
     }
 
-    private componentWillReceiveProps(nextProps: IProps) {
+    public componentWillReceiveProps(nextProps: IProps) {
         // if the like status props changes proceeds to update the state
         const {like, totalLikes} = nextProps.singleImage;
 
@@ -75,7 +64,7 @@ export class FullCard extends React.Component<IProps, IState> {
 
     }
 
-    private componentWillUpdate(nextProps: IProps, nextState: IState) {
+    public componentWillUpdate(nextProps: IProps, nextState: IState) {
         const {LoggedInUserID, singleImage} = nextProps;
         const {id} = singleImage;
         this.likeIdentifier = LoggedInUserID.concat(id);

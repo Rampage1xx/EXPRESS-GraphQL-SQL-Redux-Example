@@ -21,9 +21,9 @@ const defineSecondQuery: IResolveFriendshipParameters = ({status, user_one, user
     }
     const queryStatus = ['HAS'.concat(status), 'IS'.concat(status)];
     return ( `
-INSERT INTO friends(id, user_one, user_two, status, created_at, updated_at)
-VALUES ('${v4()}','${user_one}', '${user_two}', '${queryStatus[0]}','${moment()}', '${moment()}'),
-('${v4()}','${user_two}', '${user_one}', '${queryStatus[1]}','${moment()}','${moment()}');
+INSERT INTO friends(id, user_one, user_two, status, user_id, created_at, updated_at)
+VALUES ('${v4()}','${user_one}', '${user_two}', '${queryStatus[0]}','${user_one}','${moment()}', '${moment()}'),
+('${v4()}','${user_two}', '${user_one}', '${queryStatus[1]}','${user_two}', '${moment()}','${moment()}');
 `);
 
 };

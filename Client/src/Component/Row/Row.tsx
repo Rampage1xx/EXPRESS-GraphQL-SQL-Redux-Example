@@ -15,7 +15,7 @@ export class Row extends React.PureComponent<IProps, any> {
 
     }
 
-    private  componentWillReceiveProps(nextProps: IProps) {
+    public  componentWillReceiveProps(nextProps: IProps) {
         this.generateCards(nextProps);
 
     }

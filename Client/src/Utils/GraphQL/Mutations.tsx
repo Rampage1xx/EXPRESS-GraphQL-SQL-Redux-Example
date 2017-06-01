@@ -1,11 +1,7 @@
 import {actionActivateModal, actionCloseModal} from '../../Actions/ActionCreators';
 import {client, store} from '../../store/Store';
 import {
-    addImageMutation,
-    addLikeMutation,
-    createUser,
-    removeImageMutation,
-    removeLikeMutation
+    addImageMutation, addLikeMutation, createUser, removeImageMutation, removeLikeMutation
 } from './QueryAndMutationsStrings';
 
 // OPTIONS //
@@ -41,9 +37,7 @@ export const removeLikeHandler = (identifier) => {
 
 export const formCreateAccountHandler = (formProps) : void => {
     const getValues = (value) => formProps.get(value);
-    /*  const username = formProps.get('username');
-     const password = formProps.get('password');
-     const email = formProps.get('email')*/
+
     const values = ['username', 'email', 'password'].map((value) => getValues(value));
     client.mutate({
         mutation : createUser, variables : { userName : values[0], email : values[1], password : values[2] }

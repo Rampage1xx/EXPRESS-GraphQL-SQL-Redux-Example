@@ -6,6 +6,7 @@ interface IFriendsAttributes {
     user_one?: string;
     user_two?: string;
     status?: boolean;
+    user_id?: string;
 }
 interface IFriendsInstance extends  Instance<IFriendsAttributes>, IFriendsAttributes {}
 export const FriendsSequelize = connection.define<IFriendsInstance, IFriendsAttributes>('friends', {

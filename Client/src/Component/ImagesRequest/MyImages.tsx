@@ -1,7 +1,7 @@
+import {get} from 'lodash';
 import * as React from 'react';
 import Masonry from 'react-masonry-component';
 import {GenerateMasonry} from '../../Utils/GenerateMasonry';
-import {get} from 'lodash';
 interface IProps {
     userImages: TCurrentUser
 }
@@ -41,7 +41,7 @@ export class MyImages extends React.PureComponent<IProps, any> {
         }
     }
 
-    private componentWillReceiveProps(nextProps: IProps) {
+    public componentWillReceiveProps(nextProps: IProps) {
         this.generateMasonryCards(nextProps);
 
     }

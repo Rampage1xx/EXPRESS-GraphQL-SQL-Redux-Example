@@ -1,7 +1,7 @@
 import * as assert from 'assert';
 import * as protobuf from 'protobufjs';
 import {ImagesArrayProtoBuffer, redisClient} from '../database/Redis';
-import {resolvePendingFriendship} from '../database/Sequelize/NativeQueries/FriendRequestsQueries';
+import {resolvePendingFriendship} from '../database/Sequelize/NativeQueries/FriendRequestsPSQL';
 import {connection} from '../database/Sequelize/SequelizeConfiguration';
 import '../database/Sequelize/SequelizeConnect';
 import {FriendRequestSequelize, IFriendRequestInstance} from '../database/Sequelize/Tables/FriendRequestsSequelize';
@@ -15,7 +15,7 @@ import {userFind} from './variables';
 const root = new protobuf.Root();
 
 before('clear databases', async function () {
-    this.timeout(3000)
+    this.timeout(3000);
     console.log('*********CLEARING DATABASES**************');
     await redisClient.flushdbAsync()
         .then(r => console.log('redis flushed'));
@@ -143,15 +143,18 @@ describe('CRUD', () => {
             resolvePendingFriendship({
                 status: 'ACCEPTED',
                 user_two: user2.id,
-                user_one: user1.id
+                user_one: user1.id,
             }),
             {plain: true, logging: true}
         );
 
         const friendRequest = await FriendRequestSequelize.findOne();
         const friendStatus = await FriendsSequelize.findOne();
+        const findFriends = await UsersSequelize.find({
+            where: {userName: 'donald'}, include: [FriendsSequelize]
+        });
         assert.deepEqual(friendRequest, null);
-        assert.deepEqual(friendStatus.user_one, user1.id)
+        assert.deepEqual(friendStatus.user_one, user1.id);
     });
 
     xit('should delete a user', async () => {

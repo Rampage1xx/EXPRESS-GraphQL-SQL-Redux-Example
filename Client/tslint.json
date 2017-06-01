@@ -202,10 +202,6 @@
     "prefer-type-cast": true,
     "promise-function-async": false,
     "promise-must-complete": true,
-    "quotemark": [
-      true,
-      "single"
-    ],
     "radix": false,
     "react-a11y-anchors": true,
     "react-a11y-aria-unsupported-elements": true,
@@ -265,6 +261,7 @@
       "check-operator",
       "check-separator",
       "check-type"
-    ]
+    ],
+    "quotemark": [true, "jsx-double"]
   }
 }

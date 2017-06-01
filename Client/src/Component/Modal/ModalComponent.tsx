@@ -2,8 +2,8 @@ import * as React from 'react';
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader, NavLink} from 'reactstrap';
 import {actionCloseModal} from '../../Actions/ActionCreators';
 import {store} from '../../store/Store';
-import {OpenModalButton} from './AddOns/OpenModalButton';
 import {ModalClosingTag} from './AddOns/ModalClosingTag';
+import {OpenModalButton} from './AddOns/OpenModalButton';
 
 interface IProps {
     name: string,
@@ -29,7 +29,7 @@ export class ModalComponent extends React.Component<IProps, IState> {
 
     }
 
-    private componentWillReceiveProps(nextProps: IProps) {
+    public componentWillReceiveProps(nextProps: IProps) {
         // when form contained in the modal get submitted it dispatches an action to
         // informs the modal to close itself.
         // This if statement executes the order  and after that reverts the store closeModal state

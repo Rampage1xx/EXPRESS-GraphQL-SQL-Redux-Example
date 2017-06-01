@@ -27,7 +27,7 @@ export class AppContainer extends React.PureComponent<IProps, any> {
         this.findUserHandler = this.findUserHandler.bind(this);
     }
 
-    private componentWillReceiveProps(nextProps: IProps): void {
+    public componentWillReceiveProps(nextProps: IProps): void {
 
         if (nextProps.loginStateChange) {
             this.props.currentUser.refetch();
