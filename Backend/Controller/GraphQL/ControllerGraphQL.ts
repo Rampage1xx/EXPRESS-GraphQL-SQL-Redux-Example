@@ -1,9 +1,9 @@
 import {get} from 'lodash';
 import {isDate, toDate} from 'validator';
-import {ImagesArrayProtoBuffer, redisClient} from '../database/Redis';
-import {IImageInstance, ImagesSequelize} from '../database/Sequelize/Tables/ImagesSequelize';
-import {LikesSequelize} from '../database/Sequelize/Tables/LikesSequelize';
-import {UsersSequelize} from '../database/Sequelize/Tables/UsersSequelize';
+import {ImagesArrayProtoBuffer, redisClient} from '../../database/Redis';
+import {IImageInstance, ImagesSequelize} from '../../database/Sequelize/Tables/ImagesSequelize';
+import {LikesSequelize} from '../../database/Sequelize/Tables/LikesSequelize';
+import {UsersSequelize} from '../../database/Sequelize/Tables/UsersSequelize';
 
 export const findImagesSequelize = async (createdAt: string): Promise<IImageInstance[]> => {
 

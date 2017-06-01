@@ -47,11 +47,11 @@ services:
     build:
       context: .
       dockerfile: node.dockerfile
-   # command: ["npm", "run-script","mocha"]
-    command: ["pm2-dev","start","pm2.config.json"]
+    command: ["npm", "run-script","mocha"]
+   # command: ["pm2-dev","start","pm2.config.json"]
     environment:
-    #  NODE_ENV: test
-      NODE_ENV: development
+      NODE_ENV: test
+    #  NODE_ENV: development
     depends_on:
      - postgres
      - redis

@@ -1,5 +1,5 @@
 import {isAlphanumeric, isDate, isEmail, isLength, toDate} from 'validator';
-import {createUserSequelize, findImagesSequelize} from '../Controller/ControllerGraphQL';
+import {createUserSequelize, findImagesSequelize} from '../Controller/GraphQL/ControllerGraphQL';
 
 export const validateCreateUser = (args, avatar) => {
     const errorMessage = 'the data submitted for the account creation is not valid';

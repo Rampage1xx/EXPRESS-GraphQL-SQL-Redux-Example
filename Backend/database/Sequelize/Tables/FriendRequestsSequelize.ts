@@ -19,11 +19,11 @@ export const FriendRequestSequelize = connection.define<IFriendRequestInstance, 
         primaryKey: true
     },
     user_one: {
-        type: STRING,
+        type: UUID,
         allowNull: false
     },
     user_two: {
-        type: STRING,
+        type: UUID,
         allowNull: false
     },
     status: {

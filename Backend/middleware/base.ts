@@ -36,6 +36,7 @@ export class BaseMiddleware {
 
     static get Configuration() {
         const app = Express();
+        app.set('trust proxy', 1); // trust first proxy
         app.use(helmet());
         app.use(session(sessionParameters));
         app.use(bodyParser.json());

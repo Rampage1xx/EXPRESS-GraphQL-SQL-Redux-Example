@@ -1,14 +1,14 @@
 import {Instance, STRING, UUID, UUIDV4} from 'sequelize';
 import {connection} from '../SequelizeConfiguration';
 
-interface IFriendsAttributes {
+export interface IFriendsAttributes {
     id?: string;
     user_one?: string;
     user_two?: string;
     status?: boolean;
     user_id?: string;
 }
-interface IFriendsInstance extends  Instance<IFriendsAttributes>, IFriendsAttributes {}
+export interface IFriendsInstance extends  Instance<IFriendsAttributes>, IFriendsAttributes {}
 export const FriendsSequelize = connection.define<IFriendsInstance, IFriendsAttributes>('friends', {
     id: {
         type: UUID,
@@ -16,11 +16,11 @@ export const FriendsSequelize = connection.define<IFriendsInstance, IFriendsAttr
         defaultValue: UUIDV4
     },
     user_one: {
-        type: STRING,
+        type: UUID,
         allowNull: false
     },
     user_two: {
-        type: STRING,
+        type: UUID,
         allowNull: false
     },
     status: {

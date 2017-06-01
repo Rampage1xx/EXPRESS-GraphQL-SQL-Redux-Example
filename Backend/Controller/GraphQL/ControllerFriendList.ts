@@ -1,0 +1,3 @@
+const FriendListFetch = (args, req) => {
+
+};

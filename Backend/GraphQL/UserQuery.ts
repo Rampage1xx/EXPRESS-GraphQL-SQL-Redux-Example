@@ -1,5 +1,5 @@
 import {GraphQLBoolean, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
-import {findUsernameSequelize, findUserSequelize} from '../Controller/ControllerGraphQL';
+import {findUsernameSequelize, findUserSequelize} from '../Controller/GraphQL/ControllerGraphQL';
 import {googleID, twitterID} from '../Strings';
 import {ImageType} from './ImageQuery';
 import {LikesType} from './LikeQuery';

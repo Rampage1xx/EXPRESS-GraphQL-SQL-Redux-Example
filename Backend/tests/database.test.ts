@@ -2,6 +2,7 @@ import * as assert from 'assert';
 import * as protobuf from 'protobufjs';
 import {ImagesArrayProtoBuffer, redisClient} from '../database/Redis';
 import {resolvePendingFriendship} from '../database/Sequelize/NativeQueries/FriendRequestsPSQL';
+import {getFriends} from '../database/Sequelize/NativeQueries/FriendsPSQL';
 import {connection} from '../database/Sequelize/SequelizeConfiguration';
 import '../database/Sequelize/SequelizeConnect';
 import {FriendRequestSequelize, IFriendRequestInstance} from '../database/Sequelize/Tables/FriendRequestsSequelize';
@@ -9,19 +10,21 @@ import {FriendsSequelize} from '../database/Sequelize/Tables/FriendsSequelize';
 import {IImageInstance, ImagesSequelize} from '../database/Sequelize/Tables/ImagesSequelize';
 import {LikesSequelize} from '../database/Sequelize/Tables/LikesSequelize';
 import {UsersSequelize} from '../database/Sequelize/Tables/UsersSequelize';
-import {ILikesInstance, IUserAttributes, IUserInstance} from '../types/database.types';
+import {
+    IFindFriendsResultsMapped, IFindFriendsResultsPSQL, ILikesInstance, IUserAttributes, IUserInstance
+} from '../types/database.types';
 import {userFind} from './variables';
 
 const root = new protobuf.Root();
 
-before('clear databases', async function () {
-    this.timeout(3000);
+before('clear databases', function (done) {
+    this.timeout(1000000);
     console.log('*********CLEARING DATABASES**************');
-    await redisClient.flushdbAsync()
+    redisClient.flushdbAsync()
         .then(r => console.log('redis flushed'));
 
-    await  connection.sync({force: true})
-        .then(r => console.log('postgres cleared'))
+    connection.sync({force: true})
+        .then(r => done())
         .catch(e => e);
 
 });
@@ -77,6 +80,12 @@ describe('CRUD', () => {
             email: 'battle@toads.com',
             userName: 'battletoads'
         });
+
+        const createUser3 = await UsersSequelize.create({
+            email: 'conker@live.reloaded',
+            userName: 'conker'
+        });
+        assert.deepEqual(createUser3.email, 'conker@live.reloaded');
         assert.deepEqual(createUser2.email, 'battle@toads.com');
         assert.strictEqual(createUser.email, 'donald@duck.com');
 
@@ -123,13 +132,18 @@ describe('CRUD', () => {
     it('should create a friend request', async () => {
         const user1 = await userFind('donald');
         const user2 = await userFind('battletoads');
+        const user3 = await userFind('conker');
         const request: IFriendRequestInstance = await FriendRequestSequelize.create({
             user_one: user1.id,
             user_two: user2.id
         });
-
+        const request2 = await FriendRequestSequelize.create({
+            user_one: user1.id,
+            user_two: user3.id
+        });
         assert.deepEqual(request.user_one, user1.id);
         assert.deepEqual(request.user_two, user2.id);
+        assert.deepEqual(request2.user_two, user3.id);
 
     });
 
@@ -138,14 +152,22 @@ describe('CRUD', () => {
         // needs to be refactored too much repetition
         const user1 = await userFind('donald');
         const user2 = await userFind('battletoads');
-
+        const user3 = await userFind('conker');
         const accept = await connection.query(
             resolvePendingFriendship({
                 status: 'ACCEPTED',
                 user_two: user2.id,
-                user_one: user1.id,
+                user_one: user1.id
             }),
-            {plain: true, logging: true}
+            {plain: true}
+        );
+
+        const accept2 = await connection.query(
+            resolvePendingFriendship({
+                status: 'ACCEPTED',
+                user_two: user3.id,
+                user_one: user1.id
+            })
         );
 
         const friendRequest = await FriendRequestSequelize.findOne();
@@ -155,6 +177,16 @@ describe('CRUD', () => {
         });
         assert.deepEqual(friendRequest, null);
         assert.deepEqual(friendStatus.user_one, user1.id);
+        assert.deepEqual(findFriends.friends[0].user_two, user2.id);
+    });
+
+    it('should fetch all the friends', async () => {
+        const user1 = await userFind('donald');
+        const result: IFindFriendsResultsPSQL = await connection.query(
+            getFriends({id: user1.id}),
+            {logging: true});
+        const resultRows: IFindFriendsResultsMapped = result[0].map(resultRow => resultRow);
+        assert.deepEqual(resultRows[0].friendUserName, 'battletoads')
     });
 
     xit('should delete a user', async () => {
@@ -166,36 +198,35 @@ describe('CRUD', () => {
     });
 
 });
+    describe(' protocol buffer tests', () => {
 
-describe(' protocol buffer tests', () => {
+        it('should convert an array to protobuff and get it back', () => {
 
-    it('should convert an array to protobuff and get it back', () => {
+                return root.load('./database/Images.proto', {keepCase: true})
+                    .then(r => {
+                        const argument = {images: payload};
+                        const ImageArray = r.lookupType('ImageDefinition.ImageList');
 
-            return root.load('./database/Images.proto', {keepCase: true})
-                .then(r => {
-                    const argument = {images: payload};
-                    const ImageArray = r.lookupType('ImageDefinition.ImageList');
+                        const errMsg = ImageArray.verify(argument);
+                        if (errMsg) {
+                            throw errMsg;
+                        }
+                        const message = ImageArray.create(argument);
+                        const buffer = ImageArray.encode(message).finish();
+                        const decrypt = ImageArray.decode(buffer);
+                        const transformBackToArray = decrypt.toObject({arrays: true});
+                        return assert.deepEqual(payload[0].dataValues.id, transformBackToArray.images[0].dataValues.id);
+                    });
+            }
+        );
 
-                    const errMsg = ImageArray.verify(argument);
-                    if (errMsg) {
-                        throw errMsg;
-                    }
-                    const message = ImageArray.create(argument);
-                    const buffer = ImageArray.encode(message).finish();
-                    const decrypt = ImageArray.decode(buffer);
-                    const transformBackToArray = decrypt.toObject({arrays: true});
-                    return assert.deepEqual(payload[0].dataValues.id, transformBackToArray.images[0].dataValues.id);
-                });
-        }
-    );
+        it('should save a buffer into redis and get it back', async () => {
+            const argument = {images: payload};
+            const encoded = await ImagesArrayProtoBuffer({argument, encode: true});
+            await redisClient.setexAsync('B', 60, encoded);
+            const data = await redisClient.getAsync('B');
+            const decoded = await ImagesArrayProtoBuffer({argument: data, decode: true});
+            assert.deepEqual(decoded.images, payload);
+        });
 
-    it('should save a buffer into redis and get it back', async () => {
-        const argument = {images: payload};
-        const encoded = await ImagesArrayProtoBuffer({argument, encode: true});
-        await redisClient.setexAsync('B', 60, encoded);
-        const data = await redisClient.getAsync('B');
-        const decoded = await ImagesArrayProtoBuffer({argument: data, decode: true});
-        assert.deepEqual(decoded.images, payload);
     });
-
-});
