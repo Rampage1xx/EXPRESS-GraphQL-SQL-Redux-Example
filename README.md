@@ -6,6 +6,7 @@
 - npm run setup 
 - npm start 
 - browse to localhost:80
+- browse to http://localhost/graphql for the magic
 ### Core things still missing:
 - Improved file structure to accomodate the new features
 - Docker Swarm
