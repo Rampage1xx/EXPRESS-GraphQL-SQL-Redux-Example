@@ -12,7 +12,7 @@ function asyncComponent(getComponent) {
        public static Component = null;
       public  state = { Component: AsyncComponent.Component };
 
-       private componentWillMount() {
+       public componentWillMount() {
             if (!this.state.Component) {
                 getComponent().then(Component => {
                     AsyncComponent.Component = Component

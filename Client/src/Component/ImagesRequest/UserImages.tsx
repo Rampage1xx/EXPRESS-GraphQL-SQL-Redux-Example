@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Masonry from 'react-masonry-component';
-import {addLikeStatusToArray, findUserImagesQueryHandler} from '../../Utils/GraphQL/Queries';
-import {GenerateMasonry} from '../../Utils/GenerateMasonry';
 import {RouteComponentProps} from 'react-router';
+import {GenerateMasonry} from '../../Utils/GenerateMasonry';
+import {addLikeStatusToArray, findUserImagesQueryHandler} from '../../Utils/GraphQL/Queries';
 
 export class UserImages extends React.Component<RouteComponentProps<{id: string, likes: any[]}>, any> {
     private userID: string;
@@ -18,7 +18,7 @@ export class UserImages extends React.Component<RouteComponentProps<{id: string,
 
     }
 
-    private componentDidMount() {
+    public componentDidMount() {
         findUserImagesQueryHandler(this.userID)
             .then((response) => {
                 this.generateMasonryCards(response.data);
