@@ -9,6 +9,7 @@
 - browse to http://localhost/graphql for the magic
 - You need to be logged in to  use almost every graphql/pinit features
 ### Core things still missing:
+- security checklist
 - Improved file structure to accomodate the new features
 - Docker Swarm
 - Perhaps a better nginx conf
