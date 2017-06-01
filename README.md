@@ -1,5 +1,6 @@
 # PinIT
 ### Pininterest clone made with GraphQL! <br/>
+### Latest changes are on the V1 branch <br/>
 ### Requires docker. <br/>
 - Share the project folder on docker
 - Insert the social keys in ./Backend/Config/keys.ts 
