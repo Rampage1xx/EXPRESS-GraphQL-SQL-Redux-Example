@@ -7,6 +7,7 @@
 - npm start 
 - browse to localhost:80
 - browse to http://localhost/graphql for the magic
+- You need to be logged in to  use almost every graphql/pinit features
 ### Core things still missing:
 - Improved file structure to accomodate the new features
 - Docker Swarm
