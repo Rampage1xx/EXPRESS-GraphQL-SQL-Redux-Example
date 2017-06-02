@@ -11,3 +11,5 @@
 2017/05/22 09:27:33 [error] 5#5: *1 directory index of "/etc/nginx/html/" is forbidden, client: 172.18.0.1, server: , request: "GET / HTTP/1.1", host: "localhost"
 2017/05/22 10:44:12 [error] 5#5: *1 directory index of "/etc/nginx/html/" is forbidden, client: 172.18.0.1, server: , request: "GET / HTTP/1.1", host: "localhost"
 2017/05/31 11:46:13 [error] 5#5: *11 connect() failed (111: Connection refused) while connecting to upstream, client: 172.18.0.1, server: , request: "GET / HTTP/1.1", upstream: "http://172.18.0.4:3000/", host: "localhost"
+2017/06/01 20:22:42 [error] 5#5: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.18.0.1, server: , request: "GET / HTTP/1.1", upstream: "http://172.18.0.4:3000/", host: "localhost"
+2017/06/01 20:22:42 [error] 5#5: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.18.0.1, server: , request: "GET /favicon.ico HTTP/1.1", upstream: "http://172.18.0.4:3000/favicon.ico", host: "localhost", referrer: "http://localhost/"

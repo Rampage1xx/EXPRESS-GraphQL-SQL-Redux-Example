@@ -14,13 +14,14 @@ class FormContainer extends React.Component<IProps, any> {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
- // sends the values to the function assigned to the handling
+
+    // sends the values to the function assigned to the handling
     private  handleClick(formProps: object) {
         this.props.SubmitForm(formProps);
     }
 
     public    render() {
-        const { handleSubmit } = this.props;
+        const {handleSubmit} = this.props;
 
         return (
             <form onSubmit={ handleSubmit(this.handleClick) }>
@@ -49,4 +50,8 @@ export const LoginForm = reduxForm({
 
 export const AddImageForm = reduxForm({
     form: 'AddImageForm'
+})(FormContainer);
+
+export const SendMessageForm = reduxForm({
+    form: 'SendMessage'
 })(FormContainer);

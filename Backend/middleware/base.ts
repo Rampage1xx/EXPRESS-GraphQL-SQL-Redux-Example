@@ -29,14 +29,16 @@ const sessionParameters = {
     saveUninitialized: 'false',
     cookie: {maxAge: 6000000},
     checkExpirationInterval: 15 * 60 * 1000,
-    expiration: 24 * 60 * 60 * 30
+    expiration: 24 * 60 * 60 * 30,
+   // domain: 'localhost',
+   // secure: true
 };
-
+//Asdasasa
 export class BaseMiddleware {
 
     static get Configuration() {
         const app = Express();
-        app.set('trust proxy', 1); // trust first proxy
+      //  app.set('trust proxy', 1); // trust first proxy
         app.use(helmet());
         app.use(session(sessionParameters));
         app.use(bodyParser.json());

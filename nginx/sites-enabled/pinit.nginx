@@ -1,7 +1,6 @@
-
-server {
+ server {
     listen 80;
-    #listen 443 ssl;
+
 
     location ~*.(html|js)$ {
         root /etc/nginx/html/app1/;
