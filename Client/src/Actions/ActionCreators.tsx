@@ -22,5 +22,5 @@ export const actionActivateModal = (modalNumber) => {
     return {
         type: ACTIVATE_MODAL,
         modalNumber
-    }
-}
+    };
+};
