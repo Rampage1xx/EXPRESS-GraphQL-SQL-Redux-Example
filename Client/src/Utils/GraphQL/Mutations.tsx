@@ -5,7 +5,7 @@ import {
 } from './QueryAndMutationsStrings';
 
 // OPTIONS //
-export const createUserMutationOptions = {
+export const createUserMutationOptions: any = {
     // we pass a method to props containing the variables of the mutation
     // doing so we detach the  mutation from the view state
     name : 'userCreate',
