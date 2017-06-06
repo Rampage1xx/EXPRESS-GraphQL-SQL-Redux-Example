@@ -1,7 +1,7 @@
 import {RouteComponentProps} from '@types/react-router';
 import {Map} from 'immutable';
 import * as React from 'react';
-import {BootStrapSocket, LeaveChannel, SendMessage} from '../../utils/Sockets';
+import {LeaveChannel, SendMessage} from '../../utils/Sockets';
 import {SendMessageForm} from '../Form/FormContainer';
 import {SendMessageField} from '../Form/SendMessageField';
 interface ILocationProps {
@@ -17,7 +17,7 @@ export class ChatRoomComponent extends React.Component<RouteComponentProps<any>,
         this.sendMessage = this.sendMessage.bind(this);
         this.messageLogs = this.messageLogs.bind(this);
         this.locationState = props.location.state as ILocationProps;
-        BootStrapSocket(this.locationState.roomName);
+       // BootStrapSocket(this.locationState.roomName);
 
     }
 

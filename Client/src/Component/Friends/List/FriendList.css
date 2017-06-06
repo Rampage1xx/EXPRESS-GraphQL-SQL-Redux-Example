@@ -1,0 +1,27 @@
+.friendList__box {
+    background-color: aqua;
+    align-self: flex-end;
+    bottom: 0;
+    position: fixed;
+    min-width: 50px;
+    min-height: 50px;
+    display:flex;
+    flex-direction: column;
+}
+
+.friendList__Header {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.friendList__X {
+    border: 1px solid black;
+    font-size:10px;
+}
+
+.friendList__Content {
+    display: flex;
+    flex-direction: column;
+
+}
