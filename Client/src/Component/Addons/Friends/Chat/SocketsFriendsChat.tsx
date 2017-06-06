@@ -6,7 +6,7 @@ import {actionNewFriendChat, actionNewFriendMessage} from './Actions';
 import {IActionNewFriendMessage, INewChat, INewFriendChatSocket, INewFriendMessageSocket} from './FriendsChat.types';
 
 export const BootStrapSocketFriendChat = (IDSelf: string) => {
-    Socket.emit('Chat', {ChatID: IDSelf});
+    Socket.emit('ClientBootstrap', {userID: IDSelf});
     Socket.on('PrivateChat', (payload: INewFriendChatSocket) => {
 
         const openChat: INewChat = {

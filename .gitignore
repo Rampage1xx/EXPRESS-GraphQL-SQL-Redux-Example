@@ -426,3 +426,5 @@ Client/Client.rar
 /Backend/middleware/passport/config.ts
 /swar-example.yaml
 /conf.nginx
+/docker-compose.yaml
+/Backend/.env

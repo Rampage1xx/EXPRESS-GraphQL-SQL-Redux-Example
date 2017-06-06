@@ -50,7 +50,7 @@ services:
     build:
       context: .
       dockerfile: node.dockerfile
-   # command: ["npm", "run-script","mocha"]
+    #command: ["npm", "run-script","mocha"]
     command: ["pm2-dev","start","pm2.config.json"]
     environment:
     #  NODE_ENV: test
@@ -64,6 +64,7 @@ services:
       - ./Backend/package.json:/var/www/package.json
       - ./Backend/pm2.config.json:/var/www/pm2.config.json
       - ./Backend/database/Images.proto:/var/www/database/Images.proto
+      - ./Backend/.env:/var/www/.env
 #    ports:
 #     - "3000:3000"
     networks:

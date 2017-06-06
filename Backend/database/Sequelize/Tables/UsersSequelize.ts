@@ -46,6 +46,10 @@ export const UsersSequelize = connection.define<IUserInstance, IUserAttributes>(
         googleUsername: {
             type: STRING,
             unique: true
+        },
+        online: {
+            type: BOOLEAN,
+            defaultValue: false
         }
 
     },

@@ -22,6 +22,11 @@ export const SocketBootstrap = (io: SocketIO.Server): object => {
             socket.join(chatID);
         });
 
+        socket.on('ClientBootstrap', (parameters: { userID: string }) => {
+            socket.join(parameters.userID);
+            // TODO:sets user online in db
+        });
+
         socket.on('startChatWithFriend', (payload: INewFriendChat) => {
             io.sockets.in(payload.userIDReceiver).emit('PrivateChat', payload);
             socket.join(payload.chatID);

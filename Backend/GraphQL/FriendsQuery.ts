@@ -1,4 +1,5 @@
 import {GraphQLObjectType, GraphQLString} from 'graphql';
+import {FriendListFetch} from '../Controller/GraphQL/ControllerFriendList';
 
 const FriendsType = new GraphQLObjectType({
     name: 'Friends',

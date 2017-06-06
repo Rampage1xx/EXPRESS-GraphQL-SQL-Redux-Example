@@ -95,5 +95,11 @@ describe('testing graphql resolve functions', () => {
         assert.notDeepEqual(deletedLikeID, null, 'there should be the ID of the like removed from the DB');
         assert.deepEqual(findDeletedLike, null, 'the like should not be present into the DB after its removal');
     });
-});
 
+    xit('should get friends', async () => {
+        const getFriendList = await GraphQLQuery()
+            .send({
+                query: 'aa'
+            })
+    });
+});
