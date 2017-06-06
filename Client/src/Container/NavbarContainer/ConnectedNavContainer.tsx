@@ -2,9 +2,9 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Button, Nav, NavItem, NavLink} from 'reactstrap';
 import {createStructuredSelector} from 'reselect';
-import {ModalWarnings} from '../../Component/Modal/AddOns/ModalWarnings';
-import {LoggedInComponents} from '../../Component/navbar/LoggedInComponents';
-import {NotLoggedInComponents} from '../../Component/navbar/NotLoggedInComponents';
+import {ModalWarnings} from '../../Component/Core/Modal/AddOns/ModalWarnings';
+import {LoggedInComponents} from '../../Component/Core/navbar/LoggedInComponents';
+import {NotLoggedInComponents} from '../../Component/Core/navbar/NotLoggedInComponents';
 
 import {activeModalStateChangeSelector, closeModalSelector, idPropsSelector} from '../AppSelector';
 
