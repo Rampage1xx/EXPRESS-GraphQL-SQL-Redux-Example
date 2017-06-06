@@ -3,7 +3,7 @@ import {store} from '../store/Store';
 import {actionActivateModal, actionLoginStateChange} from '../Actions/ActionCreators';
 
 export const instance1 = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost',
     headers: {'Content-Type': 'application/json'},
     validateStatus: (status) => {
         return status >= 200 && status < 300;
