@@ -214,7 +214,7 @@ describe('CRUD', () => {
                         const message = ImageArray.create(argument);
                         const buffer = ImageArray.encode(message).finish();
                         const decrypt = ImageArray.decode(buffer);
-                        const transformBackToArray = decrypt.toObject({arrays: true});
+                        const transformBackToArray = (decrypt as any).toObject({arrays: true});
                         return assert.deepEqual(payload[0].dataValues.id, transformBackToArray.images[0].dataValues.id);
                     });
             }
