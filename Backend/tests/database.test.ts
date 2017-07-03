@@ -56,13 +56,13 @@ const payload = [
         }
     }];
 
-const findUser: () => Promise<IUserInstance> = () => UsersSequelize.findOne({
+const findUser: () => any = () => UsersSequelize.findOne({
     where: {
         email: 'donald@duck.com'
     }
 });
 
-const findImage: () => Promise<IImageInstance> = () => ImagesSequelize.findOne({
+const findImage: () => any = () => ImagesSequelize.findOne({
     where: {
         title: `title of image`
     }
