@@ -143,7 +143,7 @@ export const findUserSequelize = (args, id) => {
     }
 };
 
-export const findUsernameSequelize = (args): {error: string} | Promise<{userName: string}> => {
+export const findUsernameSequelize = (args): any => {
 
     try {
         return UsersSequelize.findOne({where: {userName: args.userName}})
