@@ -11,7 +11,7 @@ export const imageFind = (title) => ImagesSequelize.findOne({
     }
 });
 
-export const userFind = (userName): Promise<IUserInstance> => UsersSequelize.findOne({
+export const userFind = (userName): any => UsersSequelize.findOne({
     where: {
         userName: userName
     }
