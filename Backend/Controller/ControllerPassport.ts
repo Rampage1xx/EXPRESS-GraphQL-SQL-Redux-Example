@@ -27,7 +27,7 @@ export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDi
         });
 };
 // SHOULD THE USER CHOOSE A GLOBAL USERNAME?
-export const createUser = (profile: profileParameters): Promise<IUserInstance> => {
+export const createUser = (profile: profileParameters): any => {
     const {email, SocialDatabaseUsernameRow, SocialDatabaseIDRow, socialDisplayName, SocialID} = profile;
     const createUserError = 'loggedUserImagesGraphQL already exists';
     return UsersSequelize.create({
