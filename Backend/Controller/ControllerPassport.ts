@@ -1,7 +1,7 @@
 import {UsersSequelize} from '../database/Sequelize/Tables/UsersSequelize';
 import {IUserInstance} from '../types/database.types';
 
-export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow}): Promise<IUserInstance> => {
+export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow}): any => {
     const findUserError = 'error while finding user';
     return UsersSequelize.findOne({
         where: {
@@ -39,7 +39,7 @@ export const createUser = (profile: profileParameters): Promise<IUserInstance> =
     });
 };
 
-export const oAuthLoginFunction = async (profile: profileParameters, cb): Promise<any> => {
+export const oAuthLoginFunction = async (profile: profileParameters, cb): any => {
     const {avatar, SocialDatabaseUsernameRow} = profile;
     try {
         // a) find the user
