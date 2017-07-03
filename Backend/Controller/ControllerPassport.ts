@@ -1,7 +1,7 @@
 import {UsersSequelize} from '../database/Sequelize/Tables/UsersSequelize';
 import {IUserInstance} from '../types/database.types';
 
-export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow}): any => {
+export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow}) => {
     const findUserError = 'error while finding user';
     return UsersSequelize.findOne({
         where: {
@@ -27,7 +27,7 @@ export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDi
         });
 };
 // SHOULD THE USER CHOOSE A GLOBAL USERNAME?
-export const createUser = (profile: profileParameters): any => {
+export const createUser = (profile: profileParameters) => {
     const {email, SocialDatabaseUsernameRow, SocialDatabaseIDRow, socialDisplayName, SocialID} = profile;
     const createUserError = 'loggedUserImagesGraphQL already exists';
     return UsersSequelize.create({
@@ -39,7 +39,7 @@ export const createUser = (profile: profileParameters): any => {
     });
 };
 
-export const oAuthLoginFunction = async (profile: profileParameters, cb): any => {
+export const oAuthLoginFunction = async (profile: profileParameters, cb) => {
     const {avatar, SocialDatabaseUsernameRow} = profile;
     try {
         // a) find the user
