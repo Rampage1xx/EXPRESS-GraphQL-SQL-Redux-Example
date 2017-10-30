@@ -1,6 +1,10 @@
 ### IN PROGRESS
 - [x]  Make client file structure highly modular
-- [ ]  FRIENDS NETWORK WITH NATIVE QUERIES
+- [ ]  FRIENDS NETWORK WITH NATIVE QUERIES  
+- [ ]  Socket acks.
+- [ ]  Sequelize Model Typings
+- [ ]  Front end refactor
 - [ ]  SOCKET.IO CHAT WITH REDIS PUB/SUB
+- [x] Too many things to list 
 ### Known issues 
-- sometimes webpack decides to not compile react
+- currently broken
