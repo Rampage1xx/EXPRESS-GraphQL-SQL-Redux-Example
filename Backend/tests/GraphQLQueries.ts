@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 import { ImageSequelize } from '../database/Sequelize/Tables/ImageSequelize';
-import { closeServer } from '../server';
+import { ServerInstance } from '../server';
 import './GraphQLResolve.test';
 import { fetchPins, GraphQLQuery, userFind } from './variables';
 
@@ -53,4 +53,4 @@ describe(' testing GraphQL queries', () =>
     });
 });
 
-closeServer.close();
+ServerInstance.close();

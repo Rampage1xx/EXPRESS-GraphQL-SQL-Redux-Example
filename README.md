@@ -1,11 +1,13 @@
-### IN PROGRESS
-- [x]  Make client file structure highly modular
-- [ ]  FRIENDS NETWORK WITH NATIVE QUERIES  
-- [ ]  Socket acks.
-- [ ]  Raw SQL strings validation for injection attacks
-- [ ]  Sequelize Model Typings
-- [ ]  Front end refactor
-- [ ]  SOCKET.IO CHAT WITH REDIS PUB/SUB
-- [x] Too many things to list 
-### Known issues 
-- currently broken
+### Client currently isn't working due to  graphql schema refactorings
+
+
+## How to boot:
+
+- complete .template.env and rename it to .env
+
+- yarn start
+
+## IN PROGRESS
+- [ x ]  Backend Refactor
+- [ ]  Frontend refactor
+

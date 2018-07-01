@@ -67,6 +67,8 @@ services:
       - ./Backend/.env:/var/www/.env
 #    ports:
 #     - "3000:3000"
+    env_file:
+      -
     networks:
      - nodeapp-network
 
