@@ -408,9 +408,8 @@ Backend/node_modules/yallist/
 Backend/node_modules/yeast/
 BackendSRC/
 node_modules/
-/Backend/middleware/passport/facebook.ts
+/Backend/Configuration/Middleware/passport/facebook.ts
 /Backend/tests/mocks.ts
-/.gitignore
 /Client/src/Container/test.tsx
 /Client/src/Component/Core/Utils/GraphQL/mocks.tsx
 /Client/src/Component/Core/Card/mock.tsx
@@ -423,8 +422,7 @@ Client/Client.rar
 !/Backend/database/CreateDummyCards.ts
 /Backend/database/mocks.ts
 /mock.yaml
-/Backend/middleware/passport/config.ts
+/Backend/Configuration/Middleware/passport/config.ts
 /swar-example.yaml
 /conf.nginx
-/docker-compose.yaml
 /Backend/.env

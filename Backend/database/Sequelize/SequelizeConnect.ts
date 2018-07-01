@@ -1,24 +1,43 @@
-import {createDummyImages} from '../CreateDummyCards';
-import {connection, NODE_TEST, sleep} from './SequelizeConfiguration';
-import {FriendRequestSequelize} from './Tables/FriendRequestsSequelize';
-import {FriendsSequelize} from './Tables/FriendsSequelize';
-import {ImagesSequelize} from './Tables/ImagesSequelize';
-import {LikesSequelize} from './Tables/LikesSequelize';
-import {UsersSequelize} from './Tables/UsersSequelize';
+import { createDummyImages } from '../DatabaseSeeding';
+import { connection, NODE_TEST, sleep } from './SequelizeConfiguration';
+import { FriendRequestSequelize } from './Tables/FriendRequestsSequelize';
+import { FriendSequelize } from './Tables/FriendSequelize';
+import { ImageSequelize } from './Tables/ImageSequelize';
+import { LikeSequelize } from './Tables/LikeSequelize';
+import { UserSequelize } from './Tables/UserSequelize';
 
-LikesSequelize.belongsTo(ImagesSequelize);
-LikesSequelize.belongsTo(UsersSequelize);
-ImagesSequelize.belongsTo(UsersSequelize);
-ImagesSequelize.hasMany(LikesSequelize);
-UsersSequelize.hasMany(ImagesSequelize);
-UsersSequelize.hasMany(LikesSequelize);
-UsersSequelize.hasMany(FriendRequestSequelize);
-UsersSequelize.hasMany(FriendsSequelize);
+LikeSequelize.belongsTo(ImageSequelize);
+LikeSequelize.belongsTo(UserSequelize);
+ImageSequelize.belongsTo(UserSequelize);
+ImageSequelize.hasMany(LikeSequelize);
+UserSequelize.hasMany(ImageSequelize);
+UserSequelize.hasMany(LikeSequelize);
+UserSequelize.hasMany(FriendRequestSequelize);
 
-if (!NODE_TEST) {
-    connection.sync({force: true})
-        .then(connection => console.log('******CONNECTED TO POSTGRES******'))
-        .catch(e => e);
+
+UserSequelize.belongsToMany(UserSequelize, { through: FriendRequestSequelize, foreignKey: 'user_one' });
+
+UserSequelize.belongsToMany(UserSequelize, { through: FriendRequestSequelize, foreignKey: 'user_two' });
+
+UserSequelize.belongsToMany(UserSequelize, { through: FriendSequelize, foreignKey: 'user_one' });
+
+UserSequelize.belongsToMany(UserSequelize, { through: FriendSequelize, foreignKey: 'user_two' });
+
+if (!NODE_TEST)
+{
+    connection.sync({ force: true })
+              .then(connection => console.log('******CONNECTED TO POSTGRES******'))
+              .catch(e => e);
     sleep(4000).then(r => createDummyImages())
-        .catch(e => console.log(e));
+               .catch(e => console.log(e));
+}
+
+export namespace SequelizeModel
+{
+    export const Like = LikeSequelize;
+    export const Image = ImageSequelize;
+    export const User = UserSequelize;
+    export const Friend = FriendSequelize;
+    export const FriendRequest = FriendRequestSequelize;
+
 }

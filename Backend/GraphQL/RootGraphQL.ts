@@ -1,36 +1,30 @@
-import {GraphQLObjectType, GraphQLSchema} from 'graphql';
-import {imagesListGraphQL, postImageMutation, removeImageMutation} from './ImageQuery';
-import {addLikeMutation, removeLikeMutation} from './LikeQuery';
-import {
-    addUserMutation,
-    findUserImagesGraphQL,
-    loggedUserImagesGraphQL,
-    userNameFieldFormValidation
-} from './UserQuery';
+import { GraphQLObjectType, GraphQLSchema } from 'graphql';
+import { imageAddMutation, imageDeleteMutation, imagesGetManyGraphQL } from './ImageQueryAndMutations';
+import { likeAddMutation, likeDeleteMutation } from './LikeQueryAndMutations';
+import { userAddMutation, userCheckIfUsernameTaken } from './UserQueryAndMutations';
 
 const RootQuery = new GraphQLObjectType({
-    name: 'RootQuery',
+    name  : 'RootQuery',
     fields: () => ({
-        imagesListGraphQL,
-        loggedUserImagesGraphQL,
-        userNameFieldFormValidation,
-        findUserImagesGraphQL
-    })
+        images_get_many         : imagesGetManyGraphQL,
+        user_check_name_if_taken: userCheckIfUsernameTaken,
+        // user_login              : userLogin,
+    }),
 });
 
 const RootMutation = new GraphQLObjectType({
-    name: 'Mutations',
+    name  : 'Mutations',
     fields: {
-        addUserMutation,
-        addLikeMutation,
-        postImageMutation,
-        removeLikeMutation,
-        removeImageMutation
-    }
+        user_create : userAddMutation,
+        like_create : likeAddMutation,
+        like_delete : likeDeleteMutation,
+        image_create: imageAddMutation,
+        image_delete: imageDeleteMutation,
+    },
 
 });
 
 export const RootSchema = new GraphQLSchema({
     mutation: RootMutation,
-    query: RootQuery
+    query   : RootQuery,
 });

@@ -1,64 +1,93 @@
-import {UsersSequelize} from '../database/Sequelize/Tables/UsersSequelize';
-import {IUserInstance} from '../types/database.types';
+import { UserSequelize } from '../database/Sequelize/Tables/UserSequelize';
+import { IUserInstance } from '../types/database.types';
+import * as uuid from 'uuid';
 
-export const findUserPassport = ({email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow}) => {
-    const findUserError = 'error while finding user';
-    return UsersSequelize.findOne({
+
+export const findUserPassport = async ({ email, SocialDatabaseIDRow, SocialID, socialDisplayName, SocialDatabaseUsernameRow }): Promise<IUserInstance | null> =>
+{
+    const user = await UserSequelize.findOne({
         where: {
-            email
-        }
-    })
-        .then((user: any) => {
-            // we check:
-            // a)  if there is a result,
-            // b)  if that result has the social data
-            // c)  in the case if it's not there we proceed to add it
-            // d) return the result
-            return !user ? user :
-                user[SocialDatabaseIDRow] ? user :
-                    user.update({
-                        [SocialDatabaseIDRow]: SocialID,
-                        [SocialDatabaseUsernameRow]: socialDisplayName
-                    });
-
-        })
-        .catch((e) => {
-            throw findUserError;
-        });
-};
-// SHOULD THE USER CHOOSE A GLOBAL USERNAME?
-export const createUser = (profile: profileParameters) => {
-    const {email, SocialDatabaseUsernameRow, SocialDatabaseIDRow, socialDisplayName, SocialID} = profile;
-    const createUserError = 'loggedUserImagesGraphQL already exists';
-    return UsersSequelize.create({
-        email: email,
-        [SocialDatabaseIDRow]: SocialID,
-        [SocialDatabaseUsernameRow]: socialDisplayName
-    }).catch(e => {
-        throw createUserError;
+            email,
+        },
     });
+
+    // we check:
+    // a)  if there is a result,
+    // b)  if that result has the social data
+    // c)  in the case if it's not there we proceed to add it
+    // d) return the result
+
+    //todo refactor add types, make more clear
+
+    if (!user)
+    {
+        return null;
+    }
+
+    if (user[SocialDatabaseIDRow])
+    {
+        return user;
+    }
+
+    user[SocialDatabaseIDRow] = SocialID;
+
+    user[SocialDatabaseUsernameRow] = socialDisplayName;
+
+    await user.save();
+
+    return user;
+};
+export const createUser = async (profile: profileParameters) =>
+{
+    const { email, SocialDatabaseUsernameRow, SocialDatabaseIDRow, socialDisplayName, SocialID } = profile;
+
+
+    return UserSequelize.create({
+        email                      : email,
+        [SocialDatabaseIDRow]      : SocialID,
+        [SocialDatabaseUsernameRow]: socialDisplayName,
+        enabled                    : true,
+        password                   : uuid.v4(),
+        userName                   : email,
+    });
+
 };
 
-export const oAuthLoginFunction = async (profile: profileParameters, cb) => {
-    const {avatar, SocialDatabaseUsernameRow} = profile;
-    try {
+export const oAuthLoginFunction = async (profile: profileParameters, cb) =>
+{
+    const { avatar, SocialDatabaseUsernameRow } = profile;
+    try
+    {
         // a) find the user
         // b) if false(not present) create account
         // c) return result
-        const findUserResult = await findUserPassport(profile).catch((e) => {
-            throw e;
-        });
-        const result: IUserInstance | any = findUserResult ? findUserResult
-            :
-            await createUser(profile);
+        const findUserResult = await findUserPassport(profile);
+
+
+        let user: IUserInstance;
+
+        if (findUserResult)
+        {
+            user = findUserResult;
+        }
+
+        else
+        {
+            user = await createUser(profile);
+
+        }
+
         // data that leaves the server
         const data = {
-            userName: result.dataValues[SocialDatabaseUsernameRow],
-            id: result.dataValues.id,
-            avatar: avatar
+            userName: user[SocialDatabaseUsernameRow],
+            id      : user.id,
+            avatar  : avatar,
         };
+
         return cb(null, data);
-    } catch (err) {
+
+    } catch (err)
+    {
         return cb(err);
     }
 };

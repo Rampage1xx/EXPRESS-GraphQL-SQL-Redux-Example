@@ -1,39 +1,78 @@
-import {isAlphanumeric, isDate, isEmail, isLength, toDate} from 'validator';
-import {createUserSequelize, findImagesSequelize} from '../Controller/GraphQL/ControllerGraphQL';
+import { isAlphanumeric, isEmail, isLength, toDate } from 'validator';
 
-export const validateCreateUser = (args, avatar) => {
-    const errorMessage = 'the data submitted for the account creation is not valid';
-    try {
+interface IValidationSuccess
+{
+    error: null;
+
+    validInput: true
+}
+
+interface IValidationFail
+{
+
+    error: string;
+
+    validInput: false
+
+}
+
+type TValidation = IValidationFail | IValidationSuccess
+
+
+export namespace Validation
+{
+    export const CreateUser = (args): TValidation =>
+    {
+        // const errorMessage = 'the data submitted for the account creation is not valid';
+
         const email = isEmail(args.email);
+
         const usernameAlphaNumeric = isAlphanumeric(args.userName);
+
         const userNameLength = isLength(args.userName, 5, 15);
+
         //password should be matched against a regex
+
         const passwordLength = isLength(args.password, 7, 30);
-        if (!email || !usernameAlphaNumeric || !userNameLength || !passwordLength) {
-            throw errorMessage;
+
+        if (!email || !usernameAlphaNumeric || !userNameLength || !passwordLength)
+        {
+            return ({
+                validInput: false,
+                error     : 'placeholder',
+            });
         }
 
-        return createUserSequelize(args, avatar);
+        return ({
+            error     : null,
+            validInput: true,
+        });
 
-    } catch (err) {
-        return {error: errorMessage};
-    }
-};
 
-export const findImageValidation = (date) => {
-    const notADate = 'not a valid date';
-    try {
+    };
+
+    export const FindImage = (date): TValidation =>
+    {
+        const notADate = 'not a valid date';
+
         const validatedDate = toDate(date);
 
-        if (!validatedDate) {
-            throw  notADate;
-        } else {
-            return findImagesSequelize(date);
+        if (!validatedDate)
+        {
+            return ({
+                validInput: false,
+                error     : notADate,
+            });
         }
 
-    } catch (err) {
 
-        return {error: err};
-    }
+        return ({
 
-};
+            validInput: true,
+            error     : null,
+        });
+
+    };
+
+}
+
