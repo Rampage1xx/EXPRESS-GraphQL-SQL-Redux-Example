@@ -31,7 +31,8 @@ function asyncComponent(getComponent) {
 }
 
 export  const MyImagesAsync = asyncComponent(() =>
-System.import('../Component/UserImages/MyImages').then(module => module.default));
+System.import('../Component/UserImages/MyImages')
+    .then(module => module.default));
 
 /* mock */
 /* credits to : https://gist.github.com/acdlite/a68433004f9d6b4cbc83b5cc3990c194 */

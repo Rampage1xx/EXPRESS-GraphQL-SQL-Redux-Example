@@ -12,8 +12,5 @@
     "remove": "docker-compose rm",
     "test-client": "cd ./Client && npm run test",
     "buildBW": "cd ./Backend && npm run  build-watch"
-  },
-  "devDependencies": {
-    "@types/socket.io-client": "^1.4.29"
   }
 }

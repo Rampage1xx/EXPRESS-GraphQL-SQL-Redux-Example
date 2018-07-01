@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # PinIT
 ### Pininterest clone made with GraphQL! <br/>
 ### Latest changes are on the V1 branch <br/>
@@ -17,10 +18,18 @@
 - Some types
 - Pretty CSS (zero creativity right now :boom:)
 <br/>🐳 Work In Progress 🐳
+=======
+### Client currently isn't working due to  graphql schema refactorings
+>>>>>>> v1
 
-### Coming Soon™ (wish I had an infinte day)
-- Friends network
-- Socket.IO chat
-- Video Chat
-- perhaps more
+
+## How to boot:
+
+- complete .template.env and rename it to .env
+
+- yarn start
+
+## IN PROGRESS
+- [ x ]  Backend Refactor
+- [ ]  Frontend refactor
 

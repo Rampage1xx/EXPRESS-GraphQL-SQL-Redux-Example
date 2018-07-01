@@ -1,20 +1,20 @@
-import {agent} from 'supertest';
-import {ImagesSequelize} from '../database/Sequelize/Tables/ImagesSequelize';
-import {UsersSequelize} from '../database/Sequelize/Tables/UsersSequelize';
-import {app} from '../server';
-import {IUserInstance} from '../types/database.types';
+import { agent } from 'supertest';
+import { ImageSequelize } from '../database/Sequelize/Tables/ImageSequelize';
+import { UserSequelize } from '../database/Sequelize/Tables/UserSequelize';
+import { app } from '../server';
+
 export const agent1 = agent(app);
 
-export const imageFind = (title) => ImagesSequelize.findOne({
+export const imageFind = (title) => ImageSequelize.findOne({
     where: {
-        title
-    }
+        title,
+    },
 });
 
-export const userFind = (userName): Promise<IUserInstance> => UsersSequelize.findOne({
+export const userFind = (userName): any => UserSequelize.findOne({
     where: {
-        userName: userName
-    }
+        userName: userName,
+    },
 });
 
 export const GraphQLQuery = () => agent1.post('/graphql');

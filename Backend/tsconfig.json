@@ -6,11 +6,13 @@
     "sourceMap": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "strictFunctionTypes": false,
+    "strict": true,
     "outDir": "./Compiled/",
+    "skipLibCheck": true,
     "types": [
       "mocha",
       "node",
-      "long"
     ]
   },
   "exclude": [

@@ -1,16 +1,14 @@
-
-server {
+ server {
     listen 80;
-    #listen 443 ssl;
+    access_log logs/pinit.log;
+
 
     location ~*.(html|js)$ {
         root /etc/nginx/html/app1/;
-        access_log main;
         expires max;
     }
 
     location / {
-        access_log main;
         proxy_pass         http://nodecluster;
         proxy_redirect     off;
         proxy_set_header   Host $host;

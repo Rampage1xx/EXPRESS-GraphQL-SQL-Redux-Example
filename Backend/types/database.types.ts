@@ -1,4 +1,5 @@
-import {Instance} from 'sequelize';
+import { Instance } from 'sequelize';
+import { IFriendsInstance } from '../database/Sequelize/Tables/FriendSequelize';
 
 export declare type TProtoBuffer = (Parameters: {
     argument: any | Buffer,
@@ -6,32 +7,54 @@ export declare type TProtoBuffer = (Parameters: {
     decode?: boolean
 }) => Promise<any> | Promise<Buffer>;
 
-export interface ILikesAttributes {
-    id?: string | number;
-    identifier?: string;
-    user_id?: string;
-    image_id?: string;
-}
-export interface ILikesInstance extends Instance<ILikesAttributes>, ILikesAttributes {
+export interface IUserAttributes extends IUserCreation
+{
+    id: string;
 
 }
 
-
-export interface IUserAttributes {
+export interface IUserCreation
+{
     id?: string;
-    enabled?: boolean;
-    userName?: string;
-    password?: string;
+
+    enabled: boolean;
+
+    userName: string;
+
+    password: string;
+
     localAccount?: boolean;
-    email?: string;
+
+    email: string;
+
     twitterID?: string;
+
     twitterUsername?: string;
+
     googleID?: string;
+
     googleUsername?: string;
+
     avatar?: string;
-    username?: string;
+
+    // username?: string;
+
+    friends?: IFriendsInstance[];
 }
 
-export interface IUserInstance extends Instance<IUserAttributes>, IUserAttributes {
-    verifyPassword(password: string): boolean;
+export interface IUserInstance extends Instance<IUserAttributes>, IUserAttributes
+{
+    verifyPassword (password: string): boolean;
 }
+
+interface IFindFriendsParametersPSQL
+{
+    userName: string;
+
+    friendId: string;
+
+    friendUserName: string;
+}
+
+export declare type  IFindFriendsResultsMapped = IFindFriendsParametersPSQL[];
+export declare type IFindFriendsResultsPSQL = IFindFriendsResultsMapped[];

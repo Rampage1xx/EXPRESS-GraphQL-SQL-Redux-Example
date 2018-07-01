@@ -1,8 +1,8 @@
 @import 'root.css';
-@import 'Component/Row/grid.css';
-@import 'Component/navbar/Navbar.css';
-@import 'Component/Row/Row.css';
-@import 'Component/Card/FullCard.css';
+@import 'Component/core/Row/grid.css';
+@import 'Component/Core/navbar/Navbar.css';
+@import 'Component/core/Row/Row.css';
+@import 'Component/Core/Card/FullCard.css';
 
 
 
