@@ -10,6 +10,6 @@
 - yarn start
 
 ## IN PROGRESS
-- [ x ]  Backend Refactor
+- [x]  Backend Refactor
 - [ ]  Frontend refactor
 
